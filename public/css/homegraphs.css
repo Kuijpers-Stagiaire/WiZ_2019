@@ -1,0 +1,230 @@
+/* Import font Open Sans */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+/* Tablet Landscape */
+/* @media screen and (max-width: 1060px) {
+    #primary { width:67%; }
+    #secondary { width:30%; margin-left:3%;}  
+} */
+
+/* Tabled Portrait */
+/* @media screen and (max-width: 768px) {
+    #primary { width:100%; }
+    #secondary { width:100%; margin:0; border:none; }
+} */
+
+
+/* img { max-width: 100%; }
+html { font-size:100%; } */
+
+body {    
+    font-family: 'Open Sans', sans-serif;
+    background: white;
+    --grid-width: 500px;
+    --grid-height: 600px;
+}
+
+/* Containers and sections */
+
+.home-container{
+    /* Dimensions */
+    width: 1600px;
+    height: 700px;
+    border-radius: 4px;
+    /* Colors */
+   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+   background: white;
+    /* Margins & Paddings */
+    margin-top: 50px !important;
+    margin : 0 auto;
+    /* Flexbox */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.home-section-left{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+    width: 600px;
+}
+
+.right{
+    background-image: url(../img/clickable.png);
+    background-size: cover;
+    width: var(--grid-width);
+    height: var(--grid-height);
+
+}
+
+.grid{
+
+    width: var(--grid-width);
+    height: var(--grid-height);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.grids{
+    width: 125px;
+    height: 150px;
+    position: relative;
+}
+
+.grid-button{
+  transition: 0.8s;
+  position: absolute;
+  width: 12.5px;
+  height: 12.5px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.grid-button:hover{
+    transition: 0.8s;
+    background: #2f2e87;
+}
+
+#makkum{
+    top: 90.5%;
+    left: 12.95%;
+}
+
+#groningen{
+    top: 49.5%;
+    left: 23.45%;
+}
+
+#katwijk{
+    top: 90.3%;
+    left: 19.2%;
+}
+
+#amsterdam{
+    top: 69.5%;
+    left: 70.32%;
+}
+
+#zwolle{
+    top: 57.5%;
+    left: 71.9%;
+}
+
+#den-haag{
+    top: 15.5%;
+    left: 9.5%;
+}
+
+#utrecht{
+    top: 6.5%;
+    left: 93.9%;
+}   
+
+#roosendaal{
+    top: 82.5%;
+    left: 14.9%;
+}
+#oosterhout{
+    top: 57.5%;
+    left: 63.9%;
+}
+
+#tilburg{
+    top: 77.5%;
+    left: 86.9%;
+}
+
+#den-bosch{
+    top: 44.5%;
+    left: 11.9%;
+}
+
+#arnhem{
+    top: 20.5%;
+    left: 75.9%;
+}
+
+#helmond{
+    top: 88.5%;
+    left: 45.9%;
+}
+
+#zelhem{
+    top: 9.5%;
+    left: 33.9%;
+}
+
+#echt{
+    top: 39.5%;
+    left: 60.9%;
+}
+
+.title{
+    font-size: 30px;
+    color: #2f2e87;
+    text-align: left;
+    width: 600px;
+}
+
+.text{
+    font-size: 15px;
+    line-height: 24px;
+    width: 600px;
+    color: #5f5f5f;
+}
+
+@media (max-width: 880px) {
+
+    .home-container{
+        width: 350px;
+        height: 1500px;
+        display: flex;
+        background-size: cover;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+
+    .grid{
+        width: 300px;
+        height: 400px;
+    }
+
+    .grids{
+        width: 75px;
+        height: 100px;
+    }
+
+    .home-section-left{
+        width: 350px;
+        height: 400px;
+    }
+
+    .right{
+        width : 300px;
+        height: 400px;
+    }
+
+    #doughnut-chart{
+        width: 300px;
+    }
+
+    #line-chart{
+        display: none;
+    }
+
+
+
+}
+

@@ -1,0 +1,243 @@
+.container-fluid {
+    padding: 0px !important;
+}
+
+.maincont {
+    position: relative;
+}
+
+.upperside {
+    background-color: #f28e0b;
+    /* height: 250px; */
+    color: #ffffff;
+    padding-bottom: 100px;
+    font-size: 25px;
+}
+
+.profile-img {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    position: relative;
+}
+
+.editProfileImg {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    top: -125px;
+    position: relative;
+}
+
+.overlay-profile {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.editProfileImg:hover .overlay-profile {
+    opacity: 0.5;
+}
+
+.icon-editProfile {
+    color: white;
+    /* font-size: 75px; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.fa-camera:hover {
+    color: #eee !important;
+}
+
+.fa-camera {
+    font-size: 75px;
+}
+
+.img-preview {
+    height: 200px;
+    width: 200px; 
+    border-radius: 50%;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.row {
+    margin: 0px !important;
+}
+
+.top-row-col {
+    margin-top: 2rem;
+}
+
+.bottom-row-col {
+    margin-bottom: 5rem;
+}
+
+#Userinfo {
+    color: #ffffff;
+}
+
+.graph {
+    margin: 0px;
+    max-width: 540px !important;
+}
+
+.profile-links {
+    width: 18rem;
+    /* margin-left: 30px; */
+    margin-top: 15px;
+    border-width: 1px; 
+    width: 260px; 
+    /* margin-right: 30px; */
+}
+
+/* h5 {
+    position: relative; Helps us control overlap
+    padding-left: 30px; Creates space for the Icon
+    } */
+  
+    .fa-power-off:before, .fa-user-cog:before, .kuijpers-icon {
+    /* content: '\f4fe';
+    font-family: fontAwesome; */
+    /* position: absolute; */
+    left: 0; /* Adjust as needed */
+    top: 3px; /* Adjust as needed */
+    margin-right: 10px;
+    }
+    
+.kuijpers-icon {
+    /* height: 20px; */
+    width: 20px;
+}
+
+.fa-user-cog {
+    width: 30px;
+}
+
+.li-pad {
+    padding: .5rem;
+    list-style: none;
+}
+
+
+.lineheight {
+    line-height: 1 !important;
+}
+
+.profilepage {
+    display: none;
+}
+
+ /* #doughnut-chart{
+    height: 600px !important;
+    width: 500px !important;
+}
+
+#bar-chart{
+    height: 600px !important;
+    width: 500px !important;
+} 
+.graphjes{
+    width: 1200px;
+}  */
+
+@media screen and (max-width: 425px) {
+
+    .top-row-col {
+        padding: 0px;
+        margin-top: 10px;
+        font-size: 20px;
+        height: 0px;
+    }
+
+    .upside {
+        height: 0px;
+    }
+
+    .bottom-row-col {
+        padding: 0px;
+        margin-bottom: 60px;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .upperside {
+        padding-bottom: 0px;
+    }
+}
+
+@media (min-width: 320px) {
+    .profile-links {
+        width: 260px;
+    }
+
+    .controlmobile {
+        display: none;
+    }
+}
+
+@media (min-width: 375px) {
+    .profile-links {
+        width: 315px;
+    }
+
+    .controlmobile {
+        display: none;
+    }
+}
+
+@media (min-width: 426px) {
+    .profile-links {
+        width: 365px;
+    }
+
+    .controlmobile {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .profile-links {
+        width: 480px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .bar-chart {
+        width: 90%  !important ;
+    }
+    .doughnut-chart{
+        width: 90%  !important ;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .bar-chart {
+        width: 100%  !important;
+    }
+    .doughnut-chart{
+        width: 100%  !important;
+    }
+}
+
+.col-userinfo {
+    padding: 0px !important;
+}

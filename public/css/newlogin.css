@@ -1,0 +1,210 @@
+body{
+    background-image: url(../img/solarix.jpg);
+    background-size: cover;
+}
+
+body img{
+    
+}
+
+
+.login-container{
+    width: 500px;
+    height: 500px;
+    margin : 0 auto;
+    margin-bottom: 150px;
+    background: white;
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-section-left{
+    width: 450px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin : 0 auto;
+
+}
+
+.login-section-left-1{
+    width: 400px;
+    height: 150px;
+    display: flex;  
+    align-items: center;
+    justify-content: space-around;
+}
+
+.login-section-left-1-header-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.login-section-left-1-header-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.login-section-left-2{
+    width: 350px;
+    height: 320px;
+
+
+}
+
+.login-section-left-2 input, button{
+    border-left : 4px solid #f28e0b;
+    border-top: transparent !important;
+    border-bottom:  : transparent !important;
+    border-right: transparent !important;
+    width : 350px;
+
+    outline: none;
+    background : #e8f0fe;
+    padding: 5px;
+
+}
+
+.login-section-left-2 input:focus{
+    background: #e8f0fe !important;
+    border-color: #f28e0b;
+    outline: none;
+
+}
+
+.login-section-left-2 button{
+    transition: 0.8s;
+    color : black;
+    line-height: 22px;
+    background: #e8f0fe;
+    font-size: 18px;
+    border-left : 4px solid #f28e0b;
+    border-bottom: transparent !important;
+    height: 38px;
+    margin-top: -23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-section-left-2 button:hover{
+    transition: 0.8s;
+    color : white;
+    background: #f28e0b;
+}
+
+.login-section-left-3{
+
+}
+
+.login-section-left-4{
+    width: 450px;
+    height: 100px;
+    background : #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-bottom-1{
+    font-size: 14px;
+}
+
+.left-bottom-2{
+    font-size: 14px;
+    margin-left: 5px;
+    color : #f28e0b;
+}
+
+.small{
+    margin-top: -20px;
+    font-size: 13px;
+    color : #cecece;
+}
+
+.big{
+    font-size: 25px;
+}
+
+
+
+
+
+.login-section-right{
+    width: 350px;
+    height: 700px;
+    background-image: url(../img/kuijpers-error.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-section-right img{
+
+}
+
+.login-p-orange{
+    color : #f28e0b;
+    font-size: 32px;
+}
+
+.login-p-white{
+    margin-top: -30px;
+    color : white;
+    font-size: 27px;
+}
+
+.login-p-white-small{
+    color : white;
+    font-size: 20px;
+    margin-bottom: -11px;
+}
+
+.login-p-white-medium{
+    color : white;
+}
+
+.login-p-white-large{
+    color : white;
+    font-size: 30px;
+    margin-bottom: 13px;
+    margin-right: 9px;
+}
+
+.login-section-right-1{
+    width: 250px;
+    text-align: left;
+}
+
+.login-section-right-2{
+    border-left: 1px solid white;
+    width: 250px;
+    padding-left: 25px;
+}
+
+.login-section-right-3{
+    background : white;
+    opacity: 0.9;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.login-section-right-4{
+    width: 250px;
+    text-align: left;
+    display: flex;
+
+    align-items: center;
+    flex-direction: row;
+}

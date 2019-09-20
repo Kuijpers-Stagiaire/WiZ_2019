@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\database\\migrations",
+    "\\public\\css",
+    "\\public\\img\\icons",
+    "\\resources\\js",
+    "\\resources\\js\\components",
+    "\\resources\\views",
+    "\\resources\\views\\auth",
+    "\\resources\\views\\auth\\passwords",
+    "\\routes"
+  ],
+  "SelectedNode": "\\routes\\console.php",
+  "PreviewInSolutionExplorer": false
+}

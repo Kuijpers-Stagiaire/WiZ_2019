@@ -1,0 +1,9 @@
+.bestellijst-header{
+	width:100%;
+	height:60px;
+	background:#8fa2d2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}

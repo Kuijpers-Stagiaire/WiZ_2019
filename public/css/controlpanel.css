@@ -1,0 +1,360 @@
+.btn{
+    font-family: 'Open Sans', sans-serif;
+}
+.users-top {
+    height: 100px;
+}
+
+.info{
+    height: 64px;
+    background-color: #edf2f8;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-bottom: 15px;
+    line-height: 4;
+}
+
+
+#userdelete{
+    margin-bottom: 193px !important;
+} 
+
+#DelForm{
+    text-align: right;
+}
+
+#AnBtn{
+    text-align: left;
+}
+.tabcontent{
+    padding: 0px !important;
+}
+
+.searchuser{
+    width: 30%;
+    margin-right : 0px !important;
+}
+.users {
+    height: 64px;
+    background-color: #edf2f8;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+    line-height: 4;
+    color: #000000;
+    text-decoration: none;
+}
+
+.row.users:hover {
+    background-color: #8fa2d2;
+    text-decoration: none;   
+}
+
+.img-col {
+    padding-left: 0px !important;
+    line-height: 0 !important;
+    text-align: left;
+    width: 90px;
+}
+
+
+
+.users-top, .users-main {
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+#infobar {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    font-style: oblique;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.imginfobar{
+    opacity: 0;
+}
+
+#infobar:hover{
+    background-color: #edf2f8;
+}
+
+
+#infobarproductbeheer {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    font-style: oblique;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-bottom: 15px;
+}
+
+#btn {
+    height: 40px;
+    text-align: right;
+}
+
+#wrapper {
+    float: center;
+}
+
+ul  li{ 
+	list-style-type:none; 
+} 
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    /* height: 100vh; */
+}
+
+
+
+
+#Productbeheer{
+    margin-top: 30px;
+    margin-left: 120px;
+    margin-right: 120px;
+    text-align: center;
+    height: 100vh;
+}
+
+
+.WeigAccbtn{
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 25px;
+    height: 25px;
+    line-height: 0.7;
+    /* padding-top: 20px; */
+    margin-top: 19.5px;
+}
+
+input[type="submit"] {
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+
+}
+
+.formscol{
+    width: 100%;
+    text-align: center;
+}
+.form1 {
+    float: left;
+    margin-left: 58px;
+}
+.form2 {
+   float: right;
+   margin-right: 58px;
+}
+
+
+/*-------------------------------------------*/
+/*------------- User detail css -------------*/
+/*-------------------------------------------*/
+
+.profile-img-users {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    position: relative;
+}
+
+.userdetail{
+    margin-top: 50px;
+}
+
+.usericons{
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 200px;
+    color: #000000;
+}
+
+.usrinfo{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.usrinfo-cols{
+    margin-top: 20px;
+}
+
+
+
+.confirmdeleteuser{
+    text-align: center;
+}
+
+
+#userdetailverticalline{
+    border-left: 3px solid #8fa2d2;
+    height: 600px;
+}
+
+
+#userdetailline{
+    margin-top: 20px;
+        border-top: 3px solid #8fa2d2;
+}
+
+@media only screen and (max-width: 1025px) {
+    #Productbeheer {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .img-col{
+        display: none;
+    }
+    .colpadding{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+
+form.Sbar input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    border-top-left-radius: .75rem;
+    border-bottom-left-radius: .75rem;
+}
+
+form.Sbar button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #8fa2d2;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    border-top-right-radius: .75rem;
+    border-bottom-right-radius: .75rem;
+}
+
+
+form.Sbar::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.searchcreateUsers {
+    margin-top: 10px;
+}
+.createUserbtn{
+    text-align: center;
+}
+
+.Nusr{
+    border-radius: .25rem;
+    width: 100%;
+    padding: 10px;
+    background-color: #8fa2d2;
+    color: #ffffff;
+    font-size: 17px;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.Nusr:hover {
+    background-color: #2f2e87;
+}
+
+.usernotfound{
+    text-align: center;
+    margin-bottom: 150px;
+}
+.usernotfoundicon{
+    text-align: center;
+    font-size: 75px;
+    margin-top: 120px;
+}
+
+.userdel {
+    cursor: pointer;
+}
+
+/* Pagination controlpanel */
+
+.controluserlink{
+    text-align: center;
+    justify-content: center;
+    /* margin-top: 50px !important;
+    margin-bottom: 50px !important; */
+}
+
+.page-link{
+    background-color: #ffffff;
+    border-color: #2f2e87;
+    color: #2f2e87;
+}
+
+.page-item.disabled .page-link{
+    background-color: #ffffff;
+    border-color: #2f2e87;
+    color: #2f2e87;
+}
+
+
+.page-item.active .page-link{
+    background-color: #2f2e87;
+    border-color: #2f2e87;
+    color: #ffffff;
+}
+
+
+.page-link:hover {
+    background-color: #2f2e87;
+    border-color: #2f2e87;
+    color: #ffffff;
+}
