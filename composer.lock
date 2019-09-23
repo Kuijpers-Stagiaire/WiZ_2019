@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6852e4095e2eeb42f438fbb439a1b851",
+    "content-hash": "d58dfb01c80e1cb2550156f70aff4b3a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2485,52 +2485,6 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
-        },
-        {
-            "name": "silviolleite/laravelpwa",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/silviolleite/laravel-pwa.git",
-                "reference": "e0c610af32cc88d793f485ede3a5edb4b760fa92"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/silviolleite/laravel-pwa/zipball/e0c610af32cc88d793f485ede3a5edb4b760fa92",
-                "reference": "e0c610af32cc88d793f485ede3a5edb4b760fa92",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LaravelPWA\\Providers\\LaravelPWAServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LaravelPWA\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Silvio Luis Leite",
-                    "email": "silviolleite@gmail.com"
-                }
-            ],
-            "description": "Looks like an app, feels like an app, but NOT an app.",
-            "keywords": [
-                "laravel",
-                "php",
-                "progressive web apps",
-                "pwa"
-            ],
-            "time": "2019-01-21T23:41:39+00:00"
         },
         {
             "name": "snowfire/beautymail",
@@ -5528,6 +5482,52 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "silviolleite/laravelpwa",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silviolleite/laravel-pwa.git",
+                "reference": "e0c610af32cc88d793f485ede3a5edb4b760fa92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silviolleite/laravel-pwa/zipball/e0c610af32cc88d793f485ede3a5edb4b760fa92",
+                "reference": "e0c610af32cc88d793f485ede3a5edb4b760fa92",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelPWA\\Providers\\LaravelPWAServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelPWA\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Silvio Luis Leite",
+                    "email": "silviolleite@gmail.com"
+                }
+            ],
+            "description": "Looks like an app, feels like an app, but NOT an app.",
+            "keywords": [
+                "laravel",
+                "php",
+                "progressive web apps",
+                "pwa"
+            ],
+            "time": "2019-01-21T23:41:39+00:00"
         },
         {
             "name": "theseer/tokenizer",
