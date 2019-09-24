@@ -105,11 +105,11 @@
                 </div>
                 <div>
                     <i class="fas fa-phone"></i>
-                    <p>+1 234 567890</p>
+                    <p>0900 20 50 800</p>
                 </div>
                 <div>
                     <i class="fas fa-envelope"></i>
-                    <p><a href="mailto:kuijpers@kuijpers.com" aria-label="Email">kuijpers@kuijpers.com</a></p>
+                    <p><a href="mailto:kuijpers@kuijpers.com" aria-label="Email">info@kuijpers.com</a></p>
                 </div>
             </div>
             <div class="footer-right">

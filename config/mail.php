@@ -86,7 +86,7 @@ return [
 
     'username' => env('wizkuijpers@gmail.com'),
 
-    'password' => env('Wiz2019'),
+    'password' => env('Wiz@2019'),
 
     /*
     |--------------------------------------------------------------------------
