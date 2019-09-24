@@ -45,67 +45,76 @@
             <th>Toegevoegd op</th>
             <th>Acties</th>
         </thead>
-        @if (isset($getBasket))
-        @foreach($getBasket as $getBasketItem)
-        <tr>
-            <td><strong>{{$getBasketItem->bestelling_id}}</strong></td>
-            <td><img src="{{$getBasketItem->product_img}}" height="50"></td>
+            @if (isset($getBasket))
+                @foreach($getBasket as $getBasketItem)
+                    <tr>
+                        <td><strong>{{$getBasketItem->bestelling_id}}</strong></td>
+                        <td><img src="{{$getBasketItem->product_img}}" height="50"></td>
 
-            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
-            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
-            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_aantal}}</td>
-            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
-            <td  class="default-{{$getBasketItem->bestelling_id}}"><button type="button" class="btn btn-success btn-edit" id="{{$getBasketItem->bestelling_id}}">Bewerken</button></td>
+                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
+                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
+                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_aantal}}</td>
+                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
+                        <td  class="default-{{$getBasketItem->bestelling_id}}"><button type="button" class="btn btn-success btn-edit" id="{{$getBasketItem->bestelling_id}}">Bewerken</button></td>
 
-            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
-            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
-            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}"><input class="{{$getBasketItem->bestelling_id}}" value="{{$getBasketItem->product_aantal}}" type="number"></input></td>
-            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
-            <td style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">
-                <a type="button" class="btn btn-success btn-save" id="{{$getBasketItem->bestelling_id}}" href="/overzicht/bestellijst/">Opslaan</a> 
-                <a type="button" class="btn btn-info btn-edit" id="{{$getBasketItem->bestelling_id}}">Annuleer</a>
-                <a type="button" class="btn btn-danger" href="/overzicht/bestellijst/destroy/{{$getBasketItem->bestelling_id}}/{{$getBasketItem->product_id}}/{{$getBasketItem->product_aantal}}">X</a>
-            </td>
-        </tr>
-        @endforeach
+                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
+                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
+                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}"><input class="{{$getBasketItem->bestelling_id}}" value="{{$getBasketItem->product_aantal}}" type="number"></input></td>
+                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
+                        <td style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">
+                            <a type="button" class="btn btn-success btn-save" id="{{$getBasketItem->bestelling_id}}" href="/overzicht/bestellijst/">Opslaan</a> 
+                            <a type="button" class="btn btn-info btn-edit" id="{{$getBasketItem->bestelling_id}}">Annuleer</a>
+                            <a type="button" class="btn btn-danger" href="/overzicht/bestellijst/destroy/{{$getBasketItem->bestelling_id}}/{{$getBasketItem->product_id}}/{{$getBasketItem->product_aantal}}">X</a>
+                        </td>
+                    </tr>
+                @endforeach             
+            
+            
         @endif
     </table>
 </div>
-<div class="container mt-4 d-flex justify-content-center">
-    <a href="/mail/send/{{$getBasketItem->product_toevoeger_id}}" type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>   Plaats bestelling</a>
-</div>
+    @if (isset($getBasketItem))
+        <div class="container mt-4 d-flex justify-content-center">
+            <a href="/mail/send/{{$getBasketItem->product_toevoeger_id}}" type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>   Plaats bestelling</a>
+        </div>
+    @else
+        <div class="noProducts" >Geen producten beschikbaar</div>
+    @endif
 @endsection
 
 <style>
 
-input{
-    width: 60px;
-}
+    input{
+        width: 60px;
+    }
 
-.my-custom-scrollbar {
-  position: relative;
-  max-height: 700px;
-  overflow: auto;
-}
-.table-wrapper-scroll-y {
-  display: block;
-}
+    .my-custom-scrollbar {
+        position: relative;
+        max-height: 700px;
+        overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+        display: block;
+    }
 
-#edit{
-    display : none !important;
-}
+    #edit{
+        display : none !important;
+    }
 
-.btn-save{
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
-    border-radius: .25rem !important;
-}
+    .btn-save{
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+        border-radius: .25rem !important;
+    }
 
-#app{
-    margin-bottom: 10px !important;
-}
+    #app{
+        margin-bottom: 10px !important;
+    }
 
+    .noProducts{
+        text-align: center;
+    }
 </style>
 
 <script
@@ -117,34 +126,34 @@ input{
 <script>
     
 
-$(document).ready(function () {
+    $(document).ready(function () {
 
-            setTimeout(function() {
-              $("#app").fadeOut("slow");
-            }, 3000);
-    $(".btn-edit").on("click", function(){
-        item = $(this).attr("id");
+                setTimeout(function() {
+                $("#app").fadeOut("slow");
+                }, 3000);
+        $(".btn-edit").on("click", function(){
+            item = $(this).attr("id");
 
-        console.log(item);
+            console.log(item);
 
-        $('.edit-' + item).toggle();
-        $('.default-' + item).toggle();
+            $('.edit-' + item).toggle();
+            $('.default-' + item).toggle();
 
-        console.log($(".edit-" + item).attr("class"));
+            console.log($(".edit-" + item).attr("class"));
+        });
+
+        $(".btn-save").on("click", function(){
+            item = $(this).attr("id");
+            aantal = $("." + item).val();
+
+            href = $(this).attr("href");
+
+            href_new = href + item + "/" + aantal;
+        // alert(href_new);
+
+            $(".btn-save").attr("href", href_new);
+
+        });
     });
-
-    $(".btn-save").on("click", function(){
-        item = $(this).attr("id");
-        aantal = $("." + item).val();
-
-        href = $(this).attr("href");
-
-        href_new = href + item + "/" + aantal;
-       // alert(href_new);
-
-        $(".btn-save").attr("href", href_new);
-
-    });
-});
 
 </script>
