@@ -34,6 +34,10 @@ class Chartcontroller extends Controller
 
         $currentuser = Auth::user()->rechten;
         if($currentuser == 'User'){
+            echo"Geen toegang";
+        }
+        elseif($currentuser == ''){
+            echo"Geen toegang";
         }
         else{
             $controltoegang = $currentuser;

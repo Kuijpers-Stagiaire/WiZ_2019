@@ -84,7 +84,7 @@
     <div class="tabcontent" id="Productbeheer">
         <div class="container-fluid users-main">
             <div class="row info" id="infobarproductbeheer">
-                <div class="img-col colpadding"><img src="img/aanvraagicon.png" class="profile-img-small imginfobar"></div>
+                <!-- <div class="img-col colpadding"><img src="img/aanvraagicon.png" class="profile-img-small imginfobar"></div> -->
                 <div class="col colpadding"><p class="nummer"> Aanvraag ID: </p></div>
                 <div class="col colpadding"><p class="naam"> Gebruikers: </p></div>
                 <div class="col colpadding">Product:</div>
@@ -92,6 +92,38 @@
                 <div class="col colpadding">Product locatie:</div>
                 <div class="col colpadding"><img src="img/setting2.png" height="30" width="30"></div>
             </div>
+            @if(isset($overzicht))
+                @foreach ($overzicht as $product)
+                    <a href="/controlpanel/products/{{ $product->id }}">
+                        <div id="searchProducts">
+                            <div class="row products productsdata">
+                                <!-- <div class="img-col"><img src="/storage/avatars/{{ $user->avatar }}" class="profile-img-small"></div> -->
+                                <div class="col-4">{{ $user->email }}</div>
+                                <div class="col">{{$user->rechten}}</div>
+                                <div class="col">{{$user->vestiging}}</div>
+                                <div class="col">{{$user->id}}</div>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+                <div class="row ">
+                    <div class="col"></div>
+                    <div class="controluserlink">{{ $users->links() }}</div>
+                    <div class="col"></div>
+                </div>
+            @endif
+            @if(isset($usersearcherror))
+                <div class="row usernotfoundicon">
+                    <div class="col"></div>
+                    <div class="col-6"><i class="fas fa-user-times"></i></div>
+                    <div class="col"></div>
+                </div>
+                <div class="row usernotfound">
+                    <div class="col"></div>
+                    <div class="col-6"> <h3>Gebruiker niet gevonden</h3></div>
+                    <div class="col"></div>
+                </div>
+            @endif
         </div>
     </div>   
 @endsection

@@ -100,7 +100,7 @@
                 <div>
                     <i class="fas fa-map-marker-alt"></i>
                     <a  target="blank" aria-label="Locatie" href="https://www.google.nl/maps/place/Panovenweg+20,+5708+HR+Helmond/@51.4738781,5.6267348,17z/data=!3m1!4b1!4m5!3m4!1s0x47c7214f44307933:0x16bd59b2e5452121!8m2!3d51.4738748!4d5.6289235" rel="noopener">
-                        <p><span>Panovenweg 20</span> Helmond, Nederland</p>
+                        <p><span>Panovenweg 18</span> Helmond, Nederland</p>
                     </a>
                 </div>
                 <div>
@@ -109,7 +109,7 @@
                 </div>
                 <div>
                     <i class="fas fa-envelope"></i>
-                    <p><a href="mailto:kuijpers@kuijpers.com" aria-label="Email">info@kuijpers.com</a></p>
+                    <p><a href="mailto:wizkuijpers@gmail.com" aria-label="Email">wizkuijpers@gmail.com</a></p>
                 </div>
             </div>
             <div class="footer-right">
