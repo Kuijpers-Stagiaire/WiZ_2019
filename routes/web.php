@@ -126,6 +126,8 @@ Route::get('/overzicht', ['middleware' => 'auth', 'uses' => 'ProductsController@
 Route::get('/overzicht/nieuw', ['middleware' => 'auth', 'uses' => 'ProductsController@producttoevoegen']);
 Route::post('/overzicht/nieuw/store', ['middleware' => 'auth', 'uses' => 'ProductsController@store']);
 
+Route::get('/overzicht/product_Scannen', ['middleware' => 'auth', 'uses' => 'ProductsController@nieuw_Barcode']);
+
 // Product toevoegen d.m.v. barcodescaner
 Route::post('/overzicht/nieuw_scanned', ['middleware' => 'auth', 'uses' => 'ProductsController@barcode']);
 

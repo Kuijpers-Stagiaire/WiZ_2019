@@ -35,6 +35,14 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       <i class="fas fa-plus-square" style="color : white !important;"></i> Nieuw product 
                     </a>
 
+                    <div class="dropdown">
+                      <button class="dropbtn">Nieuw product</button>
+                      <div class="dropdown-content">
+                        <a href="overzicht/nieuw">Handmatig</a>
+                        <a href="overzicht/product_Scannen">Scannen</a>
+                      </div>
+                    </div>
+
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document" style="height : 490px;margin-top:150px;">
