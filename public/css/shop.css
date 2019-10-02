@@ -19,6 +19,8 @@ body{
     color: black;
 }
 
+
+
 .card-group{
     border-color: #8fa2d2;
     border-width: 1px;
@@ -122,16 +124,16 @@ body{
 
 /* Productdetail */
 
-.modalimage{
+/* .modalimage{
     margin-top: 0px !important;
     max-height: 400px;
     max-width: 400px;
-}
+} */
 
-.detailmodal{
+/* .detailmodal{
     text-align: center;
     margin: auto;
-}
+} */
 
 .userdetailverticalline{
     border-left: 3px solid #8fa2d2;
@@ -139,10 +141,10 @@ body{
     margin-bottom: 70px;
 }
 
-.modalimagedetail{
+/* .modalimagedetail{
     width: 400px;
     height: 100%;
-}
+} */
 
 .myImg{
     display: block;
@@ -302,13 +304,14 @@ ul.prodinfo {
     background-color: #7f7f7f;
 }
 
-.custom-modal-body-child-1{
+ .custom-modal-body-child-1{
     margin-right: 5px;
+    text-align: center;
 }
-
+/*
 .custom-modal-body-child-2{
     margin-left: 5px;
-}
+} */
 
 form.Sbar input[type=text] {
     font-size: 17px;
@@ -417,51 +420,51 @@ form.Sbar::after {
     margin-left: 10px;
 }
 
-.custom-modal-footer-section{
+/* .custom-modal-footer-section{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-}
+} */
 
 @media only screen and (min-width: 375px) and (max-width: 425px){
 
 
-    .custom-modal-footer{
+    /* .custom-modal-footer{
         height: 200px !important;
         background: white;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-    }
+    } */
     .custom-aantal-input{
         width: 100px;
     }
 
-    .custom-modal-img{
+    /* .custom-modal-img{
         margin-bottom: 10px;
-    }
+    } */
 
     .hr{
         display: none !important;
     }
 
-    .custom-modal-body-child-2{
+    /* .custom-modal-body-child-2{
         width: 350px !important;
-    }
+    } */
 
     .custom-table{
         width: 350px !important; 
         height: 350px;
     }
 
-    .custom-modal-body{
+    /* .custom-modal-body{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-    }
+    } */
 
     #Searchnavbar{
         flex-direction: row;
@@ -495,7 +498,7 @@ form.Sbar::after {
 }
 
 
-.custom-modal-form-data-design {
+/* .custom-modal-form-data-design {
     background: none !important;
     border: none !important;
     cursor: default;
@@ -573,13 +576,13 @@ form.Sbar::after {
     width: 550px;
     overflow-y: auto;
 
-}
+} */
 
-.custom-modal-footer{
+/* .custom-modal-footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+} */
 
 a, u {
     text-decoration: none !important;

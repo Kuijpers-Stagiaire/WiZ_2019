@@ -1,433 +1,324 @@
+@if(session('status'))
+    {{ session('status') }}
+@endif
 @extends('layouts.layout')
 @section('pageSpecificCSS')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/shop.css') }}" />
 @endsection
 @section('titlePage')
-    <title>WiZ Kuijpers - Product toevoegen</title>
+    <title>WiZ Kuijpers - Overzicht</title>
 @endsection
+@section('shopmenu')
+<?php 
+// Haal de token op uit de sessie, om deze te gebruiken bij het ophalen van producten.
+echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
+?>
+    <div class="container-fluid">
+        
+            <!-- <div class="col order-12 shop-bar addcol"> -->
+                <style>
+                    .dropdown-content a:hover {background-color: #ddd;}
 
+                    .dropdown:hover .dropdown-content {display: block;}
 
-@section('content')
-<div class="custom-modal-body-child-1">
-    <!-- Tijdelijke placeholder afbeelding, zodra er een product gescand is, wordt deze afbeelding veranderdt naar de afbeelding van het product. -->
-    <img src="https://oie.msu.edu/_assets/images/placeholder/placeholder-200x200.jpg" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="custom-modal-img" width="200" height="200">
-    </div>
-    <div class="custom-modal-body-child-2">
-    <!-- Tabel waar alle productinformatie te zien gaat worden. -->
-        <table class="table table-striped table-bordered table-hover table-responsive custom-table">
-            <tbody>
-            <thead>
-            <tr>
-                <td style="width:18%;">ID:</td>
-                <td class=""><input class="custom-modal-form-data-design custom-modal-id"></td>
-            </tr>
-        </thead>
-            <tr>
-                <td>Merk:</td>
-                <td><input class="custom-modal-form-data-design custom-modal-merk" required="required" name="merk"></td>
-            </tr>
-            <tr>
-                <td>Productnaam:</td>
-                <td><input class="custom-modal-form-data-design custom-modal-productnaam" name="productnaam"required="required" ></td>
-            </tr>
-            <tr>
-                <td>Productomschrijving</td>
-                <td><textarea class="custom-modal-form-data-design custom-modal-productomschrijving" name="productomschrijving" style="min-height:60px;max-height:80px;" ></textarea></td>
-            </tr>
-            <tr>
-                <td>Serie</td>
-                <td><input class="custom-modal-form-data-design custom-modal-serie" name="serie"></td>
-            </tr>
+                    .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
-            <tr>
-                <td>Model</td>
-                <td><input class="custom-modal-form-data-design custom-modal-type" name="type" required="required" ></td>
-            </tr>
+                    .dropbtn {
+                    background-color: #4CAF50;
+                    color: white;
+                    /* padding: 16px; */
+                    font-size: 16px;
+                    border: none;
+                    text-align: center; 
+                    border: 1px solid transparent;
 
-            <tr>
-                <td>Productcode</td>
-                <td><input class="custom-modal-form-data-design custom-modal-productcode" name="productcode" ></td>
-            </tr>
-            <tr>
-                <td>GLN</td>
-                <td><input class="custom-modal-form-data-design custom-modal-gln" name="gln" required="required" ></td>
-            </tr>
-            <tr>
-                <td>GTIN</td>
-                <td><input class="custom-modal-form-data-design custom-modal-gtin" name="gtin" required="required" ></td>
-            </tr>
-            <tr>
-                <td>Deeplink</td>
-                <td><a class="custom-modal-deeplink2" href="" target="_blank"><input class="custom-modal-form-data-design custom-modal-deeplink" name="deeplink" style="color : blue !important;cursor:pointer;" required="required" readonly></a></td>
-                <input type="hidden" class="hidden-image" name="image" value="">
-                <input type="hidden" class="hidden-aantal" name="aantal" value="">
-                <input type="hidden" class="hidden-gewicht-eenheid" name="gewicht-eenheid" value="">
-                <input type="hidden" class="hidden-gewicht" name="gewicht" value="">
+                    }
 
-                <input type="hidden" class="hidden-productnaam-volledig" name="productnaam-volledig" value="">
-                <input type="hidden" class="hidden-producttype" name="producttype" value="">
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col pagetitle"> 
-                <h2>Product toevoegen</h2>
-            </div>
-            <div class="col">
-            {{-- <div class="btn-floating-container">
-                <button class="btn-floating btn btn-primary btn-medium"><i class="fa fa-barcode " aria-hidden="true"></i>
-                </button>
-            </div> --}}
+                    .dropdown {
+                    position: relative;
+                    display: inline-block;
+                    }
+
+                    .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: #f1f1f1;
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                    }
+
+                    .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                    }
+                </style>
+                <div class="addprod">
+                    <div class="dropdown">
+                      <button class="dropbtn" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">Nieuw product</button>
+                      <div class="dropdown-content">
+                        <a href="overzicht/nieuw">Handmatig</a>
+                        <a href="overzicht/product_Scannen">Scannen</a>
+                      </div>
+                    </div>
+                    <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+                        <i class="fas fa-shopping-cart"></i> Winkelwagen
+                    </a>
+                </div>
+                    <!-- Modal -->
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div class="hr"></div>
+                            <div class="alert alert-danger alert-scan" role="alert" style="font-size:16px !important; display: none !important; display: flex; align-items: center;justify-content: flex-start !important;">Fout! Uw barcode is incorrect.
+                            </div>
+                            <div>
+
+                              <form method="post" action="/overzicht/nieuw_scanned" enctype="multipart/form-data" id="form-barcode">
+                                
+                              @method('POST')
+                              @csrf
+
+                                <div class="custom-modal-body-child-1">
+                                    <!-- Tijdelijke placeholder afbeelding, zodra er een product gescand is, wordt deze afbeelding veranderdt naar de afbeelding van het product. -->
+                                    <img src="https://oie.msu.edu/_assets/images/placeholder/placeholder-200x200.jpg" onerror=this.src="{{ url('/img/img-placeholder.png') }}" width="200" height="200" style="text-align: center; ">
+                                </div>
+                                <div>
+                                  <!-- Tabel waar alle productinformatie te zien gaat worden. -->
+                                    <table class="table table-striped table-bordered table-hover table-responsive custom-table">
+                                      <tbody>
+                                        <thead>
+                                        <tr>
+                                          <td style="width:18%;">ID:</td>
+                                          <td class=""><input class="custom-modal-form-data-design custom-modal-id"></td>
+                                        </tr>
+                                    </thead>
+                                        <tr>
+                                          <td>Merk:</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-merk" required="required" name="merk"></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Productnaam:</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-productnaam" name="productnaam"required="required" ></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Productomschrijving</td>
+                                          <td><textarea class="custom-modal-form-data-design custom-modal-productomschrijving" name="productomschrijving" style="min-height:60px;max-height:80px;"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Serie</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-serie" name="serie"></td>
+                                        </tr>
+
+                                        <tr>
+                                          <td>Model</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-type" name="type" required="required" ></td>
+                                        </tr>
+
+                                        <tr>
+                                          <td>Productcode</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-productcode" name="productcode" ></td>
+                                        </tr>
+                                        <tr>
+                                          <td>GLN</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-gln" name="gln" required="required" ></td>
+                                        </tr>
+                                        <tr>
+                                          <td>GTIN</td>
+                                          <td><input class="custom-modal-form-data-design custom-modal-gtin" name="gtin" required="required" ></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Deeplink</td>
+                                          <td><a class="custom-modal-deeplink2" href="" target="_blank"><input class="custom-modal-form-data-design custom-modal-deeplink" name="deeplink" style="color : blue !important;cursor:pointer;" required="required" readonly></a></td>
+                                          <input type="hidden" name="image" value="">
+                                          <input type="hidden" name="aantal" value="">
+                                          <input type="hidden" name="gewicht-eenheid" value="">
+                                          <input type="hidden" name="gewicht" value="">
+
+                                          <input type="hidden" name="productnaam-volledig" value="">
+                                          <input type="hidden" name="producttype" value="">
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+                                </form>
+                            </div>
+                          </div>
+                          <div class="modal-footer custom-modal-footer">
+                                <div class="custom-modal-footer-section">
+                                    <input type="number" class="custom-aantal-input" name="aantal" form="form-barcode" placeholder="Aantal" required="required" min="0" oninput="validity.valid||(value='');" step="1">
+
+                                    <select class="custom-aantal-input custom-modal-category" name="custom-modal-category" form="form-barcode">
+                                      @foreach ($categories as $category)
+                                      <option value="{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                                      @endforeach
+                                  </select>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-secondary push" data-dismiss="modal">Sluiten</button>
+                                    <button type="submit" class="btn btn-primary custom-modal-opslaan" form="form-barcode">Product toevoegen</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="input-group">
-                    <span class="input-group-btn"> 
-                        {{-- <button class="btn btn-scan" type="button" id="btn" value="Start/Stop the scanner" data-toggle="modal" data-target="#livestream_scanner">
-                            <i class="fa fa-barcode"></i>
-                        </button>  --}}
-                    </span>
-                </div> -->
-                <!-- /input-group -->
-            <!-- </div> -->
-            <!-- /.col-lg-6 -->
-        <!-- </div> -->
-        <!-- /.row -->
-        <!-- <div class="modal" id="livestream_scanner">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Barcode Scanner</h4>
-                        <button type="button" id="scanclose" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>                        
-                    </div>
-                    <div class="modal-body">
-                        <div id="interactive" class="viewport"></div>
-                        <div class="error"></div>
-                        <div id="scanner-container"></div>
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div> -->
-                <!-- </div> -->
-                <!-- /.modal-content -->
-            <!-- </div> -->
-            <!-- /.modal-dialog -->
-        <!-- </div> -->
-        <!-- /.modal -->
+    </div>
+@endsection
+@section('content')
 
-        <!--<form action="/overzicht/nieuw/store" method="POST" enctype="multipart/form-data">
-            @method('POST')
-            @csrf
-            <div class="row from-group">
-                <div class="col-xl  form-group">
-                    <h5>Product foto:</h5>
-                    <div class="productphoto">
-                        <img aria-label="Product foto" id="imgShop" src="" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="img-fluid" name="imagelink">
-                        <br>
-                        <input aria-label="Product foto teovoegen" type="file" name="imagelink" onchange="previewFileShop()">
-                    </div>
-
-                    <h5>Product extra informatie:</h5>
-                    <textarea aria-label="Product extra informatie"  class="form-control" rows="7" cols="50"  name="Specificaties" value="{{ old('Specificaties')}}"></textarea>
-                </div>
-                <div class="col-xl  form-group">
-                    <div>
-                        <h5>Product naam:</h5>
-                        <input aria-label="Product naam" id="Productomschrijving" class="form-control{{ $errors->has('Productomschrijving') ? ' is-invalid' : '' }}" type="text" name="Productomschrijving" @if(isset($gtininfo)) value="{{$gtininfo[0]->productomschrijving}}" @endif value="{{ old('Productomschrijving') }}" autofocus/>
-                        <br>
-                        @if ($errors->has('Productomschrijving'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Productomschrijving') }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div>
-                        <h5>Productcode:</h5>
-                        <input aria-label="Productcode" id="Productcodefabrikant" class="form-control{{ $errors->has('Productcodefabrikant') ? ' is-invalid' : '' }}" type="text" name="Productcodefabrikant" value="{{ old('Productcodefabrikant') }}"/>
-                        <br>
-                        @if ($errors->has('Productcodefabrikant'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Productcodefabrikant') }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div>
-                        <h5>gtin_fabrikant:</h5>
-                    <input aria-label="gtin_fabrikant" class="form-control scanBtn{{ $errors->has('GTIN') ? ' is-invalid' : '' }}" type="text" id="GTIN" name="GTIN" @if(isset($gtininfo)) value="{{$gtininfo[0]->gtin}}" @endif value="{{ old('GTIN') }}"/>
-                        <button class="btn btn-scan" type="button" id="btn" value="Start/Stop the scanner" data-toggle="modal" data-target="#livestream_scanner">
-                            <i class="fa fa-barcode"></i>
-                        </button> 
-                        <br>
-                        @if ($errors->has('GTIN'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('GTIN') }}
-                            </div>
-                        @endif
-                        @if (isset($gtinerror))
-                            <div class="alert alert-danger" role="alert">
-                                Dit product is nog niet bij ons bekend, vul de rest van de informatie zelf in.
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div>
-                        <h5>Fabrikaat:</h5>
-                        <input aria-label="Fabrikaat" id="Fabrikaat" class="form-control{{ $errors->has('Fabrikaat') ? ' is-invalid' : '' }}" type="text" name="Fabrikaat" @if(isset($gtininfo)) value="{{$gtininfo[0]->fabrikaat}}"@endif value="{{ old('Fabrikaat') }}"/>
-                        <br>
-                        @if ($errors->has('Fabrikaat'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Fabrikaat') }}
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div>
-                        <h5>Productserie:</h5>
-                        {{-- <input id="Productserie" class="form-control{{ $errors->has('Productserie') ? ' is-invalid' : '' }}" type="text" name="Productserie" required/> --}}
-                        <select aria-label="Productserie" id="Productserie" class="form-control{{ $errors->has('Productserie') ? ' is-invalid' : '' }}" name="Productserie" value="{{ old('Productserie') }}">
-                            <option disabled selected hidden>Productserie:</option>
-                            <option>IT</option>
-                            <option>Magazijn</option>
-                            <option>Diversen</option>
-                            @if(isset($gtininfo)) 
-                                <option selected>{{$gtininfo[0]->productserie}}</option>
-                            @endif
-                        </select>
-                        <br>
-                        @if ($errors->has('Productserie'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Productserie') }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div>
-                        <h5>Producttype:</h5>
-                        {{-- <input id="Producttype" class="form-control{{ $errors->has('Producttype') ? ' is-invalid' : '' }}" type="text" name="Producttype" required/> --}}
-                        <select aria-label="Producttype" id="Producttype" class="form-control{{ $errors->has('Producttype') ? ' is-invalid' : '' }}" name="Producttype" value="{{ old('Producttype') }}">
-                            <option disabled selected hidden>Producttype:</option>
-                            <option>Tablet</option>
-                            <option>Printer</option>
-                            <option>PC</option>
-                            <option>Monitor</option>
-                            <option>Laptop</option>
-                            <option>Flenzen</option>
-                            <option>Afsluiters</option>
-                            <option>RVS buizen</option>
-                            <option>Elektrische onderdelen</option>
-                            <option>T stukken</option>
-                            <option>Telefoons</option>
-                            <option>TL-buizen</option>
-                            <option>Diversen</option>
-                            @if(isset($gtininfo)) 
-                                <option selected>{{$gtininfo[0]->producttype}}</option>
-                            @endif
-                        </select>
-                        <br>
-                        @if ($errors->has('Producttype'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Producttype') }}
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div>
-                        <h5>Locatie:</h5>
-                        {{-- <input id="Locatie" class="form-control{{ $errors->has('Locatie') ? ' is-invalid' : '' }}" type="text" name="Locatie" required/> --}}
-                        <select aria-label="Locatie" id="Locatie" class="form-control{{ $errors->has('Locatie') ? ' is-invalid' : '' }}" name="Locatie" value="{{ old('Locatie') }}">
-                            <option disabled selected hidden>Vestiging:</option>
-                            <option>Amsterdam</option>
-                            <option>Arnhem</option>
-                            <option>Den Bosch</option>
-                            <option>Den Haag</option>
-                            <option>Echt</option>
-                            <option>Groningen</option>
-                            <option>Helmond</option>
-                            <option>Katwijk</option>
-                            <option>Makkum</option>
-                            <option>Oosterhout</option>
-                            <option>Roosendaal</option>
-                            <option>Tilburg</option>
-                            <option>Utrecht</option>
-                            <option>Zelhem</option>
-                            <option>Zwolle</option>
-                        </select>
-                        <br>
-                        @if ($errors->has('Locatie'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Locatie') }}
-                            </div>
-                        @endif
-
-                    </div>
-                    
-                    <div>
-                        <h5>Eenheid gewicht:</h5>
-                        <input aria-label="Eenheid gewicht" id="Eenheidgewicht" class="form-control{{ $errors->has('Eenheidgewicht') ? ' is-invalid' : '' }}" type="text" name="Eenheidgewicht" value="{{ old('Eenheidgewicht') }}"/>
-                        <br>
-                        @if ($errors->has('Eenheidgewicht'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Eenheidgewicht') }}
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div>
-                        <h5>Aantal:</h5>
-                        <input aria-label="Aantal" id="Aantal" class="form-control{{ $errors->has('Aantal') ? ' is-invalid' : '' }}" type="text" name="Aantal" value="{{ old('Aantal') }}"/>
-                        <br>
-                        @if ($errors->has('Aantal'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Aantal') }}
-                            </div>
-                        @endif
-                    </div>
-                </div>
+{{-- <div class="container-fluid bekijkook">
+    <h3>Bekijk ook deze producten:</h3>
+    <div class="row">
+        @if (isset($bekijkook))
             </div>
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-6 prodcreate">
-                    <input class="btn btn-lg" type="submit" value="Toevoegen"/>
-                </div>
-                <div class="col"></div>
+            @php $counttabID = 0 @endphp
+            <div class="tab list-group">
+                <button type="button" class="tablinks list-group-item list-group-item-action" onclick="openCity(event, 'menu1')" id="defaultOpen">menu1</button>
+                <button type="button" class="tablinks list-group-item list-group-item-action" onclick="openCity(event, 'menu2')">menu2</button>
+                <button type="button" class="tablinks list-group-item list-group-item-action" onclick="openCity(event, 'menu3')">menu3</button>
+                <button type="button" class="tablinks list-group-item list-group-item-action" onclick="openCity(event, 'menu4')">menu4</button>
             </div>
-        </form>
-    </div> -->
-    <script>     
+                
+            @foreach ($bekijkook as $bekijk)
+                @php $counttabID++ @endphp
+                <div id="menu{{$counttabID}}" class="tabcontent">
+                    <h3>{{$bekijk->productomschrijving}}</h3>
+                    <p>London is the capital city of England.</p>
+                </div>
+            @endforeach
+        @else 
+            <h1>not set</h1>
+        @endif       
+    </div>
+</div> --}}
+@endsection
+@section('PWA')
+    <div>
+        <img id="btnAdd" alt="PWA popup" src="{{ asset('img/pwa-icon.png') }}">
+    <div>
+@endsection
+<script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous">
+  </script>
+
+
+<script>
+$(document).ready(function () {
+  // Wanneer een barcode gescand is, zal deze functie geroepen worden.
+  $(document).scannerDetection({
+    timeBeforeScanTest: 100, // De periode die gewacht wordt tussen elk character(om te zien of het een barcodescanner is, en geen normaal toetsenbord).
+    avgTimeByChar: 30, // Het is geen barcode als de gemiddelde periode tussen input gemiddeld langer is dan 30 miliseconde.
+    // preventDefault: true, // Deze instelling zorgde ervoor dat normale inputs niet meer werkte, zie de CRPR-lijst voor een beter beschrijving.
+      // Het is een barcode wanneer de waarde gelijk is aan 13(standaard lengte van een gtin-barcode).
+      endChar: [13],
+      // Wanneer alle parameters voldoen aan de minimale waarden, wordt de volgende functie uitgevoerd.
+      onComplete: function(barcode, qty){
+      // Controleer of het gaat om een GTIN-barcode, zo niet laat een melding zien aan de gebruiker die na 3 seconden weg gaat.
+      if(barcode.length != 13){
+        $(".alert-scan").text("De barcode levert helaas geen resultaten op! Probeer een nieuwe barcode of voeg het product handmatig toe.");
+        $(".alert-scan").show().delay(3000).fadeOut();
+      }else{
+      validScan = true;
+      // Voeg een 0 toe aan de barcode, de reden hiervoor staat in de CRPR-lijst
+      retrieveData("0" + barcode);
+      }
+      },
+      // Wanneer een barcode onsuccesvol ingescand is, wordt de volgende code uitgevoerd. GitTest
+      onError: function(string, qty) {
+      }
+    });
+
+    // Stop de gescande waarde van de barcodescanner in de functieparameter, om te gebruiken bij het ophalen van een product.
+    function retrieveData(barcode){
+      // Token die verstopt zit in een ontzichtbare div.
+      $token = $(".hidden-token").text();
+
+      // Ajax call naar een lokaal php-script genaamd: retrieveProductInfo.php(script wat productinfo ophaalt).
+      $.ajax({
+              url: "http://127.0.0.1:8000/retrieveProductInfo.php",
+              contentType: "application/json",
+              dataType: 'json',
+              data: {
+                  barcode : barcode,
+                  token : $token
+              },
+              // Als de query succesvol is uitgevoerd, voer het volgende uit:
+              success: function(result){
+
+                  // JSON parse de opgehaalde waardes(stop ze in een makkelijk uitleesbare javascript object).
+                  if(result == ""){
+                    $(".alert-scan").text("De barcode levert helaas geen resultaten op! Probeer een nieuwe barcode of voeg het product handmatig toe.");
+                    $(".alert-scan").show().delay(3000).fadeOut();
+                  }else{
+                  var result = JSON.parse(result);
+                  console.log(result);
+
+                  // Vul de tabel die men te zien krijgt met de nieuwe opgehaalde waarde.
+                  $(".custom-modal-id").val(result.Id);
+                  $(".custom-modal-merk").val(result.ManufacturerName);
+                  $(".custom-modal-productnaam").val(result.ProductClassDescription);
+                  $(".custom-modal-productomschrijving").val(result.LongDescription);
+                  $(".custom-modal-productcode").val(result.Productcode);
+                  $(".custom-modal-gln").val(result.ManufacturerGLN);
+                  $(".custom-modal-gtin").val(result.GTIN);
+                  $(".custom-modal-deeplink").val(result.ManufacturerName);
+                  $(".custom-modal-deeplink2").attr("href", result.Deeplink);
+                  $(".custom-modal-img").attr("src", "https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
+
+                  // ... versopte inputs, hierin komt informatie die niet relevant is voor de gebruiker te staan.
+
+                  $(".hidden-gewicht-eenheid").val(result.WeightMeasureUnitDescription);
+                  $(".hidden-gewicht").val(result.WeightQuantity);
+                  $(".hidden-productnaam-volledig").val(result.Description);
+                  $(".custom-modal-serie").val(result.Model);
+                  $(".custom-modal-type").val(result.Version);
+                  
+                  $(".hidden-image").val("https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
+                  $(".hidden-producttype").val(result.ProductClassDescription);
+                  }
+                  
+              }
+          });
+      }
+
 
             setTimeout(function() {
               $("#app").fadeOut("slow");
             }, 3000);
+ 
+        $(".btn-open").on("click", function(){
 
+            var item = $(this).attr("id");
+            
+            $("." + item).toggle();
 
-            function startScanner() {
-                Quagga.init({
-                    inputStream: {
-                        name: "Live",
-                        type: "LiveStream",
-                        target: document.querySelector('#scanner-container'),
-                        constraints: {
-                            width: 480,
-                            height: 320,
-                            facingMode: "environment"
-                        },
-                    },
-                    decoder: {
-                        readers: [
-                            // "code_128_reader"
-                            "ean_reader"
-                            // "ean_8_reader",
-                            // "code_39_reader",
-                            // "code_39_vin_reader",
-                            // "codabar_reader",
-                            // "upc_reader",
-                            // "upc_e_reader",
-                            // "i2of5_reader"
-                        ],
-                        debug: {
-                            showCanvas: true,
-                            showPatches: true,
-                            showFoundPatches: true,
-                            showSkeleton: true,
-                            showLabels: true,
-                            showPatchLabels: true,
-                            showRemainingPatchLabels: true,
-                            boxFromPatches: {
-                                showTransformed: true,
-                                showTransformedBox: true,
-                                showBB: true
-                            }
-                        }
-                    },
-    
-                }, function (err) {
-                    if (err) {
-                        console.log(err);
-                        return
-                        Quagga.initialized = true;
-                        Quagga.start();
-                    }
-    
-                    console.log("Initialization finished. Ready to start");
-                    Quagga.start();
-    
-                    // Set flag to is running
-                    _scannerIsRunning = true;
-                });
-    
-                Quagga.onProcessed(function (result) {
-                    var drawingCtx = Quagga.canvas.ctx.overlay,
-                    drawingCanvas = Quagga.canvas.dom.overlay;
-    
-                    if (result) {
-                        if (result.boxes) {
-                            drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-                            result.boxes.filter(function (box) {
-                                return box !== result.box;
-                            }).forEach(function (box) {
-                                Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
-                            });
-                        }
-    
-                        if (result.box) {
-                            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
-                        }
-    
-                        if (result.codeResult && result.codeResult.code) {
-                            Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
-                        }
-                    }
-                });
-                function order_by_occurrence(arr) {
-                    var counts = {};
-                    arr.forEach(function(value){
-                        if(!counts[value]) {
-                            counts[value] = 0;
-                        }
-                        counts[value]++;
-                    });
+        });
 
-                    return Object.keys(counts).sort(function(curKey,nextKey) {
-                        return counts[curKey] < counts[nextKey];
-                    });
-                }
+        $(".btn-add").on("click", function(){
 
-                var last_result = [];
-                Quagga.onDetected(function (result) {
-                    var last_code = result.codeResult.code;
-                    console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
-                    last_result.push(last_code);
-                    if (last_result.length > 5) {
-                        code = order_by_occurrence(last_result)[0];
-                        console.log(last_result);
-                        last_result = [];
-                        document.getElementById('GTIN').value = code;
-                        setTimeout(function(){ $('#livestream_scanner').modal('hide'); }, 500);
+            var item = $(this).attr("id");
 
-                        window.location = "/overzicht/nieuw/" + code,
+            var amount = $(".form-amount-" + item).val();
 
-                        Quagga.stop();
-                    }
-                    
-                });
-            }
-    
-            // Start/stop scanner
-            document.getElementById("btn").addEventListener("click", function () {
-                startScanner();
-            });
+            var href = $(".btn-add-" + item).attr("href");
 
-            document.getElementById("scanclose").addEventListener("click", function () {
-                Quagga.stop();
-            });
-        </script>
-@endsection
+            $(".btn-add").attr("href", href + amount);
+
+            var href_new = $(".btn-add").attr("href");
+
+        });
+
+        $(".btn-close").on("click", function(){
+            $(".modal").hide();
+        })
+    });
+
+</script>
