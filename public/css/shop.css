@@ -380,7 +380,7 @@ form.Sbar::after {
     background : #2f2e87 !important;
     color : white !important;
     height : 38px !important;
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     align-items: center;
     width: 200px;

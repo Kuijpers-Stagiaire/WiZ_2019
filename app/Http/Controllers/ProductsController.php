@@ -375,6 +375,6 @@ class ProductsController extends Controller
         //  Combobox items Cats
         $categories = DB::table('productseries')->distinct()->select('productserie_naam', 'productserie_img')->get();
         $combocats = DB::table('overzicht')->distinct()->select('Productserie', 'Productserie')->get();
-        return view('Products.newProductSanned', compact('combocats', 'categories'))->with('message', 'IT WORKS!');
+        return view('Products.newProductScanned', compact('combocats', 'categories'))->with('message', 'IT WORKS!');
     }
 }
