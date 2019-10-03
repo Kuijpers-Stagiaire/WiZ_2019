@@ -187,102 +187,96 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
             <h3>Categorieën</h3>
           
 
-    <div class="row row-categories">
-                    @foreach ($categories as $category)
-                        <div class="card card-categories col-3" >
-                            <a href="/overzicht/products/{{ $category->productserie_naam }}">
-                            <p class="card-text card-text-categories h6 text-center">{{$category->productserie_naam}}</p>
-                          <img class="card-img-top card-img-categories" src="{{$category->productserie_img}}"  alt="Card image cap"></a>
+              <div class="row row-categories">
+                @foreach ($categories as $category)
+                  <div class="card card-categories col-3" >
+                      <a href="/overzicht/products/{{ $category->productserie_naam }}">
+                      <p class="card-text card-text-categories h6 text-center">{{$category->productserie_naam}}</p>
+                      <img class="card-img-top card-img-categories" src="{{$category->productserie_img}}"  alt="Card image cap"></a>
 
 
-                          <!-- UNCOMMENT THIS TO ACTIVATE STYLE WITH BUTTON -->
+                    <!-- UNCOMMENT THIS TO ACTIVATE STYLE WITH BUTTON -->
 <!--                           <div class="card-body card-body-categories">
-                            <a href="/overzicht/products/{{ $category->productserie_naam }}" class="btn btn-product" style="width : 180px !important;"><i class="fas fa-arrow-circle-right"></i> Bekijk</a>
-                          </div> -->
-                        </div>
-                    @endforeach
-    </div>
-
-
-
-                    
-            
+                      <a href="/overzicht/products/{{ $category->productserie_naam }}" class="btn btn-product" style="width : 180px !important;"><i class="fas fa-arrow-circle-right"></i> Bekijk</a>
+                    </div> -->
+                  </div>
+                @endforeach
+              </div>
         </div>
         <div class="col sidecols"></div>
-        <div class="eerderbekeken">
+          <div class="eerderbekeken">
             @if(isset($productsOTs))
-                <div class="col eerderbekeken">
-                    <h3 class="onlangs">Onlangs toegevoegd</h3>
-                    @foreach ($productsOTs as $productsOT) 
+              <div class="col eerderbekeken">
+                <h3 class="onlangs">Onlangs toegevoegd</h3>
+                  @foreach ($productsOTs as $productsOT) 
+                  <!-- END OF OLD DESIGN -->
+                    <div class="card card-vl flex-row flex-wrap card-ot">
+                      <div class="card-header card-header-img border-0">
+                        <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/>
+                      </div>
+                    <div class="card-block px-2">
+                      <!-- 15 if on normal pc, 27 on big -->
+                      <?php  
+                      $cut = 15;
+                      $out = strlen($productsOT->productomschrijving) > $cut ? substr($productsOT->productomschrijving,0,$cut)."..." : $productsOT->productomschrijving; 
 
-                    <!-- END OF OLD DESIGN -->
-                           <div class="card card-vl flex-row flex-wrap card-ot">
-                                <div class="card-header card-header-img border-0">
-                                    <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/>
-                                </div>
-                                <div class="card-block px-2">
-                                  <!-- 15 if on normal pc, 27 on big -->
-                                  <?php  
-                                  $cut = 15;
-                                  $out = strlen($productsOT->productomschrijving) > $cut ? substr($productsOT->productomschrijving,0,$cut)."..." : $productsOT->productomschrijving; 
+                      if ($out == "") {
+                        $out = strlen($productsOT->productnaam) > $cut ? substr($productsOT->productnaam,0,$cut)."..." : $productsOT->productnaam;;
+                      }
 
-                                  if ($out == "") {
-                                    $out = strlen($productsOT->productnaam) > $cut ? substr($productsOT->productnaam,0,$cut)."..." : $productsOT->productnaam;;
-                                  }
-
-                                  ?>
-                                    <h4 class="card-title">{{$out}}</h4>
-                                        <span class="app_txt ulinfo">
-                                        <ul class="prodvraag">
-                                            <li>Locatie:</li>
-                                            <li>Serie:</li>
-                                            <li>Aantal:</li></b>
-                                        </ul>
-                                        <ul class="prodinfo">
-                                            <li>{{$productsOT->locatie}}</li>
-                                            <li>{{$productsOT->productserie}}</li>
-                                            <li class="product-aantal">{{$productsOT->aantal}}</li>
-                                        </ul>
-                                    </span>
-                                    <a href="/overzicht/productdetail/{{$productsOT->id}}" class="btn btn-product" id="testing">Bekijk</a>
-                                    <?php if ($productsOT->aantal <= 0) {
-                                      echo "<button class='btn-open btn btn-product' id='$productsOT->id' disabled='disabled'>Toevoegen</button>";
-                                    }else{
-                                      echo "<button class='btn-open btn btn-product' id='$productsOT->id'>Toevoegen</button>";
-                                      
-                                    }
-                                    
-                                      ?>
-                                </div>
-                                <div class="w-100"></div>
-                            </div>
+                      ?>
+                        <h4 class="card-title">{{$out}}</h4>
+                            <span class="app_txt ulinfo">
+                              <ul class="prodvraag">
+                                  <li>Locatie:</li>
+                                  <li>Serie:</li>
+                                  <li>Aantal:</li></b>
+                              </ul>
+                              <ul class="prodinfo">
+                                  <li>{{$productsOT->locatie}}</li>
+                                  <li>{{$productsOT->productserie}}</li>
+                                  <li class="product-aantal">{{$productsOT->aantal}}</li>
+                              </ul>
+                            </span>
+                            <a href="/overzicht/productdetail/{{$productsOT->id}}" class="btn btn-product" id="testing">Bekijk</a>
+                            <?php if ($productsOT->aantal <= 0) {
+                              echo "<button class='btn-open btn btn-product' id='$productsOT->id' disabled='disabled'>Toevoegen</button>";
+                            }else{
+                              echo "<button class='btn-open btn btn-product' id='$productsOT->id'>Toevoegen</button>";
+                              
+                            }
+                            
+                              ?>
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
          
-                            <div class="modal {{$productsOT->id}}" id="myModal" tabindex="-1" role="dialog">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">{{$productsOT->productomschrijving}}</h5>
-                                    <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/>
-                                    <form>
-                                      <div class="form-group">
-                                        <label for="exampleInputEmail1">Aantal</label>
-                                        <input type="text" class="form-control form-amount-{{$productsOT->id}}" id="exampleInputEmail1" aria-describedby="emailHelp" max="{{$productsOT->aantal}}">
-                                        <small id="emailHelp" class="form-text text-muted">Vul hier het gewenste aantal producten in.</small>
-                                      </div>
-                                  </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                                    <a href="/overzicht/addItem/{{$productsOT->id}}/" id="{{$productsOT->id}}" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</a>
-                                  </div>
-                                </div>
+                    <div class="modal {{$productsOT->id}}" id="myModal" tabindex="-1" role="dialog">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">{{$productsOT->productomschrijving}}</h5>
+                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/>
+                            <form>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Aantal</label>
+                                <input type="text" class="form-control form-amount-{{$productsOT->id}}" id="exampleInputEmail1" aria-describedby="emailHelp" max="{{$productsOT->aantal}}">
+                                <small id="emailHelp" class="form-text text-muted">Vul hier het gewenste aantal producten in.</small>
                               </div>
+                            </form>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                              <a href="/overzicht/addItem/{{$productsOT->id}}/" id="{{$productsOT->id}}" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</a>
                             </div>
+                        </div>
+                      </div>
+                    </div>
 
 
                      @endforeach
@@ -293,7 +287,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
     </div>
 </div>
 
-<h3 class="bijkijkook-h3">Bekijk ook deze producten</h3>
+<!-- <h3 class="bijkijkook-h3">Bekijk ook deze producten</h3>
 
 
 <div class="container-fluid">
@@ -360,7 +354,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 @endsection
 @section('content')
