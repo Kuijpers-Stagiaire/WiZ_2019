@@ -18,7 +18,7 @@ class MailController extends Controller
         ->where('product_toevoeger_id', '=', \Auth::user()->id)
         ->get();
 
-        // dd($getBasket);
+         //dd($getBasket);
 
         $objDemo = new \stdClass();
         $objDemo->demo_one = \Auth::user()->voornaam;
@@ -57,7 +57,7 @@ class MailController extends Controller
         $objDemo->message = "U heeft producten bestelt bij WiZ, hieronder volgt een lijst.";
         
         // Koper
-        // Mail::to(\Auth::user()->email)->send(new DemoEmail($objDemo));
+        Mail::to(\Auth::user()->email)->send(new DemoEmail($objDemo));
         // // Verkoper
         // foreach ($mailArray as $mail) {
         //     $objDemo->auth = "Verkoper";
