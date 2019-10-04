@@ -2,6 +2,7 @@
     {{ session('status') }}
 @endif
 @extends('layouts.layout')
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 @section('pageSpecificCSS')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/shop.css') }}" />
 @endsection
@@ -71,11 +72,11 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                     <div id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <!-- <div class="modal-dialog modal-lg" role="document" style="height : 490px;margin-top:150px;"> -->
                         <div class="modal-header custom-modal-header">
-                          <div class="modal-title-tab-1">Barcode</div>
-                          <a class="modal-title-tab-2" href="http://127.0.0.1:8000/overzicht/nieuw">Handmatig</a>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <!-- <div class="modal-title-tab-1">Barcode</div> -->
+                          <!-- <a class="modal-title-tab-2" href="http://127.0.0.1:8000/overzicht/nieuw">Handmatig</a> -->
+                          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                          </button>
+                          </button> -->
 
                         </div>
                         <div class="modal-body">
@@ -93,6 +94,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                                   <!-- Tijdelijke placeholder afbeelding, zodra er een product gescand is, wordt deze afbeelding veranderdt naar de afbeelding van het product. -->
                                   <img src="https://oie.msu.edu/_assets/images/placeholder/placeholder-200x200.jpg" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="custom-modal-img" width="200" height="200">
                               </div>
+                              <br />
                                 <div class="custom-modal-body-child-2">
                                 <!-- Tabel waar alle productinformatie te zien gaat worden. -->
                                   <table class="table table-striped table-bordered table-hover table-responsive custom-table">
@@ -165,196 +167,14 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                                   </select>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-secondary push" data-dismiss="modal">Sluiten</button>
+                                    <!-- <button type="button" class="btn btn-secondary push" data-dismiss="modal">Sluiten</button> -->
                                     <button type="submit" class="btn btn-primary custom-modal-opslaan" form="form-barcode">Product toevoegen</button>
                                 </div>
                             </div>
                           <!-- </div> -->
                       </div>
 
-                      <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
-                        <i class="fas fa-shopping-cart"></i> Winkelwagen
-                    </a>
-                </div>
-            <!-- </div> -->
-        </div>
-    </div>
-@endsection
-@section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-8 mainshopprods">
-            <h3>Categorieën</h3>
-          
-
-              <div class="row row-categories">
-                @foreach ($categories as $category)
-                  <div class="card card-categories col-3" >
-                      <a href="/overzicht/products/{{ $category->productserie_naam }}">
-                      <p class="card-text card-text-categories h6 text-center">{{$category->productserie_naam}}</p>
-                      <img class="card-img-top card-img-categories" src="{{$category->productserie_img}}"  alt="Card image cap"></a>
-
-
-                    <!-- UNCOMMENT THIS TO ACTIVATE STYLE WITH BUTTON -->
-<!--                           <div class="card-body card-body-categories">
-                      <a href="/overzicht/products/{{ $category->productserie_naam }}" class="btn btn-product" style="width : 180px !important;"><i class="fas fa-arrow-circle-right"></i> Bekijk</a>
-                    </div> -->
-                  </div>
-                @endforeach
-              </div>
-        </div>
-        <div class="col sidecols"></div>
-          <div class="eerderbekeken">
-            @if(isset($productsOTs))
-              <div class="col eerderbekeken">
-                <h3 class="onlangs">Onlangs toegevoegd</h3>
-                  @foreach ($productsOTs as $productsOT) 
-                  <!-- END OF OLD DESIGN -->
-                    <div class="card card-vl flex-row flex-wrap card-ot">
-                      <div class="card-header card-header-img border-0">
-                        <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/>
-                      </div>
-                    <div class="card-block px-2">
-                      <!-- 15 if on normal pc, 27 on big -->
-                      <?php  
-                      $cut = 15;
-                      $out = strlen($productsOT->productomschrijving) > $cut ? substr($productsOT->productomschrijving,0,$cut)."..." : $productsOT->productomschrijving; 
-
-                      if ($out == "") {
-                        $out = strlen($productsOT->productnaam) > $cut ? substr($productsOT->productnaam,0,$cut)."..." : $productsOT->productnaam;;
-                      }
-
-                      ?>
-                        <h4 class="card-title">{{$out}}</h4>
-                            <span class="app_txt ulinfo">
-                              <ul class="prodvraag">
-                                  <li>Locatie:</li>
-                                  <li>Serie:</li>
-                                  <li>Aantal:</li></b>
-                              </ul>
-                              <ul class="prodinfo">
-                                  <li>{{$productsOT->locatie}}</li>
-                                  <li>{{$productsOT->productserie}}</li>
-                                  <li class="product-aantal">{{$productsOT->aantal}}</li>
-                              </ul>
-                            </span>
-                            <a href="/overzicht/productdetail/{{$productsOT->id}}" class="btn btn-product" id="testing">Bekijk</a>
-                            <?php if ($productsOT->aantal <= 0) {
-                              echo "<button class='btn-open btn btn-product' id='$productsOT->id' disabled='disabled'>Toevoegen</button>";
-                            }else{
-                              echo "<button class='btn-open btn btn-product' id='$productsOT->id'>Toevoegen</button>";
-                              
-                            }
-                            
-                              ?>
-                    </div>
-                    <div class="w-100"></div>
-                  </div>
-         
-                    <div class="modal {{$productsOT->id}}" id="myModal" tabindex="-1" role="dialog">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">{{$productsOT->productomschrijving}}</h5>
-                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/>
-                            <form>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Aantal</label>
-                                <input type="text" class="form-control form-amount-{{$productsOT->id}}" id="exampleInputEmail1" aria-describedby="emailHelp" max="{{$productsOT->aantal}}">
-                                <small id="emailHelp" class="form-text text-muted">Vul hier het gewenste aantal producten in.</small>
-                              </div>
-                            </form>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                              <a href="/overzicht/addItem/{{$productsOT->id}}/" id="{{$productsOT->id}}" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</a>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                     @endforeach
-                </div>
-            @endif
-        </div>
-        <div class="sidecols col"></div>
-    </div>
-</div>
-
-<!-- <h3 class="bijkijkook-h3">Bekijk ook deze producten</h3>
-
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col bekijkook">
-            <div class="card-group">
-            @if (isset($bekijkook))
-            @foreach ($bekijkook as $bekijk)
-                <div class="card bekijkcards flexbekijkook">
-                    <img alt="{{$bekijk->productomschrijving}}" class="card-img-top bekijkookimg" src="{{$bekijk->imagelink}}" onerror=this.src="{{ url('/img/img-placeholder.png') }}" width="300" height="300">
-                    <a href="/overzicht/productdetail/{{$bekijk->productcodefabrikant}}" class="card-link"><h5 class="card-title title-product">{{$bekijk->productomschrijving}} <span class="badge badge-product badge-pill badge-dark">{{$bekijk->aantal}}</span></h5></a>
-                        <div class="card-body ulinfo">
-                            <ul class="prodvraag">
-                                <li>Locatie:</li>
-                                <li>Ingangsdatum:</li>
-                                <li>Fabrikaat:</li>
-                                <li>Serie:</li>
-                                </b>
-                            </ul>
-                            <ul class="prodinfo">
-                                <li>{{$bekijk->locatie}}</li>
-                                <li>{{$bekijk->ingangsdatum}}</li>
-                                <li>{{$bekijk->fabrikaat}}</li>
-                                <li>{{$bekijk->productserie}}</li>
-                            </ul>
-                        </div>
-                        <div class="button-grp">
-                            <a href="/overzicht/productdetail/{{$bekijk->id}}" class="btn btn-product">Bekijk</a>
-                            <button class="btn-open btn btn-product" id="{{$bekijk->id}}">Toevoegen</button>
-                        </div>
-                    </div>
-                    <div class="modal {{$bekijk->id}}" id="myModal" tabindex="-1" role="dialog">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">{{$bekijk->productomschrijving}}</h5>
-                            <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <img alt="{{$bekijk->productomschrijving}}" src="{{$bekijk->imagelink}}" class="producttypeimg" width="150"/>
-                            <form>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Aantal</label>
-                                <input type="text" required="required" class="form-control form-amount-{{$bekijk->id}}" id="exampleInputEmail1" aria-describedby="emailHelp" max="{{$bekijk->aantal}}">
-                                <small id="emailHelp" class="form-text text-muted">Vul hier het gewenste aantal producten in.</small>
-                              </div>
-                          </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                            <a href="/overzicht/addItem/{{$bekijk->id}}/" type="button" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    @endforeach
-                    @else 
-                    <h1>not set</h1>
-                    @endif 
-                    </div>
-                </div>      
-            </div>
-        </div>
-    </div>
-</div> -->
+                      
 
 @endsection
 @section('content')

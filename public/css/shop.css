@@ -19,7 +19,11 @@ body{
     color: black;
 }
 
-
+/* @media only screen and (max-width: 600px) {
+    table {
+      display: none;
+    }
+  } */
 
 .card-group{
     border-color: #8fa2d2;
@@ -427,44 +431,49 @@ form.Sbar::after {
     flex-direction: row;
 } */
 
-@media only screen and (min-width: 375px) and (max-width: 425px){
+@media only screen and (min-width: 320px) and (max-width: 780px){
 
+    .container-fluid{
+        width: 100%;
 
-    /* .custom-modal-footer{
+    }
+
+    .custom-modal-footer{
         height: 200px !important;
+        width: 290px;
         background: white;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-    } */
+    }
     .custom-aantal-input{
         width: 100px;
     }
 
-    /* .custom-modal-img{
+    .custom-modal-img{
         margin-bottom: 10px;
-    } */
+    }
 
     .hr{
         display: none !important;
     }
 
-    /* .custom-modal-body-child-2{
+    .custom-modal-body-child-2{
         width: 350px !important;
-    } */
+    }
 
     .custom-table{
         width: 350px !important; 
         height: 350px;
     }
 
-    /* .custom-modal-body{
+    .custom-modal-body{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-    } */
+    }
 
     #Searchnavbar{
         flex-direction: row;
@@ -495,10 +504,13 @@ form.Sbar::after {
         width: 500px;
     }
 
+    [class*="col-"] {
+        width: 100%;
+    }
 }
 
 
-/* .custom-modal-form-data-design {
+.custom-modal-form-data-design {
     background: none !important;
     border: none !important;
     cursor: default;
@@ -576,13 +588,13 @@ form.Sbar::after {
     width: 550px;
     overflow-y: auto;
 
-} */
+}
 
-/* .custom-modal-footer{
+.custom-modal-footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-} */
+}
 
 a, u {
     text-decoration: none !important;
@@ -921,12 +933,12 @@ a, u {
 
 /* width 425 */
 @media only screen and (min-width: 375px) and (max-width: 425px){
-    /* .col{
+    .col{
         flex-basis: 500px !important;
     } 
     .ulinfo{
         padding: 20px !important;
-    }  */
+    } 
 
 }
 /* width 768 */
