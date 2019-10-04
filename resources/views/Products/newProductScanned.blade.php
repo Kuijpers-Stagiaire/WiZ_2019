@@ -56,6 +56,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                         min-width: 160px;
                         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                         z-index: 1;
+                        text-align: left;
                         }
 
                         .dropdown-content a {
@@ -70,8 +71,8 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                     <div class="dropdown">
                       <button class="dropbtn" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">Nieuw product</button>
                       <div class="dropdown-content">
-                        <a href="/overzicht/nieuw">Handmatig</a>
                         <a href="/overzicht/product_Scannen">Scannen</a>
+                        <a href="/overzicht/nieuw">Handmatig</a>
                       </div>
                     </div>
                     <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
@@ -79,57 +80,6 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                     </a>
             </div>
 
-    <!-- <div class="container-fluid">
-        
-             <div class="col order-12 shop-bar addcol">
-                <style>
-                    .dropdown-content a:hover {background-color: #ddd;}
-
-                    .dropdown:hover .dropdown-content {display: block;}
-
-                    .dropdown:hover .dropbtn {background-color: #2f2e90;}
-
-                    .dropbtn {
-                    /* background-color: #2f2e87;
-                    color: white;
-                    padding: 16px; 
-                    font-size: 16px;
-                    border: none;
-                    text-align: center; */
-                    border: 1px solid transparent; 
-                    background : #2f2e87; 
-                    color : white !important; 
-                    height : 40px !important; 
-                    display: flex; 
-                    justify-content: space-around;
-                    align-items: center; 
-                    width: 200px; 
-                    font-size: 17px;
-                    border-radius: .25rem;
-                    }
-
-                    .dropdown {
-                    position: relative;
-                    display: inline-block;
-                    }
-
-                    .dropdown-content {
-                    display: none;
-                    position: absolute;
-                    background-color: #f1f1f1;
-                    min-width: 160px;
-                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                    z-index: 1;
-                    }
-
-                    .dropdown-content a {
-                    color: black;
-                    padding: 12px 16px;
-                    text-decoration: none;
-                    display: block;
-                    font-size: 25px;
-                    }
-                </style> -->
                 <div class="addprod">
                     
                 </div>
@@ -152,16 +102,16 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
 
                             <form method="post" action="/overzicht/nieuw_scanned" enctype="multipart/form-data" class="custom-modal-body" id="form-barcode">
                               
-                            @method('POST')
-                            @csrf
+                              @method('POST')
+                              @csrf
 
                               <div class="custom-modal-body-child-1">
-                                  <!-- Tijdelijke placeholder afbeelding, zodra er een product gescand is, wordt deze afbeelding veranderdt naar de afbeelding van het product. -->
-                                  <img src="https://oie.msu.edu/_assets/images/placeholder/placeholder-200x200.jpg" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="custom-modal-img" width="200" height="200">
+                                <!-- Tijdelijke placeholder afbeelding, zodra er een product gescand is, wordt deze afbeelding veranderdt naar de afbeelding van het product. -->
+                                <img src="https://oie.msu.edu/_assets/images/placeholder/placeholder-200x200.jpg" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="custom-modal-img" width="200" height="200">
                               </div>
-                              <br />
+                              <br/>
                                 <div class="custom-modal-body-child-2">
-                                <!-- Tabel waar alle productinformatie te zien gaat worden. -->
+                                    <!-- Tabel waar alle productinformatie te zien gaat worden. -->
                                   <table class="table table-striped table-bordered table-hover table-responsive custom-table">
                                     <tbody>
                                       <thead>
@@ -218,25 +168,26 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                                     </tbody>
                                   </table>
                                 </div>
-                              </form>
-                            </div>
+                            </form>
                           </div>
+                        </div>
                           <div class="modal-footer custom-modal-footer">
-                                <div class="custom-modal-footer-section">
-                                    <input type="number" class="custom-aantal-input" name="aantal" form="form-barcode" placeholder="Aantal" required="required" min="0" oninput="validity.valid||(value='');" step="1">
+                            <div class="custom-modal-footer-section">
+                              <input type="number" class="custom-aantal-input" name="aantal" form="form-barcode" placeholder="Aantal" required="required" min="0" oninput="validity.valid||(value='');" step="1">
 
-                                    <select class="custom-aantal-input custom-modal-category" name="custom-modal-category" form="form-barcode">
-                                      @foreach ($categories as $category)
-                                      <option value="{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
-                                      @endforeach
-                                  </select>
-                                </div>
+                                <select class="custom-aantal-input custom-modal-category" name="custom-modal-category" form="form-barcode">
+                                  @foreach ($categories as $category)
+                                  <option value="{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                                  @endforeach
+                                </select>
+                            </div>
                                 <div>
                                     <!-- <button type="button" class="btn btn-secondary push" data-dismiss="modal">Sluiten</button> -->
                                     <button type="submit" class="btn btn-primary custom-modal-opslaan" form="form-barcode">Product toevoegen</button>
                                 </div>
                             </div>
                           <!-- </div> -->
+                        <!-- </div> -->
                       </div>
 
                       

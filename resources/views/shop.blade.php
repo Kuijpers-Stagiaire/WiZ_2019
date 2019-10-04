@@ -73,6 +73,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       min-width: 160px;
                       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                       z-index: 1;
+                      text-align: left;
                       }
 
                       .dropdown-content a {
@@ -89,8 +90,8 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                         <i class="fas fa-plus-square" style="color : white !important;"></i>
                       </button>
                       <div class="dropdown-content">
-                        <a href="overzicht/nieuw">Handmatig</a>
                         <a href="overzicht/product_Scannen">Scannen</a>
+                        <a href="overzicht/nieuw">Handmatig</a>
                       </div>
                     </div>
 

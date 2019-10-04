@@ -48,6 +48,7 @@
                         min-width: 160px;
                         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                         z-index: 1;
+                        text-align: left;
                         }
 
                         .dropdown-content a {
@@ -62,8 +63,8 @@
                     <div class="dropdown">
                       <button class="dropbtn" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">Nieuw product</button>
                       <div class="dropdown-content">
-                        <a href="/overzicht/nieuw">Handmatig</a>
                         <a href="/overzicht/product_Scannen">Scannen</a>
+                        <a href="/overzicht/nieuw">Handmatig</a>
                       </div>
                     </div>
                     <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
