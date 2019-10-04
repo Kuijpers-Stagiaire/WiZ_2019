@@ -31,26 +31,34 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
             <!-- <div class="col order-12 shop-bar addcol"> -->
                 <div class="addprod">
                     <!-- Button trigger modal -->
-                    <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px; ">
+                    <!-- <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px; ">
                       <i class="fas fa-plus-square" style="color : white !important;"></i> Nieuw product 
-                    </a>
+                    </a> -->
 
                     <style>
                       .dropdown-content a:hover {background-color: #ddd;}
 
                       .dropdown:hover .dropdown-content {display: block;}
 
-                      .dropdown:hover .dropbtn {background-color: #3e8e41;}
+                      .dropdown:hover .dropbtn {background-color: #2f2e90;}
 
                       .dropbtn {
-                      background-color: #4CAF50;
+                      /* background-color: #2f2e87;
                       color: white;
-                      /* padding: 16px; */
+                      padding: 16px; 
                       font-size: 16px;
                       border: none;
-                      text-align: center; 
-                      border: 1px solid transparent;
-
+                      text-align: center; */
+                      border: 1px solid transparent; 
+                      background : #2f2e87; 
+                      color : white !important; 
+                      height : 40px !important; 
+                      display: flex; 
+                      justify-content: space-around;
+                      align-items: center; 
+                      width: 200px; 
+                      font-size: 17px;
+                      border-radius: .25rem;
                       }
 
                       .dropdown {
@@ -72,11 +80,14 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       padding: 12px 16px;
                       text-decoration: none;
                       display: block;
+                      font-size: 25px;
                       }
                     </style>
 
                     <div class="dropdown">
-                      <button class="dropbtn">Nieuw product</button>
+                      <button class="dropbtn" >Nieuw product
+                        <i class="fas fa-plus-square" style="color : white !important;"></i>
+                      </button>
                       <div class="dropdown-content">
                         <a href="overzicht/nieuw">Handmatig</a>
                         <a href="overzicht/product_Scannen">Scannen</a>

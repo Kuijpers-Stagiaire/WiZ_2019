@@ -10,25 +10,84 @@
     <div class="container-fluid">
         <div class="row " id="Searchnavbar"> 
             <div class="col order1 shop-bar">
-                <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+                <style>
+                        .dropdown-content a:hover {background-color: #ddd;}
+
+                        .dropdown:hover .dropdown-content {display: block;}
+
+                        .dropdown:hover .dropbtn {background-color: #2f2e90;}
+
+                        .dropbtn {
+                        /* background-color: #2f2e87;
+                        color: white;
+                        padding: 16px; 
+                        font-size: 16px;
+                        border: none;
+                        text-align: center; */
+                        border: 1px solid transparent; 
+                        background : #2f2e87; 
+                        color : white !important; 
+                        height : 40px !important; 
+                        display: flex; 
+                        justify-content: space-around;
+                        align-items: center; 
+                        width: 200px; 
+                        font-size: 17px;
+                        border-radius: .25rem;
+                        }
+
+                        .dropdown {
+                        position: relative;
+                        display: inline-block;
+                        }
+
+                        .dropdown-content {
+                        display: none;
+                        position: absolute;
+                        background-color: #f1f1f1;
+                        min-width: 160px;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        z-index: 1;
+                        }
+
+                        .dropdown-content a {
+                        color: black;
+                        padding: 12px 16px;
+                        text-decoration: none;
+                        display: block;
+                        font-size: 25px;
+                        }
+                    </style>
+
+                    <div class="dropdown">
+                      <button class="dropbtn" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">Nieuw product</button>
+                      <div class="dropdown-content">
+                        <a href="/overzicht/nieuw">Handmatig</a>
+                        <a href="/overzicht/product_Scannen">Scannen</a>
+                      </div>
+                    </div>
+                    <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+                        <i class="fas fa-shopping-cart"></i> Winkelwagen
+                    </a>
+                <!-- <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
                     {{ csrf_field() }}
                     <input aria-label="Search product" type="text" placeholder="Search product" name="q">
                     <button aria-label="Search product" type="submit"><i class="fa fa-search"></i></button>
-                </form>
+                </form> -->
                 
-                <select aria-label="Select categorie" class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
+                <!-- <select aria-label="Select categorie" class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden>Categorieën</option>
                     @foreach ($categories as $category)
                     <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
                     @endforeach
-                </select>
+                </select> -->
             </div>
             
             <div class="col order-12 shop-bar addcol">
                 <div class="addprod">
-                    <a aria-label="Product toevoegen" href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
+                    <!-- <a aria-label="Product toevoegen" href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
                         <i class="far fa-plus-square"></i>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
