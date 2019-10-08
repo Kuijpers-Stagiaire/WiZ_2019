@@ -57,6 +57,7 @@ body {
     background-size: cover;
     width: var(--grid-width);
     height: var(--grid-height);
+    position: relative;
 
 }
 
@@ -186,8 +187,13 @@ body {
 
 @media (max-width: 880px) {
 
+    /* body{
+        width: 880px;
+
+    } */
+
     .home-container{
-        width: 350px;
+        width: 800px;
         height: 1500px;
         display: flex;
         background-size: cover;
@@ -228,3 +234,140 @@ body {
 
 }
 
+@media screen and (max-width: 1080px){
+    body {
+      width: 100%;
+    }
+
+    .home-container{
+        width: 800px;
+        height: 1000px;
+        display: flex;
+        background-size: cover;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+
+    .grid{
+        width: 350px;
+        height: 400px;
+    }
+
+    .grids{
+        width: 75px;
+        height: 100px;
+    }
+
+    .home-section-left{
+        width: 350px;
+        height: 400px;
+    }
+
+    .home-section-right{
+        width: 350px;
+        height: 400px;
+    }
+
+    .right{
+        width : 350px;
+        height: 400px;
+    }
+
+    .grid-button{
+        transition: 0.8s;
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: white;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 100%;
+      }
+
+    #doughnut-chart{
+        width: 300px;
+    }
+
+    #line-chart{
+        display: none;
+    }
+
+    #makkum{
+        top: 90.5%;
+        left: 4.95%;
+    }
+    
+    #groningen{
+        top: 49.5%;
+        left: 23.45%;
+    }
+    
+    #katwijk{
+        top: 90.3%;
+        left: 19.2%;
+    }
+    
+    #amsterdam{
+        top: 69.5%;
+        left: 70.32%;
+    }
+    
+    #zwolle{
+        top: 57.5%;
+        left: 71.9%;
+    }
+    
+    #den-haag{
+        top: 15.5%;
+        left: 9.5%;
+    }
+    
+    #utrecht{
+        top: 6.5%;
+        left: 93.9%;
+    }   
+    
+    #roosendaal{
+        top: 82.5%;
+        left: 14.9%;
+    }
+    #oosterhout{
+        top: 57.5%;
+        left: 63.9%;
+    }
+    
+    #tilburg{
+        top: 77.5%;
+        left: 86.9%;
+    }
+    
+    #den-bosch{
+        top: 44.5%;
+        left: 11.9%;
+    }
+    
+    #arnhem{
+        top: 20.5%;
+        left: 75.9%;
+    }
+    
+    #helmond{
+        top: 88.5%;
+        left: 45.9%;
+    }
+    
+    #zelhem{
+        top: 9.5%;
+        left: 33.9%;
+    }
+    
+    #echt{
+        top: 39.5%;
+        left: 60.9%;
+    }
+}

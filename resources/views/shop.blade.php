@@ -15,6 +15,8 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
 ?>
     <div class="container-fluid">
         <div class="row " id="Searchnavbar"> 
+
+
             <div class="shop-bar">
                 <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
                     {{ csrf_field() }}
@@ -28,13 +30,6 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                     @endforeach
                 </select>
             </div>
-            <!-- <div class="col order-12 shop-bar addcol"> -->
-                <div class="addprod">
-                    <!-- Button trigger modal -->
-                    <!-- <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px; ">
-                      <i class="fas fa-plus-square" style="color : white !important;"></i> Nieuw product 
-                    </a> -->
-
                     <style>
                       .dropdown-content a:hover {background-color: #ddd;}
 
@@ -84,17 +79,29 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       font-size: 25px;
                       }
                     </style>
-
-                    <div class="dropdown">
-                      <button class="dropbtn" >Nieuw product
-                        <i class="fas fa-plus-square" style="color : white !important;"></i>
-                      </button>
-                      <div class="dropdown-content">
-                        <a href="overzicht/product_Scannen">Scannen</a>
-                        <a href="overzicht/nieuw">Handmatig</a>
+                    <div class="addprod">
+                      <div class="dropdown">
+                        <button class="dropbtn" >Nieuw product
+                          <i class="fas fa-plus-square" style="color : white !important;"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="overzicht/product_Scannen">Scannen</a>
+                          <a href="overzicht/nieuw">Handmatig</a>
+                        </div>
                       </div>
+                      <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+                          <i class="fas fa-shopping-cart"></i> Winkelwagen
+                      </a>
                     </div>
+            <!-- <div class="col order-12 shop-bar addcol"> -->
+                <!-- <div class="addprod"> -->
+                    <!-- Button trigger modal -->
+                    <!-- <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px; ">
+                      <i class="fas fa-plus-square" style="color : white !important;"></i> Nieuw product 
+                    </a> -->
 
+                    
+                    <!-- </div> -->
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document" style="height : 490px;margin-top:150px;">
@@ -205,9 +212,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
 
 
 
-                    <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
-                        <i class="fas fa-shopping-cart"></i> Winkelwagen
-                    </a>
+                    
                 </div>
             <!-- </div> -->
         </div>

@@ -431,12 +431,11 @@ form.Sbar::after {
     flex-direction: row;
 } */
 
-@media only screen and (min-width: 720px) and (max-width: 1080px){
-
-    
-
+@media only screen and (min-width: 720px){
     .container-fluid{
         width: 50%;
+        height: 100%;
+        background-color: #000000;
     }
 
     .custom-modal-footer{
@@ -461,11 +460,11 @@ form.Sbar::after {
     }
 
     .custom-modal-body-child-2{
-        width: 350px !important;
+        width: 300px !important;
     }
 
     .custom-table{
-        width: 350px !important; 
+        width: 300px !important; 
         height: 350px;
     }
 
@@ -474,13 +473,15 @@ form.Sbar::after {
         justify-content: center;
         /* align-items: center; */
         flex-direction: column;
+        width: 200px;
     }
 
     #Searchnavbar{
         flex-direction: row;
         height: 100px;
-        background: orange;
-        
+        background: #8fa2d2;
+        display: block;
+        height: 100%;
     }
 
     .shop-bar{
@@ -492,7 +493,7 @@ form.Sbar::after {
     }
 
     .addprod{
-        display: flex;
+        display: inline-block;
         justify-content: space-between;
         align-items: center;
         flex-direction: column;
@@ -556,8 +557,8 @@ form.Sbar::after {
 
     #Searchnavbar{
         flex-direction: row;
-        height: 220px;
-        background: orange;
+        height: 100px;
+        background: #8fa2d2;
         
     }
 
@@ -1075,6 +1076,7 @@ a, u {
     .col-sm-8{
         flex: 0 0 100%;
         max-width: 100%;
+
     }
     /* .sidecols{
         display: block;

@@ -8,6 +8,7 @@
 
 	padding: 25px 20px;
 	margin-top: 80px;
+	margin-left: 0%;
 
 	border-top: 10px solid #8fa2d2;
 }
@@ -164,6 +165,7 @@
 
 	.footer-distributed{
 		font: bold 14px sans-serif;
+		width: 100%;
 	}
 
 	.footer-distributed .footer-left,
