@@ -53,19 +53,26 @@ body {
 }
 
 .right{
-    background-image: url(../img/clickable.png);
+    margin-top: 50px;
     background-size: cover;
     width: var(--grid-width);
     height: var(--grid-height);
     position: relative;
+    width: 700px;
+    height: 600px;
+}
 
+#locatie{
+    float: right;
+    height: 595px;
+    width: 529px;
 }
 
 .grid{
 
     width: var(--grid-width);
     height: var(--grid-height);
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -78,26 +85,21 @@ body {
 }
 
 .grid-button{
-  transition: 0.8s;
-  position: absolute;
-  width: 12.5px;
-  height: 12.5px;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: white;
-  color: white;
-  font-size: 16px;
-  border: none;
+  width: 120px;
+  height: 30px;
+  padding-top: 10px;
   cursor: pointer;
-  border-radius: 100%;
+
+  float: left;
+  float: inline-end;
 }
 
 .grid-button:hover{
     transition: 0.8s;
-    background: #2f2e87;
+    background: #f28e0b;
 }
 
-#makkum{
+/* #makkum{
     top: 90.5%;
     left: 12.95%;
 }
@@ -169,7 +171,7 @@ body {
 #echt{
     top: 39.5%;
     left: 60.9%;
-}
+} */
 
 .title{
     font-size: 30px;
@@ -193,13 +195,17 @@ body {
     } */
 
     .home-container{
-        width: 800px;
+        width: 80%;
         height: 1500px;
         display: flex;
         background-size: cover;
         justify-content: space-around;
         align-items: center;
         flex-direction: column-reverse;
+    }
+
+    .selective{
+        display: block;
     }
 
     .grid{
@@ -210,6 +216,11 @@ body {
     .grids{
         width: 75px;
         height: 100px;
+    }
+
+    .grid-button:hover{
+        transition: 0.8s;
+        background: #f28e0b;
     }
 
     .home-section-left{
@@ -230,18 +241,30 @@ body {
         display: none;
     }
 
+    .text{
+        width: 90%;
+    }
 
-
+    .grid-button{
+        width: 120px;
+        height: 30px;
+        padding-top: 10px;
+        cursor: pointer;
+      
+        float: left;
+        float: inline-end;
+      }
 }
 
-@media screen and (max-width: 1080px){
+@media screen and (max-width: 1610px){
     body {
       width: 100%;
+      height: 150%;
     }
 
     .home-container{
-        width: 800px;
-        height: 1000px;
+        width: 90%;
+        height: 1300px;
         display: flex;
         background-size: cover;
         justify-content: space-around;
@@ -265,29 +288,29 @@ body {
     }
 
     .home-section-right{
-        width: 350px;
-        height: 400px;
+        width: 60%;
+        height: 60%;
     }
 
     .right{
-        width : 350px;
+        width : 300px;
         height: 400px;
     }
 
-    .grid-button{
+    /* .grid-button{
         transition: 0.8s;
-        position: absolute;
+        position: relative;
         width: 7px;
         height: 7px;
         transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
-        background-color: white;
-        color: white;
+        background-color: #2f2e87;
+        color: #2f2e87;
         font-size: 16px;
         border: none;
         cursor: pointer;
         border-radius: 100%;
-      }
+      } */
 
     #doughnut-chart{
         width: 300px;
@@ -297,7 +320,22 @@ body {
         display: none;
     }
 
-    #makkum{
+    .grid-button{
+        width: 120px;
+        height: 30px;
+        padding-top: 10px;
+        cursor: pointer;
+      
+        float: left;
+        float: inline-end;
+    }
+
+    .grid-button:hover{
+        transition: 0.8s;
+        background: #f28e0b;
+    }
+
+    /* #makkum{
         top: 90.5%;
         left: 4.95%;
     }
@@ -369,5 +407,19 @@ body {
     #echt{
         top: 39.5%;
         left: 60.9%;
+    } */
+}
+
+@media screen and (max-width: 1201px){
+    .home-section-right{
+        width: 70%;
+        height: 60%;
+    }
+}
+
+@media screen and (max-width: 1030px){
+    .home-section-right{
+        width: 90%;
+        height: 70%;
     }
 }

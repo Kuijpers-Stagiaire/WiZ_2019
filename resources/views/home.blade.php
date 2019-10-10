@@ -20,49 +20,66 @@
         </div>
 
         <div class="home-section-right">
+            <img src="/img/clickable.png" alt="Kuijpers locaties"  id="locatie">
             <div class="right">
-            <div class="grid">
-                <div class="grids grid-1"></div>
-                <div class="grids grid-2"></div>
-                <div class="grids grid-3">
-                    <div class="grid-button" id="makkum"></div>
-                </div>
-                <div class="grids grid-4">
-                    <div class="grid-button" id="groningen"></div>
-                </div>
-                <div class="grids grid-5"></div>
-                <div class="grids grid-6">
-                    <div class="grid-button" id="katwijk"></div>
-                    <div class="grid-button" id="amsterdam"></div>
-                </div>
-                <div class="grids grid-7">
-                    <div class="grid-button" id="zwolle"></div>
-                </div>
-                <div class="grids grid-8"></div>
-                <div class="grids grid-9"></div>
-                <div class="grids grid-10">
-                    <div class="grid-button" id="den-haag"></div>
-                    <div class="grid-button" id="utrecht"></div>
-                    <div class="grid-button" id="roosendaal"></div>
-                    <div class="grid-button" id="oosterhout"></div>
-                    <div class="grid-button" id="tilburg"></div>
-                </div>
-                <div class="grids grid-11">
-                    <div class="grid-button" id="den-bosch"></div>
-                    <div class="grid-button" id="arnhem"></div>
-                    <div class="grid-button" id="helmond"></div>
-                </div>
-                <div class="grids grid-12">
-                    <div class="grid-button" id="zelhem"></div>
-                </div>
-                <div class="grids grid-13"></div>
-                <div class="grids grid-14"></div>
-                <div class="grids grid-15">
-                    <div class="grid-button" id="echt"></div>
-                </div>
-                <div class="grids grid-16"></div>
+                <li class="grid-button" id="makkum">Makkum</li>
+                <li class="grid-button" id="groningen">Groningen</li>
+                <li class="grid-button" id="katwijk">Katwijk</li>
+                <li class="grid-button" id="amsterdam">Amsterdam</li>
+                <li class="grid-button" id="zwolle">Zwolle</li>
+                <li class="grid-button" id="den-haag">Den-Haag</li>
+                <li class="grid-button" id="utrecht">Utrecht</li>
+                <li class="grid-button" id="roosendaal">roosendaal</li>
+                <li class="grid-button" id="oosterhout">Oosterhout</li>
+                <li class="grid-button" id="tilburg">Tilburg</li>
+                <li class="grid-button" id="den-bosch">Den-Bosch</li>
+                <li class="grid-button" id="arnhem">Arnhem</li>
+                <li class="grid-button" id="helmond">Helmond</li>
+                <li class="grid-button" id="zelhem">Zelhem</li>
+                <li class="grid-button" id="echt">Echt</li>
+                
+                <!-- <div class="grid">
+                    <div class="grids grid-1"></div>
+                    <div class="grids grid-2"></div>
+                    <div class="grids grid-3">
+                        <div class="grid-button" id="makkum"></div>
+                    </div>
+                    <div class="grids grid-4">
+                        <div class="grid-button" id="groningen"></div>
+                    </div>
+                    <div class="grids grid-5"></div>
+                    <div class="grids grid-6">
+                        <div class="grid-button" id="katwijk"></div>
+                        <div class="grid-button" id="amsterdam"></div>
+                    </div>
+                    <div class="grids grid-7">
+                        <div class="grid-button" id="zwolle"></div>
+                    </div>
+                    <div class="grids grid-8"></div>
+                    <div class="grids grid-9"></div>
+                    <div class="grids grid-10">
+                        <div class="grid-button" id="den-haag"></div>
+                        <div class="grid-button" id="utrecht"></div>
+                        <div class="grid-button" id="roosendaal"></div>
+                        <div class="grid-button" id="oosterhout"></div>
+                        <div class="grid-button" id="tilburg"></div>
+                    </div>
+                    <div class="grids grid-11">
+                        <div class="grid-button" id="den-bosch"></div>
+                        <div class="grid-button" id="arnhem"></div>
+                        <div class="grid-button" id="helmond"></div>
+                    </div>
+                    <div class="grids grid-12">
+                        <div class="grid-button" id="zelhem"></div>
+                    </div>
+                    <div class="grids grid-13"></div>
+                    <div class="grids grid-14"></div>
+                    <div class="grids grid-15">
+                        <div class="grid-button" id="echt"></div>
+                    </div>
+                    <div class="grids grid-16"></div>
+                </div> -->
             </div>
-        </div>
         </div>
     </div>
 
@@ -86,8 +103,6 @@
         <div class="home-section-right-button arnhem"></div>
         <div class="home-section-right-button zelhem"></div>
         <div class="home-section-right-button zwolle"></div>
-
-
     <div>
 @endsection
 @section('charts')

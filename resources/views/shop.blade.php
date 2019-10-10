@@ -94,7 +94,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       </a>
                     </div>
             <!-- <div class="col order-12 shop-bar addcol"> -->
-                <!-- <div class="addprod"> -->
+                <div class="addprod">
                     <!-- Button trigger modal -->
                     <!-- <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px; ">
                       <i class="fas fa-plus-square" style="color : white !important;"></i> Nieuw product 

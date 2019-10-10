@@ -433,9 +433,9 @@ form.Sbar::after {
 
 @media only screen and (min-width: 720px){
     .container-fluid{
-        width: 50%;
-        height: 100%;
-        background-color: #000000;
+        /* width: 50%;
+        height: 100%; */
+        /* background-color: #000000; */
     }
 
     .custom-modal-footer{
@@ -478,10 +478,10 @@ form.Sbar::after {
 
     #Searchnavbar{
         flex-direction: row;
-        height: 100px;
+        /* height: 100px; */
         background: #8fa2d2;
-        display: block;
-        height: 100%;
+        display: inline;
+        /* height: 100%; */
     }
 
     .shop-bar{
@@ -567,7 +567,7 @@ form.Sbar::after {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        height: 90px;
+        height: 120px;
     }
 
     .addprod{
@@ -1139,3 +1139,16 @@ canvas.drawing, canvas.drawingBuffer {
 
 }
 
+@media only screen and (max-width: 835px){
+    .Searchnavbar{
+        height: 120px;
+    }
+
+    /* .shop-bar{
+        height: 120px;
+    } */
+
+    .addprod{
+        display: inline;
+    }
+}
