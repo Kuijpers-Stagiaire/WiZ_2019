@@ -350,3 +350,7 @@ ul {
     width: 20%; 
     margin-top: 15px;
 }
+
+.home-favicon:hover {
+    background-color: #2f2e87;
+}

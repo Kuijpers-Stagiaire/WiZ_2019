@@ -1112,9 +1112,6 @@ canvas.drawing, canvas.drawingBuffer {
     height: auto;
 }
 
-
-
-
 @media (max-width: 425px){
     .eerderbekeken{
         display: none;
@@ -1151,6 +1148,6 @@ canvas.drawing, canvas.drawingBuffer {
     }
 
     .addprod{
-        display: inline;
+        display: block;
     }
 }
