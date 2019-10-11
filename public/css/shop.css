@@ -432,11 +432,11 @@ form.Sbar::after {
 } */
 
 @media only screen and (min-width: 720px){
-    .container-fluid{
-        /* width: 50%;
-        height: 100%; */
-        /* background-color: #000000; */
-    }
+    /* .container-fluid{
+        width: 50%;
+        height: 100%;
+        background-color: #000000;
+    } */
 
     .custom-modal-footer{
         height: 200px !important;
@@ -478,9 +478,9 @@ form.Sbar::after {
 
     #Searchnavbar{
         flex-direction: row;
-        /* height: 100px; */
+        height: 100px;
         background: #8fa2d2;
-        display: inline;
+        display: block;
         /* height: 100%; */
     }
 
@@ -488,8 +488,9 @@ form.Sbar::after {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        /* flex-direction: column; */
         height: 90px;
+        width: 100%;
     }
 
     .addprod{
@@ -568,6 +569,7 @@ form.Sbar::after {
         align-items: center;
         flex-direction: column;
         height: 120px;
+        width: 100%;
     }
 
     .addprod{
@@ -1144,9 +1146,9 @@ canvas.drawing, canvas.drawingBuffer {
         height: 120px;
     }
 
-    /* .shop-bar{
-        height: 120px;
-    } */
+    .shop-bar{
+        height: 100%;
+    }
 
     .addprod{
         display: inline;

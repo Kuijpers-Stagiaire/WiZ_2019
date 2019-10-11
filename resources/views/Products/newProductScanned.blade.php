@@ -116,7 +116,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                                     <tbody>
                                       <thead>
                                       <tr>
-                                        <td style="width:18%;">ID:</td>
+                                        <td style="width:18%;">Barcode 2BA:</td>
                                         <td class=""><input class="custom-modal-form-data-design custom-modal-id"></td>
                                       </tr>
                                   </thead>

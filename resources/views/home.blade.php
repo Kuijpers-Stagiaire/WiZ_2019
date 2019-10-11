@@ -29,7 +29,7 @@
                 <li class="grid-button" id="zwolle">Zwolle</li>
                 <li class="grid-button" id="den-haag">Den-Haag</li>
                 <li class="grid-button" id="utrecht">Utrecht</li>
-                <li class="grid-button" id="roosendaal">roosendaal</li>
+                <li class="grid-button" id="roosendaal">Roosendaal</li>
                 <li class="grid-button" id="oosterhout">Oosterhout</li>
                 <li class="grid-button" id="tilburg">Tilburg</li>
                 <li class="grid-button" id="den-bosch">Den-Bosch</li>

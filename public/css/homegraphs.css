@@ -40,13 +40,13 @@ body {
     /* Flexbox */
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .home-section-left{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    /* justify-content: space-around; */
+    /* align-items: center; */
     flex-direction: column;
     height: 400px;
     width: 600px;
@@ -92,6 +92,10 @@ body {
 
   float: left;
   float: inline-end;
+  font-size: 15px;
+    line-height: 24px;
+    /* width: 600px; */
+    color: #5f5f5f;
 }
 
 .grid-button:hover{
@@ -195,7 +199,7 @@ body {
     } */
 
     .home-container{
-        width: 80%;
+        width: 90%;
         height: 1500px;
         display: flex;
         background-size: cover;
@@ -283,8 +287,8 @@ body {
     }
 
     .home-section-left{
-        width: 350px;
-        height: 400px;
+        width: 50%;
+        height: 600px;
     }
 
     .home-section-right{
@@ -420,6 +424,6 @@ body {
 @media screen and (max-width: 1030px){
     .home-section-right{
         width: 90%;
-        height: 70%;
+        height: 50%;
     }
 }

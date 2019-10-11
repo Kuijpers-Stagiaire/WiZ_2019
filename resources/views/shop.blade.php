@@ -18,19 +18,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
 
 
             <div class="shop-bar">
-                <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
-                    {{ csrf_field() }}
-                    <input aria-label="Search product" type="text" placeholder="Zoek product" name="q" class="searchbar-button">
-                    <button aria-label="Submit search" type="submit"><i class="fa fa-search" class="searchbar-button"></i></button>
-                </form>
-                <select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
-                    <option value="" disabled selected hidden>Categorieën</option>
-                    @foreach ($categories as $category)
-                    <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
-                    @endforeach
-                </select>
-            </div>
-                    <style>
+            <style>
                       .dropdown-content a:hover {background-color: #ddd;}
 
                       .dropdown:hover .dropdown-content {display: block;}
@@ -59,6 +47,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       .dropdown {
                       position: relative;
                       display: inline-block;
+                      float: right;
                       }
 
                       .dropdown-content {
@@ -89,12 +78,25 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                           <a href="overzicht/nieuw">Handmatig</a>
                         </div>
                       </div>
-                      <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+                      <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="float: right; background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
                           <i class="fas fa-shopping-cart"></i> Winkelwagen
                       </a>
                     </div>
+                <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+                    {{ csrf_field() }}
+                    <input aria-label="Search product" type="text" placeholder="Zoek product" name="q" class="searchbar-button">
+                    <button aria-label="Submit search" type="submit"><i class="fa fa-search" class="searchbar-button"></i></button>
+                </form>
+                <select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
+                    <option value="" disabled selected hidden>Categorieën</option>
+                    @foreach ($categories as $category)
+                    <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                    @endforeach
+                </select>
+                    
+                  </div>
             <!-- <div class="col order-12 shop-bar addcol"> -->
-                <div class="addprod">
+                
                     <!-- Button trigger modal -->
                     <!-- <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px; ">
                       <i class="fas fa-plus-square" style="color : white !important;"></i> Nieuw product 
@@ -187,8 +189,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                                       </tbody>
                                     </table>
                                 </div>
-                                </form>
-                            </div>
+                            </form>        
                           </div>
                           <div class="modal-footer custom-modal-footer">
                                 <div class="custom-modal-footer-section">
@@ -207,12 +208,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                             </div>
                           </div>
                         </div>
-                      </div>
-
-
-
-
-                    
+                      </div>  
                 </div>
             <!-- </div> -->
         </div>
