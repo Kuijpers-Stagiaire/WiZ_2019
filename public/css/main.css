@@ -11,6 +11,12 @@ body {
     color: #ffffff;
 }
 
+.locatie{
+    /* height: 60%;
+    width: 60%; */
+    float: right;
+}
+
 /* .profiledisplay {
     width: 100px;
 } */
@@ -353,4 +359,15 @@ ul {
 
 .home-favicon:hover {
     background-color: #2f2e87;
+    border: none;
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 801px){
+    .locatie{
+        height: 60%;
+        width: 60%;
+        float: right;
+    }
+
 }

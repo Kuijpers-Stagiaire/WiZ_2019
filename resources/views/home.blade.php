@@ -20,7 +20,7 @@
         </div>
 
         <div class="home-section-right">
-            <img src="/img/clickable.png" alt="Kuijpers locaties"  id="locatie">
+            <img src="/img/clickable.png" alt="Kuijpers locaties"  class="locatie">
             <div class="right">
                 <li class="grid-button" id="makkum">Makkum</li>
                 <li class="grid-button" id="groningen">Groningen</li>
