@@ -60,7 +60,7 @@
             <div class="order-first" style="width: 45px; height:45px;">
                 <ul class="nav justify-content-start" style="width: 45px; height:45px;">
                     <li class="nav-item text-left" style="width: 45px; height:45px;">
-                        <a aria-label="home" class="nav-link" href="/home" style="height:45px;"><img class="home-favicon" src="img/homefavicon.ico"></a>
+                        <a aria-label="home" class="nav-link" href="/home" style="height:45px;"><img class="home-favicon" src="{{ asset('img\homefavicon.ico') }}"></a>
                     </li>
                 </ul>
             </div>

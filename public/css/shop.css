@@ -14,6 +14,7 @@ body{
 .addprod{
     font-size: 38px;
     text-align: right;
+    
 }
 .fa-plus{
     color: black;
@@ -75,6 +76,7 @@ body{
 
 .shop-bar {
     padding: .5rem;
+    width: 100%;
 }
 
 .form-control {
@@ -106,7 +108,7 @@ body{
     border-bottom-left-radius: .25rem;
     height: calc(2.25rem + 2px);
     padding: .375rem .75rem;
-
+    /* margin-right: 5px; */
     padding-left: .2rem !important;
     padding-right: 0px !important;
     border: 1px solid #ced4da;
@@ -312,10 +314,10 @@ ul.prodinfo {
     margin-right: 5px;
     text-align: center;
 }
-/*
+
 .custom-modal-body-child-2{
     margin-left: 5px;
-} */
+}
 
 form.Sbar input[type=text] {
     font-size: 17px;
@@ -329,7 +331,7 @@ form.Sbar input[type=text] {
     border-bottom-right-radius: .25rem;
     height: calc(2.25rem + 2px);
     padding: .375rem .75rem;
-    margin-top: 17px;
+    margin-top: 10px;
     padding-left: .2rem !important;
     padding-right: 0px !important;
     border: 1px solid #ced4da;
@@ -349,7 +351,7 @@ form.Sbar button {
     border-bottom-right-radius: .25rem;
     height: 39px;
     padding: .375rem .75rem;
-    margin-top: 17px;
+    margin-top: 10px;
     border: 1px solid #2f2fff;
     border-left: 0;
 
@@ -364,12 +366,14 @@ form.Sbar::after {
 
 .Sbar {
     float: left;
+    margin-bottom: 10px;
+    /* margin-top: -15px; */
 }
 
 .shop-bar{
 
     height: 60px;
-    width: 420px !important;
+    width: 100% !important;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -388,6 +392,7 @@ form.Sbar::after {
     justify-content: space-around;
     align-items: center;
     width: 200px;
+    margin: 5px;
 }
 
 /*.addcol{
@@ -403,9 +408,9 @@ form.Sbar::after {
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
-    width: 410px;
-    margin-right: 5px;
-    height: 60px;
+    width: 100%;
+    /* margin-right: 5px; */
+    /* height: 60px; */
 }
 
 #Searchnavbar{
@@ -431,7 +436,7 @@ form.Sbar::after {
     flex-direction: row;
 } */
 
-@media only screen and (min-width: 720px){
+@media only screen and (min-width: 720px) and (max-width: 845px){
     /* .container-fluid{
         width: 50%;
         height: 100%;
@@ -460,25 +465,25 @@ form.Sbar::after {
     }
 
     .custom-modal-body-child-2{
-        width: 300px !important;
+        width: 80% !important;
     }
 
     .custom-table{
-        width: 300px !important; 
-        height: 350px;
+        width: 60% !important; 
+        height: 100%;
     }
 
     .custom-modal-body{
         display: flex;
+        align-items: center;
         justify-content: center;
-        /* align-items: center; */
         flex-direction: column;
-        width: 200px;
+        /* width: 200px; */
     }
 
     #Searchnavbar{
         flex-direction: row;
-        height: 100px;
+        height: 60px;
         background: #8fa2d2;
         display: block;
         /* height: 100%; */
@@ -486,21 +491,21 @@ form.Sbar::after {
 
     .shop-bar{
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-between;
+        /* align-items: center; */
         /* flex-direction: column; */
-        height: 90px;
+        height: 60px;
         width: 100%;
+        float: left;
     }
 
     .addprod{
-        display: inline-block;
+        /* display: inline-block; */
         justify-content: space-between;
-        align-items: center;
+        align-items: left;
         flex-direction: column;
-        height: 90px;
-        margin : 0 auto;
-        margin-top: 5px;
+        /* height: 90px; */
+        /* margin : 0 auto; */
     }
 
     .searchbar-button-right{
@@ -521,7 +526,7 @@ form.Sbar::after {
 
     .custom-modal-footer{
         height: 200px !important;
-        width: 290px;
+        width: 100%;
         background: white;
         display: flex;
         justify-content: center;
@@ -545,8 +550,8 @@ form.Sbar::after {
     }
 
     .custom-table{
-        width: 350px !important; 
-        height: 350px;
+        width: 100% !important; 
+        height: 100%;
     }
 
     .custom-modal-body{
@@ -558,7 +563,7 @@ form.Sbar::after {
 
     #Searchnavbar{
         flex-direction: row;
-        height: 100px;
+        height: 70px;
         background: #8fa2d2;
         
     }
@@ -567,19 +572,23 @@ form.Sbar::after {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        justify-content: space-between;
+        /* flex-direction: column; */
         height: 120px;
         width: 100%;
+        float: left;
+        padding: 0px;
+        padding-left: 10px;
     }
 
     .addprod{
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: left;
         flex-direction: column;
-        height: 90px;
-        margin : 0 auto;
-        margin-top: 5px;
+        height: 90%;
+        /* margin : 0 auto; */
+        /* margin-top: 5px; */
     }
 
     .searchbar-button-right{
@@ -621,6 +630,8 @@ form.Sbar::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: row; 
+    width: 100%;
 }
 
 .modal-title-tab-1{
@@ -665,10 +676,10 @@ form.Sbar::after {
 }
 
 .custom-modal-body-child-2{
-    max-height: 350px;
-    margin-bottom: -50px;
-    width: 550px;
-    overflow-y: auto;
+    /* max-height: 350px;*/
+    margin-bottom: -40px; 
+    width: 100%;
+    /* overflow-y: auto; */
 
 }
 
@@ -867,7 +878,20 @@ a, u {
     align-items: center;
 }
 
+.searchprod {
+    /* flex-direction: row; 
+    justify-content: center;
+    height: 60px;
+    width: 100%; */
 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    /* margin-right: 5px; */
+    /* height: 100%; */
+}
 
 /*--------------------------*/
 
@@ -1052,9 +1076,27 @@ a, u {
     }
 }
 
-@media only screen and (min-width: 844px) {
+/* @media only screen and (min-width: 844px) {
     .Sbar {
         float: right;
+    }
+} */
+
+@media only screen and (max-width: 845px)  {
+    #Searchnavbar { 
+        height: 120px;
+
+    }
+
+    .searchprod {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: left;
+        
+    }
+
+    .shop-bar{
+        height: 100%;
     }
 }
 
@@ -1094,9 +1136,9 @@ a, u {
 
 }
 
-.order1 {
+/* .order1 {
     max-width: 425px;
-}
+} */
 
 video {
     width: 100%;
@@ -1138,16 +1180,27 @@ canvas.drawing, canvas.drawingBuffer {
 
 }
 
-@media only screen and (max-width: 835px){
+@media only screen and (max-width: 845px){
     .Searchnavbar{
         height: 120px;
     }
 
     .shop-bar{
         height: 100%;
+        float: left;
+        justify-content: space-between;
     }
 
     .addprod{
-        display: block;
+        /* display: block; */
     }
+}
+
+@media only screen and (max-width: 790px){
+
+    #exampleModal{
+        width: 100%;
+
+    }
+
 }

@@ -30,8 +30,8 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                       color: white;
                       padding: 16px; 
                       font-size: 16px;
-                      border: none;
-                      text-align: center; */
+                      border: none;*/
+                      text-align: center; 
                       border: 1px solid transparent; 
                       background : #2f2e87; 
                       color : white !important; 
@@ -46,8 +46,10 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
 
                       .dropdown {
                       position: relative;
-                      display: inline-block;
+                      display: flex;
                       float: right;
+                      margin: 5px;
+                      align-items: center; 
                       }
 
                       .dropdown-content {
@@ -82,18 +84,19 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                           <i class="fas fa-shopping-cart"></i> Winkelwagen
                       </a>
                     </div>
-                <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
-                    {{ csrf_field() }}
-                    <input aria-label="Search product" type="text" placeholder="Zoek product" name="q" class="searchbar-button">
-                    <button aria-label="Submit search" type="submit"><i class="fa fa-search" class="searchbar-button"></i></button>
-                </form>
-                <select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
-                    <option value="" disabled selected hidden>Categorieën</option>
-                    @foreach ($categories as $category)
-                    <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
-                    @endforeach
-                </select>
-                    
+                    <div class="searchprod">
+                      <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+                        {{ csrf_field() }}
+                        <input aria-label="Search product" type="text" placeholder="Zoek product" name="q" class="searchbar-button">
+                        <button aria-label="Submit search" type="submit"><i class="fa fa-search" class="searchbar-button"></i></button>
+                      </form>
+                      <select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
+                        <option value="" disabled selected hidden>Categorieën</option>
+                        @foreach ($categories as $category)
+                        <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                        @endforeach
+                      </select>
+                    </div>
                   </div>
             <!-- <div class="col order-12 shop-bar addcol"> -->
                 

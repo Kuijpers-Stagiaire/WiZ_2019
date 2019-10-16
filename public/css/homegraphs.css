@@ -98,12 +98,14 @@ body {
   font-size: 15px;
     line-height: 24px;
     /* width: 600px; */
-    color: #5f5f5f;
+    color: #2f2e87;
 }
 
 .grid-button:hover{
     transition: 0.8s;
     background: #f28e0b;
+    border: none;
+    border-radius: 8px;
 }
 
 /* #makkum{
