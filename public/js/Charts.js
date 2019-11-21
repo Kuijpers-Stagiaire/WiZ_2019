@@ -67,7 +67,7 @@ function timer(){
 
   $.ajax({
         type: 'GET',
-        url: "http://127.0.0.1:8000/retrieveChartData.php",
+        url: "https://wiz.kuijpers.com/retrieveChartData.php",
         dataType: 'json',
         data: {
             str : str
@@ -122,7 +122,7 @@ $(".grid-button").on("click", function(){
 
   $.ajax({
         type: 'GET',
-        url: "http://127.0.0.1:8000/retrieveChartData.php",
+        url: "https://wiz.kuijpers.com/retrieveChartData.php",
         dataType: 'json',
         data: {
             str : str

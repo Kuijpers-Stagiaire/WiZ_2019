@@ -25,7 +25,7 @@ Route::get('/', 'PagesController@index');
 
 Route::get('/register', ['middleware' => 'auth', 'uses' => 'PagesController@register']);
 
-Route::get('/home', ['middleware' => 'auth', 'uses' => 'ChartController@homepagecharts']);
+Route::get('/home', ['middleware' => 'auth', 'uses' => 'Chartcontroller@homepagecharts']);
 
 Route::get('/overons', ['middleware' => 'auth', 'uses' => 'PagesController@overons']);
 // Route::get('/overons', 'PagesController@overons');
