@@ -113,7 +113,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                         <div class="modal-content" style="height : 630px;">
                           <div class="modal-header custom-modal-header">
                             <div class="modal-title-tab-1">Barcode</div>
-                            <a class="modal-title-tab-2" href="https://wiz.kuijpers.com/overzicht/nieuw">Handmatig</a>
+                            <a class="modal-title-tab-2" href="http://127.0.0.1:8000/overzicht/nieuw">Handmatig</a>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -471,7 +471,7 @@ $(document).ready(function () {
 
       // Ajax call naar een lokaal php-script genaamd: retrieveProductInfo.php(script wat productinfo ophaalt).
       $.ajax({
-              url: "https://wiz.kuijpers.com/retrieveProductInfo.php",
+              url: "http://127.0.0.1:8000/retrieveProductInfo.php",
               contentType: "application/json",
               dataType: 'json',
               data: {

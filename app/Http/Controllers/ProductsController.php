@@ -325,7 +325,7 @@ class ProductsController extends Controller
         }
         // Als de deeplink leeggelaten is, verander de waarde van met niet bekend
         if(empty($request->input("deeplink"))){
-            $product->deeplink = "https://wiz.kuijpers.com/overzicht";
+            $product->deeplink = "http://127.0.0.1:8000/overzicht";
         }else{
             $product->deeplink = $request->input("deeplink");
         }
