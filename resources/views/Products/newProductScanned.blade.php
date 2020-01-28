@@ -275,7 +275,7 @@ $(document).ready(function () {
                   var result = JSON.parse(result);
                   console.log(result);
 
-                  // Vul de tabel die men te zien krijgt met de nieuwe opgehaalde waarde.
+                  // laat de waarden van 2ba zien op de site.
                   $(".custom-modal-id").val(result.Id);
                   $(".custom-modal-merk").val(result.ManufacturerName);
                   $(".custom-modal-productnaam").val(result.ProductClassDescription);
@@ -283,20 +283,23 @@ $(document).ready(function () {
                   $(".custom-modal-productcode").val(result.Productcode);
                   $(".custom-modal-gln").val(result.ManufacturerGLN);
                   $(".custom-modal-gtin").val(result.GTIN);
+                  $(".custom-modal-serie").val(result.Model);
+                  $(".custom-modal-type").val(result.Version);
+
+                  // laat het merk zien als een hyperlink om naar website fabrikant te gaan
                   $(".custom-modal-deeplink").val(result.ManufacturerName);
                   $(".custom-modal-deeplink2").attr("href", result.Deeplink);
+                  // link afbeelding van 2ba
                   $(".custom-modal-img").attr("src", "https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
 
-                  // ... versopte inputs, hierin komt informatie die niet relevant is voor de gebruiker te staan.
-
+                  // waardens niet worden laten zien op site wel in de database opgeslagen.
                   $(".hidden-gewicht-eenheid").val(result.WeightMeasureUnitDescription);
                   $(".hidden-gewicht").val(result.WeightQuantity);
                   $(".hidden-productnaam-volledig").val(result.Description);
-                  $(".custom-modal-serie").val(result.Model);
-                  $(".custom-modal-type").val(result.Version);
-                  
-                  $(".hidden-image").val("https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
                   $(".hidden-producttype").val(result.ProductClassDescription);
+                  
+                  //link afbeelding, link wordt niet laten zien
+                  $(".hidden-image").val("https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
                   }
                   
               }
