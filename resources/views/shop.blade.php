@@ -218,11 +218,29 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
     </div>
 @endsection
 @section('content')
+@if ($errors->any())
+<div class="alert alert-danger" style="margin-top:10px !important;width:900px;margin:0 auto;">
+  <button type="button" class="close" data-dismiss="alert">×</button>	
+    <ul>
+        @foreach ($errors->all() as $error)
+            <div class="Err">{{ $error }}</div>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+
+{{-- <div class="alert alert-danger" style="margin-top:10px !important;width:900px;margin:0 auto;">
+	<button type="button" class="close" data-dismiss="alert">×</button>	
+	Please check the form below for errors
+</div> --}}
+
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-8 mainshopprods">
             <h3>Categorieën</h3>
-          
 
     <div class="row row-categories">
                     @foreach ($categories as $category)
@@ -373,18 +391,26 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                           </div>
                           <div class="modal-body">
                             <img alt="{{$bekijk->productomschrijving}}" src="{{$bekijk->imagelink}}" class="producttypeimg" width="150"/>
-                            <form>
+                            {{-- <form> --}}
+                              {{-- Aanpassing form method en action toegevoegd--}}
+                              <form method="GET" action="/overzicht/addItem/{{$bekijk->id}}/">
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Aantal</label>
-                                <input type="text" required="required" class="form-control form-amount-{{$bekijk->id}}" id="exampleInputEmail1" aria-describedby="emailHelp" max="{{$bekijk->aantal}}">
+                                <input type="text" name="Aantal" required="required" class="form-control form-amount-{{$bekijk->id}}" id="exampleInputEmail1" aria-describedby="emailHelp" max="{{$bekijk->aantal}}">
                                 <small id="emailHelp" class="form-text text-muted">Vul hier het gewenste aantal producten in.</small>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                                {{-- <a href="/overzicht/addItem/{{$bekijk->id}}/" type="submit" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a> --}}
+                                {{-- Aanpassing gemaakt van <a> tag naar <button> tag inverban met form--}}
+                                <button type="submit" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</button>
                               </div>
                           </form>
                           </div>
-                          <div class="modal-footer">
+                          {{-- <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
                             <a href="/overzicht/addItem/{{$bekijk->id}}/" type="button" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a>
-                          </div>
+                          </div> --}}
                         </div>
                       </div>
                     </div>

@@ -136,6 +136,22 @@ class ProductsController extends Controller
 
     public function update(Request $request)
     { 
+        // validatie voor het formulier, voordat je iets verstuurt
+        $this->validate(request(), [
+            'Productcodefabrikant' => ['required', 'string', 'max:255'],
+            'GTIN' => ['nullable', 'string', 'max:255'],
+            'Productomschrijving' => ['required', 'string', 'max:255'],
+            'Locatie' => ['required', 'string', 'max:255'],
+            'Fabrikaat' => ['required', 'string', 'max:255'],
+            'Specificaties' => ['nullable', 'string', 'max:255'],
+            'Productserie' => ['required', 'string', 'max:255'],
+            'Producttype' => ['required', 'string', 'max:255'],
+            'Eenheidgewicht' => ['nullable', 'string', 'max:255'],
+            // 'Aantal' => ['nullable', 'string', 'max:255'],
+            // Er kunnen alleen (+)getallen toegevoegd worden
+            'Aantal' => ['nullable', 'integer', 'max:255','regex:/^[0-9]\d*$/'],
+        ]);
+
         $product_id = $request->input("id");
         $product_code = $request->input("Productcodefabrikant");
         $product_gtin = $request->input("GTIN");
@@ -224,7 +240,9 @@ class ProductsController extends Controller
             'Productserie' => ['required', 'string', 'max:255'],
             'Producttype' => ['required', 'string', 'max:255'],
             'Eenheidgewicht' => ['nullable', 'string', 'max:255'],
-            'Aantal' => ['nullable', 'string', 'max:255'],
+            // 'Aantal' => ['nullable', 'string', 'max:255'],
+            // Er kunnen alleen (+)getallen toegevoegd worden
+            'Aantal' => ['nullable', 'integer', 'max:255','regex:/^[0-9]\d*$/'],
         ]);
 
         $product = new Product();

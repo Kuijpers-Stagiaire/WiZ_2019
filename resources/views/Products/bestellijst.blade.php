@@ -6,7 +6,7 @@
     <title>WiZ Kuijpers - Bestellijst</title>
 @endsection
 @section('shopmenu')
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="row " id="Searchnavbar"> 
             <div class="col order1 shop-bar">
                 <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('content')
 <div class="container table-wrapper-scroll-y my-custom-scrollbar table-responsive">

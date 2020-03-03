@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Bestellijst;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -35,11 +36,22 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(String $product, String $aantal)
+    // public function store(String $product, string $aantal)
+    public function store(String $product, request $request)
     {   
+        //deze code zorgt ervoor dat je geen min-getal kan invoeren als je het aantal invult
+        $validator = Validator::make($request->all(), [
+            'Aantal'=>'required|regex:/^[0-9]\d*$/'
+        ]);
 
+        if($validator->fails()){
+            return redirect('/overzicht')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
+        $aantal = $request->Aantal;
         $oldAantal = Product::where('ID', $product)->first()->Aantal;
-
         $newAantal = $oldAantal - $aantal;
 
         if ($newAantal >= 0) {
@@ -47,7 +59,7 @@ class CartController extends Controller
             ->update(['Aantal' => $newAantal]);
         }else{
             return redirect('/overzicht')
-            ->with('warning','Er zijn maar ' . $oldAantal . ' van dit soort producten beschikbaar, kies een ander aantal!');;
+            ->with('warning','Er zijn maar ' . $oldAantal . ' van dit soort producten beschikbaar, kies een ander aantal a.u.b.');;
         }
             $getProducten = DB::table('overzicht')
             ->select('ID', 'product_toevoeger_id' ,'productcode_fabrikant', 'product_toevoeger_id','product_toevoeger_voornaam', 'product_toevoeger_achternaam', 'product_toevoeger_email','product_toevoeger_vestiging', 'Fabrikaat', 'Productserie', 'Eenheid gewicht','Ingangsdatum', 'Productomschrijving', 'productnaam', 'imagelink', 'Locatie', 'Producttype', 'Aantal', 'specificaties')
@@ -76,12 +88,12 @@ class CartController extends Controller
                 $item->product_uitgever_id = $getProduct->product_toevoeger_id;
                 $item->product_uitgever_naam = $getProduct->product_toevoeger_voornaam;
                 $item->product_uitgever_email = $getProduct->product_toevoeger_email;
-
                 $item->save();     
 
         }
         return redirect('/overzicht/bestellijst')
         ->with('success','Product succesvol toegevoegd!');;
+
     }
 
     /**
@@ -130,22 +142,45 @@ class CartController extends Controller
         $currentAantal = Bestellijst::where('bestelling_id', $bestelling)->first()->product_aantal;
 
         $difference = abs($currentAantal - $aantal);
-
+        //Toevoeging origineel_aantal om te controleren dat de bestelling niet hoger is dan de vooraad.
+        $origineel_aantal = $oldAantal + $currentAantal;
         if ($currentAantal > $aantal) {
+            //Controleer of het aantal toegevoegd product een positive getal is, anders geef Melding
+            if($aantal >= 0){
+                $newAantal = $oldAantal + $difference;
 
-            $newAantal = $oldAantal + $difference;
+                Product::where('ID', $product)
+                ->update(['Aantal' => $newAantal]);
+            }
+            else{
+                return redirect('/overzicht/bestellijst')
+                ->with('warning','Aantal moet een positive getal zijn!');
+            }
+            // $newAantal = $oldAantal + $difference;
 
-            Product::where('ID', $product)
-            ->update(['Aantal' => $newAantal]);
+            // Product::where('ID', $product)
+            // ->update(['Aantal' => $newAantal]);
         }else if($currentAantal < $aantal){
-            $newAantal = $oldAantal - $difference;
+            // CONTROLEER OUD AANTAL OF DE AANTAL NIET KLEINER/Gelijk is aan de voorraad, anders geef melding
+            if($origineel_aantal >= $aantal){
+                $newAantal = $oldAantal - $difference;
 
-            Product::where('ID', $product)
-            ->update(['Aantal' => $newAantal]);
-        }else{
-            return redirect('/overzicht/bestellijst')
-            ->with('warning','Niks verandert!');
+                Product::where('ID', $product)
+                ->update(['Aantal' => $newAantal]);
+            }
+            else{
+                return redirect('/overzicht/bestellijst')
+                ->with('warning','Niks verandert!');
+            }
         }
+            // $newAantal = $oldAantal - $difference;
+
+            // Product::where('ID', $product)
+            // ->update(['Aantal' => $newAantal]);
+        // }else{
+        //     return redirect('/overzicht/bestellijst')
+        //     ->with('warning','Niks verandert!');
+        // }
 
 
 

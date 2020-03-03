@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('img/wizicon.png')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
 
-    @laravelPWA
+    {{-- @laravelPWA --}}
 
 </head>
 <body>

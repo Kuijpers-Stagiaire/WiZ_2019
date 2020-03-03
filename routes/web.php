@@ -152,7 +152,8 @@ Route::patch('/overzicht/{product}/update', ['middleware' => 'auth', 'uses' => '
 // Shopping cart
 
 // Add item
-Route::get('/overzicht/addItem/{product}/{aantal}', 'CartController@store');
+// Route::get('/overzicht/addItem/{product}/{aantal}', 'CartController@store');
+Route::get('/overzicht/addItem/{product}/', 'CartController@store');
 
 // Show cart
 Route::get('/overzicht/bestellijst', ['middleware' => 'auth', 'uses' => 'CartController@show']);
