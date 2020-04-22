@@ -65,16 +65,21 @@ function timer(){
     $(".stadsnaam").text(str);
   }
 
+  $('#line-chart').remove();
+  $('#line-chart-upper').append('<canvas id="line-chart" width="600" height="350"></canvas>');
+
+  var getUrl = window.location;
+
   $.ajax({
         type: 'GET',
-        url: "http://127.0.0.1:8000/retrieveChartData.php",
+        url: `http://` + getUrl.host + `/retrieveChartData.php`,
         dataType: 'json',
         data: {
             str : str
         },
           // Als de query succesvol is uitgevoerd, voer het volgende uit:
           success: function(result){
-
+            console.log(result);
             cityName = $(".stadsnaam").text();
 
             new Chart(document.getElementById("line-chart"), {
@@ -120,16 +125,21 @@ $(".grid-button").on("click", function(){
 
   $(".stadsnaam").text(str);
 
+  $('#line-chart').remove();
+  $('#line-chart-upper').append('<canvas id="line-chart" width="600" height="350"></canvas>');
+
+  var getUrl = window.location;
+
   $.ajax({
         type: 'GET',
-        url: "http://127.0.0.1:8000/retrieveChartData.php",
+        // url: `http://127.0.0.1:8000/retrieveChartData.php`,
+        url: `http://` + getUrl.host + `/retrieveChartData.php`,
         dataType: 'json',
         data: {
             str : str
         },
           // Als de query succesvol is uitgevoerd, voer het volgende uit:
           success: function(result){
-
             cityName = $(".stadsnaam").text();
 
             new Chart(document.getElementById("line-chart"), {

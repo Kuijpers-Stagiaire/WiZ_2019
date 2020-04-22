@@ -43,7 +43,9 @@
                             <select id="rechten" type="text" class="form-control" name="rechten" value="{{ old('rechten') }}" required>
                                 <option value="" disabled selected hidden>Rechten</option>
                                 <option value="User">User</option>
-                                <option value="Manager">Manager</option>
+                                {{-- <option value="Manager">Manager</option> --}}
+                                {{-- Aanpassing gemaakt dat er nu de tekst Product-Manager opgeslagen wordt inplaats van Manager --}}
+                                <option value="Product-Manager">Product-Manager</option>
                                 <option value="Admin">Admin</option>
                             </select>
                             @if ($errors->has('rechten'))

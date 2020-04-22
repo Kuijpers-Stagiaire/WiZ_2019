@@ -11,8 +11,9 @@
 <div class="container userdetail">
         <div class="row">            
             <div class="col"><a aria-label="Pagina terug" href="/controlpanel/users/{{ $user->id }}"><i class="fas fa-arrow-circle-left usericons "></i></a></div>
-            <div class="col"><img aria-label="Avatar" class="profile-img-users mx-auto d-block" src="/storage/avatars/{{ $user->avatar }}">               
-            </div>
+            {{--De code hieronder is er voor om als de gebruiker geen profiel foto heeft en dan een default.jpg in te laden--}}
+            <div class="col"><img aria-label="Avatar" class="profile-img-users mx-auto d-block" src="/storage/avatars/{{ $user->avatar }}" onerror=this.src="{{ url('/img/default.jpg') }}"></div>
+            {{-- <div class="col"><img aria-label="Avatar" class="profile-img-users mx-auto d-block" src="/storage/avatars/{{ $user->avatar }}"></div> --}}
             <div class="col"></div>
         </div>
         <hr id="userdetailline">
@@ -56,7 +57,9 @@
                             <select aria-label="Rechten" class="form-control" name="rechten" >
                                 <option selected hidden>{{ $user->rechten }}</option>
                                 <option>User</option>
-                                <option>Manager</option>
+                                {{-- <option>Manager</option> --}}
+                                {{-- Aanpassing gemaakt dat er nu de tekst Product-Manager opgeslagen wordt inplaats van Manager --}}
+                                <option>Product-Manager</option>
                                 <option>Admin</option>
                             </select>
                             <br>
@@ -73,9 +76,53 @@
                         <br>
                         <h5>Gebruiker geüpdate op:</h5>
                         <h3>{{ $user->updated_at }}</h3>
+                        <br><br>
+                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-lg" id="wwreset">Reset wachtwoord</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- model -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reset wachtwoord</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form action="/adminchangePassword" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <input hidden name="user_email" value="{{$user->email}}"/>
+                        <label for="Nieuw_ww">Nieuw Wachtwoord</label>
+                        <input type="text" class="form-control" id="Nieuw_ww" name="Nieuw_ww"/>
+                        <small>Deze wachtwoord copieren en doorsturen naar de gebruiker!</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="makeid(8)" class="btn btn-primary">Reset wachtwoord</button>
+                    </div>                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            document.getElementById("Nieuw_ww").value = result;
+        }
+    </script>
 @endsection

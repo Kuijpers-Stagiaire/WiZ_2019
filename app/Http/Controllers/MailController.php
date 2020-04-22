@@ -5,6 +5,7 @@ use DB;
 use App\Http\Controllers\Controller;
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Bestellijst;
@@ -15,14 +16,14 @@ class MailController extends Controller
     public function send()
     {
         $getBasket = DB::table('bestellijst')
-        ->where('product_toevoeger_id', '=', \Auth::user()->id)
+        ->where('product_toevoeger_id', '=', Auth::user()->id)
         ->get();
 
          //dd($getBasket);
 
         $objDemo = new \stdClass();
-        $objDemo->demo_one = \Auth::user()->voornaam;
-        $objDemo->demo_two = \Auth::user()->email;
+        $objDemo->demo_one = Auth::user()->voornaam;
+        $objDemo->demo_two = Auth::user()->email;
 
         $imageArray = array();
         $nameArray = array();
@@ -51,13 +52,14 @@ class MailController extends Controller
         $objDemo->product_array = $productArray;
 
         $objDemo->sender = 'Kuijpers';
-        $objDemo->receiver = 'Joey van de Looverbosch';
+        $objDemo->receiver = "" . Auth::user()->voornaam." ".Auth::user()->achternaam."";
 
         $objDemo->auth = "Koper";
         $objDemo->message = "U heeft producten bestelt bij WiZ, hieronder volgt een lijst.";
         
         // Koper
-        Mail::to(\Auth::user()->email)->send(new DemoEmail($objDemo));
+        Mail::to(Auth::user()->email)->send(new DemoEmail($objDemo));
+        // Mail::send(new DemoEmail($objDemo),[],function($message){ $message->from('Jputten@kuijpers.com')->to(Auth::user()->email);});
         // // Verkoper
         // foreach ($mailArray as $mail) {
         //     $objDemo->auth = "Verkoper";
@@ -66,9 +68,9 @@ class MailController extends Controller
         // }
         // Admin
         $objDemo->auth = "Admin";
-        $objDemo->message = "Er zijn producten besteld door: " . \Auth::user()->email . ".";
+        $objDemo->message = "Er zijn producten besteld door: " . Auth::user()->email . ".";
 
-        Mail::to("jlooverbosch@kuijpers.com")->send(new DemoEmail($objDemo));
+        Mail::to("jputten@kuijpers.com")->send(new DemoEmail($objDemo));
 
         return redirect('/overzicht/bestellijst')
         ->with('success','Uw bestelling is succesvol geplaatst!');

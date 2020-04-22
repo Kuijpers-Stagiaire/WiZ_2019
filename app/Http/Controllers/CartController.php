@@ -6,6 +6,8 @@ use DB;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Bestellijst;
+//User model toegevoegd aan de lijst.
+use App\User;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
@@ -49,45 +51,39 @@ class CartController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        
+        //Id is veranderd naar Product_id.
         $aantal = $request->Aantal;
-        $oldAantal = Product::where('ID', $product)->first()->Aantal;
+        $oldAantal = Product::where('Product_id', $product)->first()->Aantal;
         $newAantal = $oldAantal - $aantal;
 
         if ($newAantal >= 0) {
-            Product::where('ID', $product)
+            Product::where('Product_id', $product)
             ->update(['Aantal' => $newAantal]);
         }else{
             return redirect('/overzicht')
             ->with('warning','Er zijn maar ' . $oldAantal . ' van dit soort producten beschikbaar, kies een ander aantal a.u.b.');;
         }
             $getProducten = DB::table('overzicht')
-            ->select('ID', 'product_toevoeger_id' ,'productcode_fabrikant', 'product_toevoeger_id','product_toevoeger_voornaam', 'product_toevoeger_achternaam', 'product_toevoeger_email','product_toevoeger_vestiging', 'Fabrikaat', 'Productserie', 'Eenheid gewicht','Ingangsdatum', 'Productomschrijving', 'productnaam', 'imagelink', 'Locatie', 'Producttype', 'Aantal', 'specificaties')
-            ->where('ID', '=', $product)
+            ->where('Product_id', '=', $product)
             ->limit(1)
             ->get();
             
+            $userinformation = User::where('id', $getProducten[0]->User_id)->get();
         $item = new Bestellijst();
-
+        //Aanpassing gemaakt zodat de correcte waardes meegegeven worden.
         foreach ($getProducten as $getProduct) {
-                    
-                $item->product_id = $getProduct->ID;
-                $item->product_img = $getProduct->imagelink;
-
-                if($getProduct->Productomschrijving == "") {
-                    $item->product_naam = $getProduct->productnaam;
-                }else{
-                    $item->product_naam = $getProduct->Productomschrijving;
-                }
+                $item->product_id = $getProduct->Product_id;
+                $item->product_img = $getProduct->ProductImage;
+                $item->product_naam = $getProduct->Description;
                 
-                $item->product_code = $product;
+                $item->product_code = $getProduct->Productcode;
                 $item->product_aantal = $aantal;
                 $item->product_toevoeger_id = \Auth::user()->id;
                 $item->product_toevoeger_naam = \Auth::user()->voornaam;
                 $item->product_toevoeger_email = \Auth::user()->email;
-                $item->product_uitgever_id = $getProduct->product_toevoeger_id;
-                $item->product_uitgever_naam = $getProduct->product_toevoeger_voornaam;
-                $item->product_uitgever_email = $getProduct->product_toevoeger_email;
+                $item->product_uitgever_id = $userinformation[0]->id;
+                $item->product_uitgever_naam = $userinformation[0]->voornaam;
+                $item->product_uitgever_email = $userinformation[0]->email;
                 $item->save();     
 
         }
@@ -111,7 +107,7 @@ class CartController extends Controller
 
         $categories = DB::table('productseries')->distinct()->select('productserie_naam', 'productserie_img')->get();
 
-        return view('products.bestellijst', compact('getBasket', 'categories'));
+        return view('Products.bestellijst', compact('getBasket', 'categories'));
     }
 
     /**
@@ -134,10 +130,10 @@ class CartController extends Controller
      */
     public function updateCustom(String $bestelling, String $aantal)
     {
-
+        //Overzicht id is aangepast naar Product_id
         $product = Bestellijst::where('bestelling_id', $bestelling)->first()->product_id;
 
-        $oldAantal = Product::where('ID', $product)->first()->Aantal;
+        $oldAantal = Product::where('Product_id', $product)->first()->Aantal;
 
         $currentAantal = Bestellijst::where('bestelling_id', $bestelling)->first()->product_aantal;
 
@@ -149,7 +145,7 @@ class CartController extends Controller
             if($aantal >= 0){
                 $newAantal = $oldAantal + $difference;
 
-                Product::where('ID', $product)
+                Product::where('Product_id', $product)
                 ->update(['Aantal' => $newAantal]);
             }
             else{
@@ -165,7 +161,7 @@ class CartController extends Controller
             if($origineel_aantal >= $aantal){
                 $newAantal = $oldAantal - $difference;
 
-                Product::where('ID', $product)
+                Product::where('Product_id', $product)
                 ->update(['Aantal' => $newAantal]);
             }
             else{
@@ -198,14 +194,14 @@ class CartController extends Controller
      */
     public function destroy(String $bestelling, String $product, String $aantal)
     {      
-
-        if (Product::where('ID', $product)->count() > 0) {
-           $oldAantal = Product::where('ID', $product)->first()->Aantal;
+        //Overzicht id is aangepast naar Product_id
+        if (Product::where('Product_id', $product)->count() > 0) {
+           $oldAantal = Product::where('Product_id', $product)->first()->Aantal;
 
 
             $newAantal = $oldAantal + $aantal;
 
-            Product::where('ID', $product)
+            Product::where('Product_id', $product)
             ->update(['Aantal' => $newAantal]);
 
             DB::table('bestellijst')

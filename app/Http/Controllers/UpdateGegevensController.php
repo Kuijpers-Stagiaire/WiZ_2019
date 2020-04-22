@@ -3,34 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\MatchOldPassword;
 use App\User;
 
-
-class HomeController extends Controller
+class UpdateGegevensController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('home');
-    }
-
+    //In deze controller staan de update functies voor de profiel/control pagina die zijn toegevoegd op 26-3-2020 - 30-3-2020.
     public function changePassword(Request $request)
     {
             if (!(Hash::check($request->get('huidig-wachtwoord'), Auth::user()->password))) {
@@ -55,7 +35,7 @@ class HomeController extends Controller
             $user = Auth::user();
             $user->password = $request->nieuw_wachtwoord;
             $user->save();
-            return redirect()->back()->with(["success" => "Password changed successfully!", 'CorrectTab' => 'Wachtwoordveranderen']);
+            return redirect()->back()->with(["success" => "Wachtwoord is succesvol geüpdate!", 'CorrectTab' => 'Wachtwoordveranderen']);
     }
 
     public function AdminChangePassword(Request $request)
@@ -67,10 +47,26 @@ class HomeController extends Controller
         ]);
 
         $user = User::where('email', $request->user_email)->get();
-        dump($user);
         $user[0]->password = $request->Nieuw_ww;
         $user[0]->save();
 
-        return redirect()->back()->with("success" , "Wachtwoord is Successvol aangepast!");
+        return redirect()->back()->with("success" , "Wachtwoord is succesvol geüpdate!");
+    }
+
+    public function Update(Request $request)
+    {
+        $request->validate([
+            'Nieuw_Voornaam' => 'required|max:50',
+            'Nieuw_Achternaam' => 'required|max:100',
+            'Nieuw_Email' => 'required|email|max:100',
+        ]);
+
+        $user = Auth::user();
+        $user->Voornaam = $request->Nieuw_Voornaam;
+        $user->Achternaam = $request->Nieuw_Achternaam;
+        $user->Email = $request->Nieuw_Email;
+        $user->save();
+        
+        return redirect()->back()->with(["success_gegevens" => "Gegevens zijn succesvol aangepast!", 'CorrectTab' => 'UpdateGegevens']);
     }
 }

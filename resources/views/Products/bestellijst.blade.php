@@ -34,45 +34,48 @@
     </div> --}}
 @endsection
 @section('content')
-<div class="container table-wrapper-scroll-y my-custom-scrollbar table-responsive">
-    <table class="table">
-        <thead>
-            <th>Bestelling #</th>
-            <th>Afbeelding</th>
-            <th>Productnaam</th>
-            <th>Productcode</th>
-            <th>Aantal</th>
-            <th>Toegevoegd op</th>
-            <th>Acties</th>
-        </thead>
-            @if (isset($getBasket))
-                @foreach($getBasket as $getBasketItem)
-                    <tr>
-                        <td><strong>{{$getBasketItem->bestelling_id}}</strong></td>
-                        <td><img src="{{$getBasketItem->product_img}}" height="50"></td>
+<div class="container-bestelijst">
+    <div class="container table-wrapper-scroll-y my-custom-scrollbar table-responsive">
+        <table class="table">
+            <thead>
+                <th>Bestelling #</th>
+                <th>Afbeelding</th>
+                <th>Productnaam</th>
+                <th>Productcode</th>
+                <th>Aantal</th>
+                <th>Toegevoegd op</th>
+                <th>Acties</th>
+            </thead>
+                @if (isset($getBasket))
+                    @foreach($getBasket as $getBasketItem)
+                        <tr>
+                            <td><strong>{{$getBasketItem->bestelling_id}}</strong></td>
+                            {{-- Deze code hieronder zorgt er voor dat er een standaard foto ingeladen wordt op moment van een error met de oorspronkelijke foto. --}}
+                            <td><img src="{{$getBasketItem->product_img}}" height="50" onerror=this.src="{{ url('/img/img-placeholder.png') }}"></td>
+                            {{-- <td><img src="{{$getBasketItem->product_img}}" height="50"></td> --}}
 
-                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
-                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
-                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_aantal}}</td>
-                        <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
-                        <td  class="default-{{$getBasketItem->bestelling_id}}"><button type="button" class="btn btn-success btn-edit" id="{{$getBasketItem->bestelling_id}}">Bewerken</button></td>
+                            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
+                            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
+                            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_aantal}}</td>
+                            <td  class="default-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
+                            <td  class="default-{{$getBasketItem->bestelling_id}}"><button type="button" class="btn btn-success btn-edit" id="{{$getBasketItem->bestelling_id}}">Bewerken</button></td>
 
-                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
-                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
-                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}"><input class="{{$getBasketItem->bestelling_id}}" value="{{$getBasketItem->product_aantal}}" type="number"></input></td>
-                        <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
-                        <td style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">
-                            <a type="button" class="btn btn-success btn-save" id="{{$getBasketItem->bestelling_id}}" href="/overzicht/bestellijst/">Opslaan</a> 
-                            <a type="button" class="btn btn-info btn-edit" id="{{$getBasketItem->bestelling_id}}">Annuleer</a>
-                            <a type="button" class="btn btn-danger" href="/overzicht/bestellijst/destroy/{{$getBasketItem->bestelling_id}}/{{$getBasketItem->product_id}}/{{$getBasketItem->product_aantal}}">X</a>
-                        </td>
-                    </tr>
-                @endforeach             
-            
-            
-        @endif
-    </table>
-</div>
+                            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_naam}}</td>
+                            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->product_code}}</td>
+                            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}"><input class="{{$getBasketItem->bestelling_id}}" value="{{$getBasketItem->product_aantal}}" type="number"></input></td>
+                            <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
+                            <td style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">
+                                <a type="button" class="btn btn-success btn-save" id="{{$getBasketItem->bestelling_id}}" href="/overzicht/bestellijst/">Opslaan</a> 
+                                <a type="button" class="btn btn-info btn-edit" id="{{$getBasketItem->bestelling_id}}">Annuleer</a>
+                                <a type="button" class="btn btn-danger" href="/overzicht/bestellijst/destroy/{{$getBasketItem->bestelling_id}}/{{$getBasketItem->product_id}}/{{$getBasketItem->product_aantal}}">X</a>
+                            </td>
+                        </tr>
+                    @endforeach             
+                
+                
+            @endif
+        </table>
+    </div>
     @if (isset($getBasketItem))
         <div class="container mt-4 d-flex justify-content-center">
             <a href="/mail/send/{{$getBasketItem->product_toevoeger_id}}" type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>   Plaats bestelling</a>
@@ -80,9 +83,19 @@
     @else
         <div class="noProducts" >Geen producten beschikbaar</div>
     @endif
-@endsection
+</div>
 
+    @endsection
 <style>
+    body, html{
+        height: 20%;
+    }
+    .footer-distributed{
+        margin-top: 0px;
+    }
+    .container-bestelijst{
+        height: 100%;
+    }
 
     input{
         width: 60px;
@@ -118,7 +131,7 @@
 </style>
 
 <script
-  src="http://code.jquery.com/jquery-3.3.1.js"
+  src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>

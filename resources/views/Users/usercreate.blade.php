@@ -22,7 +22,7 @@
                     <form action="/controlpanel/newuser/store" method="POST">
                             @method('POST')
                             @csrf
-                            <h5>Voornaam:</h5>
+                            <h5><span style="color:red;">*</span>Voornaam:</h5>
                             <input aria-label="Voornaam" type="text" class="form-control{{ $errors->has('voornaam') ? ' is-invalid' : '' }}" placeholder="Voornaam" name="voornaam" value="{{ old('voornaam') }}" autofocus>
                             <br>
                             @if ($errors->has('voornaam'))
@@ -30,7 +30,7 @@
                                     {{ $errors->first('voornaam') }}
                                 </div>
                             @endif
-                            <h5>Achternaam:</h5>
+                            <h5><span style="color:red;">*</span>Achternaam:</h5>
                             <input aria-label="Achternaam" type="text" class="form-control{{ $errors->has('achternaam') ? ' is-invalid' : '' }}" placeholder="Achternaam" name="achternaam" value="{{ old('achternaam') }}">
                             <br>
                             @if ($errors->has('achternaam'))
@@ -38,7 +38,7 @@
                                     {{ $errors->first('achternaam') }}
                                 </div>
                             @endif
-                            <h5>E-Mail adres:</h5>
+                            <h5><span style="color:red;">*</span>E-Mail adres:</h5>
                             <input aria-label="E-Mail adres" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-Mail" name="email" value="{{ old('email') }}">
                             <br>
                             @if ($errors->has('email'))
@@ -46,24 +46,25 @@
                                     {{ $errors->first('email') }}
                                 </div>
                             @endif
-                            <h5>Vestiging:</h5>
-                            <select aria-label="Vestiging" class="form-control{{ $errors->has('vestiging') ? ' is-invalid' : '' }}" name="vestiging" value="{{ old('vestiging') }}">
+                            <h5><span style="color:red;">*</span>Vestiging:</h5>
+
+                            <select aria-label="Vestiging" class="form-control{{ $errors->has('vestiging') ? ' is-invalid' : '' }}" name="vestiging">
                                 <option disabled selected hidden>Vestiging:</option>
-                                <option>Amsterdam</option>
-                                <option>Arnhem</option>
-                                <option>Den Bosch</option>
-                                <option>Den Haag</option>
-                                <option>Echt</option>
-                                <option>Groningen</option>
-                                <option>Helmond</option>
-                                <option>Katwijk</option>
-                                <option>Makkum</option>
-                                <option>Oosterhout</option>
-                                <option>Roosendaal</option>
-                                <option>Tilburg</option>
-                                <option>Utrecht</option>
-                                <option>Zelhem</option>
-                                <option>Zwolle</option>
+                                <option value="Amsterdam" {{ old('vestiging') == 'Amsterdam' ? 'selected' : '' }}>Amsterdam</option>
+                                <option value="Arnhem" {{ old('vestiging') == 'Arnhem' ? 'selected' : '' }}>Arnhem</option>
+                                <option value="Den Bosch" {{ old('vestiging') == 'Den Bosch' ? 'selected' : '' }}>Den Bosch</option>
+                                <option value="Den Haag" {{ old('vestiging') == 'Den Haag' ? 'selected' : '' }}>Den Haag</option>
+                                <option value="Echt" {{ old('vestiging') == 'Echt' ? 'selected' : '' }}>Echt</option>
+                                <option value="Groningen" {{ old('vestiging') == 'Groningen' ? 'selected' : '' }}>Groningen</option>
+                                <option value="Helmond" {{ old('vestiging') == 'Helmond' ? 'selected' : '' }}>Helmond</option>
+                                <option value="Katwijk" {{ old('vestiging') == 'Katwijk' ? 'selected' : '' }}>Katwijk</option>
+                                <option value="Makkum" {{ old('vestiging') == 'Makkum' ? 'selected' : '' }}>Makkum</option>
+                                <option value="Oosterhout" {{ old('vestiging') == 'Oosterhout' ? 'selected' : '' }}>Oosterhout</option>
+                                <option value="Roosendaal" {{ old('vestiging') == 'Roosendaal' ? 'selected' : '' }}>Roosendaal</option>
+                                <option value="Tilburg" {{ old('vestiging') == 'Tilburg' ? 'selected' : '' }}>Tilburg</option>
+                                <option value="Utrecht" {{ old('vestiging') == 'Utrecht' ? 'selected' : '' }}>Utrecht</option>
+                                <option value="Zelhem" {{ old('vestiging') == 'Zelhem' ? 'selected' : '' }}>Zelhem</option>
+                                <option value="Zwolle" {{ old('vestiging') == 'Zwolle' ? 'selected' : '' }}>Zwolle</option>
                             </select>
                             <br>
                             @if ($errors->has('vestiging'))
@@ -71,12 +72,14 @@
                                     {{ $errors->first('vestiging') }}
                                 </div>
                             @endif
-                            <h5>Gebruikers functie:</h5>
+                            <h5><span style="color:red;">*</span>Gebruikers functie:</h5>
                             <select aria-label="Rechten" class="form-control{{ $errors->has('rechten') ? ' is-invalid' : '' }}" name="rechten" value="{{ old('rechten') }}">
                                 <option disabled selected hidden>Functie:</option>
-                                <option>User</option>
-                                <option>Manager</option>
-                                <option>Admin</option>
+                                <option value="User" {{ old('rechten') == 'User' ? 'selected' : '' }}>User</option>
+                                {{-- <option>Manager</option> --}}
+                                {{-- Aanpassing gemaakt dat er nu de tekst Product-Manager opgeslagen wordt inplaats van Manager --}}
+                                <option value="Product-Manager" {{ old('rechten') == 'Product-Manager' ? 'selected' : '' }}>Product-Manager</option>
+                                <option value="Admin" {{ old('rechten') == 'Admin' ? 'selected' : '' }}>Admin</option>
                             </select>
                             <br>
                             @if ($errors->has('rechten'))
@@ -84,7 +87,7 @@
                                     {{ $errors->first('rechten') }}
                                 </div>
                             @endif
-                            <h5>Wachtwoord:</h5>
+                            <h5><span style="color:red;">*</span>Wachtwoord:</h5>
                             <input aria-label="WAchtwoord" id="password" type="password" placeholder="Wachtwoord" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password">
                             <br>
                             @if ($errors->has('password'))
@@ -92,7 +95,7 @@
                                     {{ $errors->first('password') }}
                                 </div>
                             @endif
-                            <h5>Bevestig wachtwoord:</h5>
+                            <h5><span style="color:red;">*</span>Bevestig wachtwoord:</h5>
                             <input aria-label="Bevesting wachtwoord" id="password-confirm" type="password" placeholder="Bevestig wachtwoord" class="form-control" name="password_confirmation">
                             <br>
                             <p class="createUserbtn"><button type="submit" class="btn btn-lg ">Maak gebruiker aan</button></p>

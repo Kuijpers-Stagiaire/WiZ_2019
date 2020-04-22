@@ -58,6 +58,34 @@
                         display: block;
                         font-size: 25px;
                         }
+                        /* styling voor knop van image toevoegen. */
+                        .inputfile {
+                            width: 0.1px;
+                            height: 0.1px;
+                            opacity: 0;
+                            overflow: hidden;
+                            position: absolute;
+                            z-index: -1;
+                        }
+                        .inputfile + label {
+                            margin-top: 5px;
+                            border-radius: .25rem;
+                            padding: 10px;
+                            font-size: 1.25em;
+                            font-weight: 700;
+                            color: white;
+                            background-color: #2f2e87;
+                            display: inline-block;
+                            width:100%;
+                        }
+
+                        .inputfile:focus + label,
+                        .inputfile + label:hover {
+                            background-color: #f28e0b;
+                        }
+                        .inputfile + label {
+                            cursor: pointer; /* "hand" cursor */
+                        }
                     </style>
 
                     <div class="dropdown">
@@ -140,7 +168,8 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-
+        {{-- 13-3-2020 aanpassing van namen en de knop voor foto opload aangepast--}}
+        {{-- Formulier is aangepast. zodat de nieuwe database gebruikt kan worden. --}}
         <form action="/overzicht/nieuw/store" method="POST" enctype="multipart/form-data">
             @method('POST')
             @csrf
@@ -148,40 +177,43 @@
                 <div class="col-xl  form-group">
                     <h5>Product foto:</h5>
                     <div class="productphoto">
-                        <img aria-label="Product foto" id="imgShop" src="" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="img-fluid" name="imagelink">
+                        <img aria-label="Product foto" style="width:100%;" id="ProductImage" src="" onerror=this.src="{{ url('/img/img-placeholder.png') }}" class="img-fluid" name="ProductImage">
                         <br>
-                        <input aria-label="Product foto teovoegen" type="file" name="imagelink" onchange="previewFileShop()">
+                        <input type="file" name="imagelink" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple onchange="previewFileShop()" />
+                        <label for="file"><i class="far fa-file-image"></i>	&nbsp;<span>Choose a file...</span></label>
                     </div>
 
-                    <h5>Product extra informatie:</h5>
-                    <textarea aria-label="Product extra informatie"  class="form-control" rows="7" cols="50"  name="Specificaties" value="{{ old('Specificaties')}}"></textarea>
+                    <h5>Product Omschrijving</h5>
+                    <textarea aria-label="Product extra informatie"  class="form-control" rows="18" cols="100"  name="LongDescription" value="{{ old('LongDescription')}}"></textarea>
+                    {{-- <textarea aria-label="Product extra informatie"  class="form-control" rows="7" cols="50"  name="ProductOmschrijving" value="{{ old('ProductOmschrijving')}}"></textarea> --}}
                 </div>
                 <div class="col-xl  form-group">
                     <div>
-                        <h5>Product naam:</h5>
-                        <input aria-label="Product naam" id="Productomschrijving" class="form-control{{ $errors->has('Productomschrijving') ? ' is-invalid' : '' }}" type="text" name="Productomschrijving" @if(isset($gtininfo)) value="{{$gtininfo[0]->productomschrijving}}" @endif value="{{ old('Productomschrijving') }}" autofocus/>
+                        <h5><span style="color:red;">*</span>Product naam:</h5>
+                        {{-- Aanpassing zodat de het geen omschrijving meer is maar Product naam --}}
+                        <input aria-label="Product naam" id="Description" class="form-control{{ $errors->has('Description') ? ' is-invalid' : '' }}" type="text" name="Description" @if(isset($gtininfo)) value="{{$gtininfo[0]->Description}}" @endif value="{{ old('Description') }}" autofocus/>
                         <br>
-                        @if ($errors->has('Productomschrijving'))
+                        @if ($errors->has('Description'))
                             <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Productomschrijving') }}
+                                {{ $errors->first('Description') }}
                             </div>
                         @endif
                     </div>
 
                     <div>
-                        <h5>Productcode:</h5>
-                        <input aria-label="Productcode" id="Productcodefabrikant" class="form-control{{ $errors->has('Productcodefabrikant') ? ' is-invalid' : '' }}" type="text" name="Productcodefabrikant" value="{{ old('Productcodefabrikant') }}"/>
+                        <h5><span style="color:red;">*</span>Productcode:</h5>
+                        <input aria-label="Productcode" id="Productcode" class="form-control{{ $errors->has('Productcode') ? ' is-invalid' : '' }}" type="text" name="Productcode" value="{{ old('Productcode') }}"/>
                         <br>
-                        @if ($errors->has('Productcodefabrikant'))
+                        @if ($errors->has('Productcode'))
                             <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Productcodefabrikant') }}
+                                {{ $errors->first('Productcode') }}
                             </div>
                         @endif
                     </div>
 
                     <div>
                         <h5>gtin_fabrikant:</h5>
-                    <input aria-label="gtin_fabrikant" class="form-control scanBtn{{ $errors->has('GTIN') ? ' is-invalid' : '' }}" type="text" id="GTIN" name="GTIN" @if(isset($gtininfo)) value="{{$gtininfo[0]->gtin}}" @endif value="{{ old('GTIN') }}"/>
+                        <input aria-label="GTIN" class="form-control scanBtn{{ $errors->has('GTIN') ? ' is-invalid' : '' }}" type="text" id="GTIN" name="GTIN" @if(isset($gtininfo)) value="{{$gtininfo[0]->gtin}}" @endif value="{{ old('GTIN') }}"/>
                         <button class="btn btn-scan" type="button" id="btn" value="Start/Stop the scanner" data-toggle="modal" data-target="#livestream_scanner">
                             <i class="fa fa-barcode"></i>
                         </button> 
@@ -199,86 +231,86 @@
                     </div>
                     
                     <div>
-                        <h5>Fabrikaat:</h5>
-                        <input aria-label="Fabrikaat" id="Fabrikaat" class="form-control{{ $errors->has('Fabrikaat') ? ' is-invalid' : '' }}" type="text" name="Fabrikaat" @if(isset($gtininfo)) value="{{$gtininfo[0]->fabrikaat}}"@endif value="{{ old('Fabrikaat') }}"/>
+                        <h5><span style="color:red;">*</span>Fabrikaat:</h5>
+                        <input aria-label="ManufacturerName" id="ManufacturerName" class="form-control{{ $errors->has('ManufacturerName') ? ' is-invalid' : '' }}" type="text" name="ManufacturerName" @if(isset($gtininfo)) value="{{$gtininfo[0]->ManufacturerName}}"@endif value="{{ old('ManufacturerName') }}"/>
                         <br>
-                        @if ($errors->has('Fabrikaat'))
+                        @if ($errors->has('ManufacturerName'))
                             <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Fabrikaat') }}
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div>
-                        <h5>Productserie:</h5>
-                        {{-- <input id="Productserie" class="form-control{{ $errors->has('Productserie') ? ' is-invalid' : '' }}" type="text" name="Productserie" required/> --}}
-                        <select aria-label="Productserie" id="Productserie" class="form-control{{ $errors->has('Productserie') ? ' is-invalid' : '' }}" name="Productserie" value="{{ old('Productserie') }}">
-                            <option disabled selected hidden>Productserie:</option>
-                            <option>IT</option>
-                            <option>Magazijn</option>
-                            <option>Diversen</option>
-                            @if(isset($gtininfo)) 
-                                <option selected>{{$gtininfo[0]->productserie}}</option>
-                            @endif
-                        </select>
-                        <br>
-                        @if ($errors->has('Productserie'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Productserie') }}
+                                {{ $errors->first('ManufacturerName') }}
                             </div>
                         @endif
                     </div>
 
                     <div>
-                        <h5>Producttype:</h5>
-                        {{-- <input id="Producttype" class="form-control{{ $errors->has('Producttype') ? ' is-invalid' : '' }}" type="text" name="Producttype" required/> --}}
-                        <select aria-label="Producttype" id="Producttype" class="form-control{{ $errors->has('Producttype') ? ' is-invalid' : '' }}" name="Producttype" value="{{ old('Producttype') }}">
-                            <option disabled selected hidden>Producttype:</option>
-                            <option>Tablet</option>
-                            <option>Printer</option>
-                            <option>PC</option>
-                            <option>Monitor</option>
-                            <option>Laptop</option>
-                            <option>Flenzen</option>
-                            <option>Afsluiters</option>
-                            <option>RVS buizen</option>
-                            <option>Elektrische onderdelen</option>
-                            <option>T stukken</option>
-                            <option>Telefoons</option>
-                            <option>TL-buizen</option>
-                            <option>Diversen</option>
+                        <h5><span style="color:red;">*</span>Product serie:</h5>
+                        {{-- <input id="Productserie" class="form-control{{ $errors->has('Productserie') ? ' is-invalid' : '' }}" type="text" name="Productserie" required/> --}}
+                        <select aria-label="Model" id="Model" class="form-control{{ $errors->has('Model') ? ' is-invalid' : '' }}" name="Model" value="{{ old('Model') }}">
+                            <option disabled selected hidden>Product serie:</option>
+                            <option value="IT" {{ old('Model') == 'IT' ? 'selected' : '' }}>IT</option>
+                            <option value="Magazijn" {{ old('Model') == 'Magazijn' ? 'selected' : '' }}>Magazijn</option>
+                            <option value="Diversen" {{ old('Model') == 'Diversen' ? 'selected' : '' }}>Diversen</option>
                             @if(isset($gtininfo)) 
-                                <option selected>{{$gtininfo[0]->producttype}}</option>
+                                <option selected>{{$gtininfo[0]->Model}}</option>
                             @endif
                         </select>
                         <br>
-                        @if ($errors->has('Producttype'))
+                        @if ($errors->has('Model'))
                             <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Producttype') }}
+                                {{ $errors->first('Model') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div>
+                        <h5><span style="color:red;">*</span>Product type:</h5>
+                        {{-- <input id="Producttype" class="form-control{{ $errors->has('Producttype') ? ' is-invalid' : '' }}" type="text" name="Producttype" required/> --}}
+                        <select aria-label="Version" id="Version" class="form-control{{ $errors->has('Version') ? ' is-invalid' : '' }}" name="Version" value="{{ old('Version') }}">
+                            <option disabled selected hidden>Product type:</option>
+                            <option value="Tablet" {{ old('Version') == 'Tablet' ? 'selected' : '' }}>Tablet</option>
+                            <option value="Printer" {{ old('Version') == 'Printer' ? 'selected' : '' }}>Printer</option>
+                            <option value="PC" {{ old('Version') == 'PC' ? 'selected' : '' }}>PC</option>
+                            <option value="Monitor" {{ old('Version') == 'Monitor' ? 'selected' : '' }}>Monitor</option>
+                            <option value="Laptop" {{ old('Version') == 'Laptop' ? 'selected' : '' }}>Laptop</option>
+                            <option value="Flenzen" {{ old('Version') == 'Flenzen' ? 'selected' : '' }}>Flenzen</option>
+                            <option value="Afsluiters" {{ old('Version') == 'Afsluiters' ? 'selected' : '' }}>Afsluiters</option>
+                            <option value="RVS buizen" {{ old('Version') == 'RVS buizen' ? 'selected' : '' }}>RVS buizen</option>
+                            <option value="Elektrische onderdelen" {{ old('Version') == 'Elektrische onderdelen' ? 'selected' : '' }}>Elektrische onderdelen</option>
+                            <option value="T stukken" {{ old('Version') == 'T stukken' ? 'selected' : '' }}>T stukken</option>
+                            <option value="Telefoons" {{ old('Version') == 'Telefoons' ? 'selected' : '' }}>Telefoons</option>
+                            <option value="TL-buizen" {{ old('Version') == 'TL-buizen' ? 'selected' : '' }}>TL-buizen</option>
+                            <option value="Diversen" {{ old('Version') == 'Diversen' ? 'selected' : '' }}>Diversen</option>
+                            @if(isset($gtininfo)) 
+                                <option selected>{{$gtininfo[0]->Version}}</option>
+                            @endif
+                        </select>
+                        <br>
+                        @if ($errors->has('Version'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first('Version') }}
                             </div>
                         @endif
                     </div>
                     
                     <div>
-                        <h5>Locatie:</h5>
+                        <h5><span style="color:red;">*</span>Locatie:</h5>
                         {{-- <input id="Locatie" class="form-control{{ $errors->has('Locatie') ? ' is-invalid' : '' }}" type="text" name="Locatie" required/> --}}
                         <select aria-label="Locatie" id="Locatie" class="form-control{{ $errors->has('Locatie') ? ' is-invalid' : '' }}" name="Locatie" value="{{ old('Locatie') }}">
-                            <option disabled selected hidden>Vestiging:</option>
-                            <option>Amsterdam</option>
-                            <option>Arnhem</option>
-                            <option>Den Bosch</option>
-                            <option>Den Haag</option>
-                            <option>Echt</option>
-                            <option>Groningen</option>
-                            <option>Helmond</option>
-                            <option>Katwijk</option>
-                            <option>Makkum</option>
-                            <option>Oosterhout</option>
-                            <option>Roosendaal</option>
-                            <option>Tilburg</option>
-                            <option>Utrecht</option>
-                            <option>Zelhem</option>
-                            <option>Zwolle</option>
+                            <option disabled selected hidden>Locatie:</option>
+                            <option value="Amsterdam" {{ old('Locatie') == 'Amsterdam' ? 'selected' : '' }}>Amsterdam</option>
+                            <option value="Arnhem" {{ old('Locatie') == 'Arnhem' ? 'selected' : '' }}>Arnhem</option>
+                            <option value="Den Bosch" {{ old('Locatie') == 'Den Bosch' ? 'selected' : '' }}>Den Bosch</option>
+                            <option value="Den Haag" {{ old('Locatie') == 'Den Haag' ? 'selected' : '' }}>Den Haag</option>
+                            <option value="Echt" {{ old('Locatie') == 'Echt' ? 'selected' : '' }}>Echt</option>
+                            <option value="Groningen" {{ old('Locatie') == 'Groningen' ? 'selected' : '' }}>Groningen</option>
+                            <option value="Helmond" {{ old('Locatie') == 'Helmond' ? 'selected' : '' }}>Helmond</option>
+                            <option value="Katwijk" {{ old('Locatie') == 'Katwijk' ? 'selected' : '' }}>Katwijk</option>
+                            <option value="Makkum" {{ old('Locatie') == 'Makkum' ? 'selected' : '' }}>Makkum</option>
+                            <option value="Oosterhout" {{ old('Locatie') == 'Oosterhout' ? 'selected' : '' }}>Oosterhout</option>
+                            <option value="Roosendaal" {{ old('Locatie') == 'Roosendaal' ? 'selected' : '' }}>Roosendaal</option>
+                            <option value="Tilburg" {{ old('Locatie') == 'Tilburg' ? 'selected' : '' }}>Tilburg</option>
+                            <option value="Utrecht" {{ old('Locatie') == 'Utrecht' ? 'selected' : '' }}>Utrecht</option>
+                            <option value="Zelhem" {{ old('Locatie') == 'Zelhem' ? 'selected' : '' }}>Zelhem</option>
+                            <option value="Zwolle" {{ old('Locatie') == 'Zwolle' ? 'selected' : '' }}>Zwolle</option>
                         </select>
                         <br>
                         @if ($errors->has('Locatie'))
@@ -290,12 +322,23 @@
                     </div>
                     
                     <div>
-                        <h5>Eenheid gewicht:</h5>
-                        <input aria-label="Eenheid gewicht" id="Eenheidgewicht" class="form-control{{ $errors->has('Eenheidgewicht') ? ' is-invalid' : '' }}" type="text" name="Eenheidgewicht" value="{{ old('Eenheidgewicht') }}"/>
+                        <h5>Gewicht:</h5>
+                        <input aria-label="Gewicht" id="WeightQuantity" class="form-control{{ $errors->has('WeightQuantity') ? ' is-invalid' : '' }}" type="text" name="WeightQuantity" value="{{ old('WeightQuantity') }}"/>
                         <br>
-                        @if ($errors->has('Eenheidgewicht'))
+                        @if ($errors->has('Gewicht'))
                             <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('Eenheidgewicht') }}
+                                {{ $errors->first('Gewicht') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div>
+                        <h5>Eenheid gewicht:</h5>
+                        <input aria-label="Eenheid gewicht" id="WeightMeasureUnitDescription" class="form-control{{ $errors->has('WeightMeasureUnitDescription') ? ' is-invalid' : '' }}" type="text" name="WeightMeasureUnitDescription" value="{{ old('WeightMeasureUnitDescription') }}"/>
+                        <br>
+                        @if ($errors->has('WeightMeasureUnitDescription'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first('WeightMeasureUnitDescription') }}
                             </div>
                         @endif
                     </div>
@@ -432,7 +475,8 @@
                         document.getElementById('GTIN').value = code;
                         setTimeout(function(){ $('#livestream_scanner').modal('hide'); }, 500);
 
-                        window.location = "/overzicht/nieuw/" + code,
+                        //De code hieronder Zorgde er voor dat bij scannen barcore auto maties doorgestuurd wordt.
+                        // window.location = "/overzicht/nieuw/" + code,
 
                         Quagga.stop();
                     }
@@ -447,6 +491,32 @@
 
             document.getElementById("scanclose").addEventListener("click", function () {
                 Quagga.stop();
+            });
+            // javascript toegevoegd voor de image toevoegen knop.
+            var inputs = document.querySelectorAll( '.inputfile' );
+            Array.prototype.forEach.call( inputs, function( input )
+            {
+                var label	 = input.nextElementSibling,
+                    labelVal = label.innerHTML;
+
+                input.addEventListener( 'change', function( e )
+                {
+                    var fileName = '';
+                    if( this.files && this.files.length > 1 ){
+                        fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                    }
+                    else
+                    {
+                        fileName = e.target.value.split( "\\" ).pop();
+                    }
+                    if( fileName ){
+                        console.log(fileName);
+                        label.querySelector( 'span' ).innerHTML = fileName;
+                    }
+                    else{
+                        label.innerHTML = labelVal;
+                    }
+                });
             });
         </script>
 @endsection

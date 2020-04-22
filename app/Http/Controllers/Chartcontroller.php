@@ -19,29 +19,30 @@ class Chartcontroller extends Controller
         $piechartlocatie = DB::table('overzicht')
         ->selectRaw('Locatie, Count(Locatie) AS LocatieAantal')
         ->groupby('Locatie')
-        ->orderby('LocatieAantal', 'DESC')
+        // ->orderby('LocatieAantal', 'DESC')
         ->limit(5)
         ->get();
 
         // dd($piechartlocatie[3]->Locatie);
 
-        return view('home', compact('smallfella', 'barchartproducts', 'piechartlocatie'));
+        return view('onzeresultaten', compact('smallfella', 'barchartproducts', 'piechartlocatie'));
 
     }
 
 
     public function profilepagecharts(){
 
+        //Code klijner gemaakt.
         $currentuser = Auth::user()->rechten;
-        if($currentuser == 'User'){
-            echo"Geen toegang";
-        }
-        elseif($currentuser == ''){
-            echo"Geen toegang";
-        }
-        else{
-            $controltoegang = $currentuser;
-        }
+        $controltoegang = $currentuser;
+        // if($currentuser == 'User'){
+        //     echo"Geen toegang";
+        // }
+        // elseif($currentuser == ''){
+        //     echo"Geen toegang";
+        // }
+        // else{
+        // }
 
         $barchartproducts = Product::count();
 
@@ -52,6 +53,8 @@ class Chartcontroller extends Controller
         ->limit(5)
         ->get();
 
-        return view('profiel', compact('controltoegang', 'barchartproducts', 'piechartlocatie'));
+        $Vestiging = ['Amsterdam','Arnhem','Den Bosch','Den Haag','Echt','Groningen','Helmond','Katwijk','Makkum','Oosterhout','Roosendaal','Tilburg','Utrecht','Zelhem','Zwolle'];
+        $token = null;
+        return view('profiel', compact('controltoegang', 'barchartproducts', 'piechartlocatie', 'token', 'Vestiging'));
     }
 }

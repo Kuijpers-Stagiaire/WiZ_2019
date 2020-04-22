@@ -9,31 +9,34 @@ window.addEventListener('beforeinstallprompt', function(e) {
 
   return false;
 });
+// if(typeof btnAdd === 'undefined'){
+//   var btnAdd = null;
+// }
+// else{
+  btnAdd.addEventListener('click', function() {
+    if(deferredPrompt !== undefined) {
+      // The user has had a postive interaction with our app and Chrome
+      // has tried to prompt previously, so let's show the prompt.
+      deferredPrompt.prompt();
 
-btnAdd.addEventListener('click', function() {
-  if(deferredPrompt !== undefined) {
-    // The user has had a postive interaction with our app and Chrome
-    // has tried to prompt previously, so let's show the prompt.
-    deferredPrompt.prompt();
+      // Follow what the user has done with the prompt.
+      deferredPrompt.userChoice.then(function(choiceResult) {
 
-    // Follow what the user has done with the prompt.
-    deferredPrompt.userChoice.then(function(choiceResult) {
+        console.log(choiceResult.outcome);
 
-      console.log(choiceResult.outcome);
+        if(choiceResult.outcome == 'dismissed') {
+          console.log('User cancelled home screen install');
+        }
+        else {
+          console.log('User added to home screen');
+        }
 
-      if(choiceResult.outcome == 'dismissed') {
-        console.log('User cancelled home screen install');
-      }
-      else {
-        console.log('User added to home screen');
-      }
-
-      // We no longer need the prompt.  Clear it up.
-      deferredPrompt = null;
-    });
-  }
-});
-
+        // We no longer need the prompt.  Clear it up.
+        deferredPrompt = null;
+      });
+    }
+  });
+// };
 $("#pop").on("click", function() {
   $('#imagepreview').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
@@ -58,7 +61,7 @@ function previewFile() {
 }
 
 function previewFileShop() {
-  var preview = document.getElementById("imgShop");
+  var preview = document.getElementById("ProductImage");
   var file    = document.querySelector('input[type=file]').files[0];
   var reader  = new FileReader();
 

@@ -25,7 +25,9 @@ Route::get('/', 'PagesController@index');
 
 Route::get('/register', ['middleware' => 'auth', 'uses' => 'PagesController@register']);
 
-Route::get('/home', ['middleware' => 'auth', 'uses' => 'ChartController@homepagecharts']);
+Route::get('/onze-resultaten', ['middleware' => 'auth', 'uses' => 'Chartcontroller@homepagecharts']);
+
+Route::get('/home', ['middleware' => 'auth', 'uses' => 'HomeController@index']);
 
 Route::get('/overons', ['middleware' => 'auth', 'uses' => 'PagesController@overons']);
 // Route::get('/overons', 'PagesController@overons');
@@ -70,51 +72,81 @@ Route::any ( '/controlpanel', function () {
     $currentuser = Auth::user()->rechten;
     $q = Input::get ( 'q' );
     $users = User::where ( 'voornaam', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->paginate(10);
-
+    //hier wordt de data van productbeheer table opgehaald(kijk controlpanel.blade.php voor de rest van de code rgl. 100)
+    $overzicht = Product::join('users', 'overzicht.user_id', '=', 'users.id')->select('overzicht.ProductImage','overzicht.Product_id', 'users.Voornaam', 'users.Achternaam','overzicht.Description', 'overzicht.Aantal', 'overzicht.Locatie')->get();
     if($currentuser == 'Admin'){
         $accountbeheertoegang = $currentuser;
         if (count ( $users ) > 0){
-            return view ('controlpanel', compact('users', 'q', 'accountbeheertoegang'));
+            return view ('controlpanel', compact('users', 'q', 'accountbeheertoegang', 'overzicht'));
         }
         else {
             $usersearcherror = 'error';
-            return view ('controlpanel', compact('usersearcherror', 'accountbeheertoegang'));
+            return view ('controlpanel', compact('usersearcherror', 'accountbeheertoegang', 'overzicht'));
         }
     }
     else{
-        //als de gebruiker geen admin is wordt 'accountbeheertoegang' niet gezet, nu is alleen productbeer te zien
-        return view ( 'controlpanel', compact('user', 'q'));
+        //als de gebruiker geen admin is wordt 'accountbeheertoegang' niet gezet, nu is alleen productbeheer te zien
+        // return view ( 'controlpanel', compact('user', 'q'));
+        // Aanpassing van code want verkeerde variable werd meegestuurd. $User => $Users.
+        return view ( 'controlpanel', compact('users', 'q', 'overzicht'));
     }
-
-} );
+//Middleware check toegevoegd aan de einde van de code om te controlleren of de gebruiker ingelogd is of niet.
+})->middleware("auth");
 //->orWhere ( 'productcode_fabrikant', 'LIKE', '%' . $q . '%' )->paginate(16);
 
 Route::any ( '/overzicht/products/search', function(){
+    
     $q = Input::get ( 'q' );
     // $searchproducts = Product::where ( 'Productomschrijving', 'LIKE', '%' . $q . '%' )->paginate(16);
-
+    //Aanpassing op 17-03-2020
+    //Toevoeging van extra data. Omdat de database is aangepast moet de nieuwe kolom namen aan roepen.
     $searchproducts = DB::table('overzicht AS o')
-    ->select('o.ID as id', 'o.productcode_fabrikant as productcodefabrikant', 'o.Fabrikaat as fabrikaat', 'o.Productserie as productserie', 'o.Ingangsdatum as ingangsdatum', 'o.Productomschrijving as productomschrijving', 'o.imagelink as imagelink',  'o.Locatie as locatie', 'o.Producttype as producttype', 'o.Aantal as aantal')
-    ->where('o.Productomschrijving', 'LIKE', '%' . $q . '%')
-    ->orwhere('o.productcode_fabrikant', 'LIKE', '%' . $q . '%')
+    ->select(
+        'o.Product_id as id', 
+        'o.Productcode as productcodefabrikant', 
+        'o.ManufacturerName as fabrikaat', 
+        'o.Model as productserie', 
+        'o.created_at as ingangsdatum', 
+        'o.LongDescription as productomschrijving',
+        'o.Description as productnaam', 
+        'o.ProductImage as imagelink',  
+        'o.Locatie as locatie', 
+        'o.Version as producttype', 
+        'o.Aantal as aantal'
+        )->where('o.Description', 'LIKE', '%' . $q . '%')
+    ->orwhere('o.Productcode', 'LIKE', '%' . $q . '%')
     ->simplePaginate(15);
+    
+    $categories = DB::table('productseries')->distinct()->select('productserie_naam', 'productserie_img')->get();
+    //Aanpassing op 17-03-2020
+    //De overzicht tabel heeft geen productserie maar productserie_id.
+    //zo nu haalt die eerst de Productserie_id op en dan gaat die de productserie_naam ophalen.
+    // $combocats = DB::table('overzicht')->distinct()->select('Productserie_id')->get();
+    // $combocats = DB::table('productseries')->distinct()->select('productserie_naam')->where('id', $combocats[0]->Productserie_id)->get();
 
-    // $searchproducts = Product::where('Productomschrijving', 'LIKE', '%' . $q . '%')
-    // ->orwhere('productcode_fabrikant', 'LIKE', '%' . $q . '%')
+    // $searchproducts = DB::table('overzicht AS o')
+    // ->select('o.ID as id', 'o.productcode_fabrikant as productcodefabrikant', 'o.Fabrikaat as fabrikaat', 'o.Productserie as productserie', 'o.Ingangsdatum as ingangsdatum', 'o.Productomschrijving as productomschrijving', 'o.imagelink as imagelink',  'o.Locatie as locatie', 'o.Producttype as producttype', 'o.Aantal as aantal')
+    // ->where('o.Productomschrijving', 'LIKE', '%' . $q . '%')
+    // ->orwhere('o.productcode_fabrikant', 'LIKE', '%' . $q . '%')
     // ->simplePaginate(15);
 
-    $combocats = DB::table('overzicht')->distinct()->select('Productserie')->get();
+    // // $searchproducts = Product::where('Productomschrijving', 'LIKE', '%' . $q . '%')
+    // // ->orwhere('productcode_fabrikant', 'LIKE', '%' . $q . '%')
+    // // ->simplePaginate(15);
 
-    
+    // $combocats = DB::table('overzicht')->distinct()->select('Productserie')->get();
     if(count($searchproducts) > 0)
     {
-        return view ( 'products.allproducts', compact('searchproducts', 'q', 'combocats'));
+        return view ( 'Products.allproducts', compact('searchproducts', 'q', 'categories'));
+        // return view ( 'Products.allproducts', compact('searchproducts', 'q', 'combocats'));
     }
     else
     {
-        $searcherror = 'Geen resultaten.';
-        return view ( 'products.allproducts', compact('searcherror', 'combocats'));
+        $searcherror = 'Product niet gevonden.';
+        return view ( 'Products.allproducts', compact('searcherror', 'categories'));
+        // return view ( 'Products.allproducts', compact('searcherror', 'combocats'));
     }
+//Middleware check toegevoegd aan de einde van de code om te controlleren of de gebruiker ingelogd is of niet.
 });
 
 Route::get('/profile', 'UsersController@profilepic');
@@ -152,6 +184,7 @@ Route::patch('/overzicht/{product}/update', ['middleware' => 'auth', 'uses' => '
 // Shopping cart
 
 // Add item
+// Aanpassing gemaakt zodat de route nu de $request ondersteund.
 // Route::get('/overzicht/addItem/{product}/{aantal}', 'CartController@store');
 Route::get('/overzicht/addItem/{product}/', 'CartController@store');
 
@@ -165,11 +198,12 @@ Route::get('/overzicht/bestellijst/destroy/{bestelling}/{product}/{aantal}', 'Ca
 // Edit item
 Route::get('/overzicht/bestellijst/{bestelling}/{aantal}', ['middleware' => 'auth', 'uses' => 'CartController@updateCustom']);
 
-
-
-
-
-
-
 //shop product delete
 Route::delete('/overzicht/productdetail/destroy/{product}', ['middleware' => 'auth', 'uses' => 'ProductsController@destroy']);
+
+//route om naar changepassword te gaan
+Route::post('/changePassword','UpdateGegevensController@changePassword')->name('changePassword');
+//route om naar de admin reset wachtwoord te gaan
+Route::post('/adminchangePassword','UpdateGegevensController@AdminChangePassword');
+//route om de gegevens van de ingelogde gebruiker aan te passen
+Route::post('/profiel/updategebruiker', 'UpdateGegevensController@Update');

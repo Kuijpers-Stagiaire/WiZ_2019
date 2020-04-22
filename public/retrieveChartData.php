@@ -13,8 +13,9 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-
-$sql = "SELECT `aantal`, `Ingangsdatum` FROM overzicht WHERE `product_toevoeger_vestiging` = '$city'";
+//Aanpassing gemaakt zodat de nieuwe database tabel gebruikt kan worden voor de grafiek op de home pagina
+// $sql = "SELECT `aantal`, `Ingangsdatum` FROM overzicht WHERE `product_toevoeger_vestiging` = '$city'";
+$sql = "SELECT overzicht.Aantal, overzicht.Created_at FROM `overzicht` INNER JOIN users ON overzicht.User_id = users.id WHERE users.vestiging = '$city'";
 
 
 $result = $conn->query($sql);
@@ -42,7 +43,7 @@ if ($result->num_rows > 0) {
 
     	$i++;
 
-    	$i = substr($row["Ingangsdatum"], 5, 10) . ", ";
+    	$i = substr($row["Created_at"], 5, 10) . ", ";
 
 		if ($i >= "01-01" && $i <= "01-31") {
 			$jan++;

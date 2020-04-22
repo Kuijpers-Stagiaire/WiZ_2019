@@ -34,7 +34,9 @@
   <button type="button" class="close" data-dismiss="alert">×</button>	
     <ul>
         @foreach ($errors->all() as $error)
-            <div class="Err">{{ $error }}</div>
+            {{-- nieuwe melding tekst --}}
+            {{-- <div class="Err">{{ $error }}</div> --}}
+            <div class="Err">Foutieve waarden ingevuld</div>
         @endforeach
     </ul>
 </div>

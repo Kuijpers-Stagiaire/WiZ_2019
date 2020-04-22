@@ -114,47 +114,44 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
                     <td class=""><input class="custom-modal-form-data-design custom-modal-id"></td>
                   </tr>
                 </thead>
+                {{-- Veldnamen aangepast --}}
                   <tr>
                     <td>Merk:</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-merk" required="required" name="merk"></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-merk" required="required" ></td>
                   </tr>
                   <tr>
                     <td>Productnaam:</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-productnaam" name="productnaam"required="required" ></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-productnaam" required="required" ></td>
                   </tr>
                   <tr>
                     <td>Productomschrijving</td>
-                    <td><textarea class="custom-modal-form-data-design custom-modal-productomschrijving" name="productomschrijving" style="min-height:60px;max-height:80px;"></textarea></td>
+                    <td><textarea class="custom-modal-form-data-design custom-modal-productomschrijving"  style="min-height:60px;max-height:80px;"></textarea></td>
                   </tr>
                   <tr>
                     <td>Serie</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-serie" name="serie"></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-serie" ></td>
                   </tr>
                   <tr>
                     <td>Model</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-type" name="type" required="required" ></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-type"  required="required" ></td>
                   </tr>
                   <tr>
                     <td>Productcode</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-productcode" name="productcode" ></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-productcode"  ></td>
                   </tr>
                   <tr>
                     <td>GLN</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-gln" name="gln" required="required" ></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-gln"  required="required" ></td>
                   </tr>
                   <tr>
                     <td>GTIN</td>
-                    <td><input class="custom-modal-form-data-design custom-modal-gtin" name="gtin" required="required" ></td>
+                    <td><input class="custom-modal-form-data-design custom-modal-gtin"  required="required" ></td>
                   </tr>
                   <tr>
                     <td>Deeplink</td>
-                    <td><a class="custom-modal-deeplink2" href="" target="_blank"><input class="custom-modal-form-data-design custom-modal-deeplink" name="deeplink" style="color : blue !important;cursor:pointer;" required="required" readonly></a></td>
-                    <input type="hidden" class="hidden-image" name="image" value="">
-                    <input type="hidden" class="hidden-aantal" name="aantal" value="">
-                    <input type="hidden" class="hidden-gewicht-eenheid" name="gewicht-eenheid" value="">
-                    <input type="hidden" class="hidden-gewicht" name="gewicht" value="">
-                    <input type="hidden" class="hidden-productnaam-volledig" name="productnaam-volledig" value="">
-                    <input type="hidden" class="hidden-producttype" name="producttype" value="">
+                    <td><a class="custom-modal-deeplink2" href="" target="_blank"><input class="custom-modal-form-data-design custom-modal-deeplink" style="color : blue !important;cursor:pointer;" required="required" readonly></a></td>
+                    <input hidden type="tekst" class="hidden-image" name="Image" value="">
+                    <div hidden id="inputData"></div>
                   </tr>
                 </tbody>
               </table>
@@ -166,9 +163,9 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
           <div class="custom-modal-footer-section">
             <input type="number" class="custom-aantal-input" name="aantal" form="form-barcode" placeholder="Aantal" required="required" min="0" oninput="validity.valid||(value='');" step="1">
 
-              <select class="custom-aantal-input custom-modal-category" name="custom-modal-category" form="form-barcode">
+              <select class="custom-aantal-input custom-modal-category" name="Productserie_id" form="form-barcode">
                 @foreach ($categories as $category)
-                <option value="{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                <option value="{{ $category->id }}">{{ $category->productserie_naam }}</option>
                 @endforeach
               </select>
           </div>
@@ -249,6 +246,8 @@ $(document).ready(function () {
       onError: function(string, qty) {
       }
     });
+    //Javascript aangepast zodat de data van 2ba nu geladen gaat worden in zijn voledige in hidden inputs op de pagina.
+    var data = [];
 
     // Stop de gescande waarde van de barcodescanner in de functieparameter, om te gebruiken bij het ophalen van een product.
     function retrieveData(barcode){
@@ -256,8 +255,10 @@ $(document).ready(function () {
       $token = $(".hidden-token").text();
 
       // Ajax call naar een lokaal php-script genaamd: retrieveProductInfo.php(script wat productinfo ophaalt).
+      var getUrl = window.location;
+
       $.ajax({
-              url: "http://127.0.0.1:8000/retrieveProductInfo.php",
+              url: `http://` + getUrl.host + `/retrieveProductInfo.php`,
               contentType: "application/json",
               dataType: 'json',
               data: {
@@ -273,33 +274,48 @@ $(document).ready(function () {
                     $(".alert-scan").show().delay(3000).fadeOut();
                   }else{
                   var result = JSON.parse(result);
-                  console.log(result);
-
+                  // All_Data = result;
+                    
+                    var Keys = Object.keys(result);
+                    // for(i = 0; i <= Keys.length; i++)
+                    // {
+                    //   document.getElementById('inputData').innerHTML += `<input type="tekst" name="`+ Keys[i] +`" value="`+ result.[] +`">`
+                    // }
+                      Keys.forEach(ProductData);
+                      //DONT FORGET TO CLEAR DATA WHEN SCANNING MULITYPUL ITEM!!!!!!
+                      function ProductData(item, index){
+                        document.getElementById('inputData').innerHTML += `<input type="tekst" name="`+ item +`" value="`+ result[item] +`">`
+                      }
+                      // data.push([i, result [i]]);
+                      
+                    $("#arraydata").eq(0).val(data);
                   // laat de waarden van 2ba zien op de site.
-                  $(".custom-modal-id").val(result.Id);
-                  $(".custom-modal-merk").val(result.ManufacturerName);
-                  $(".custom-modal-productnaam").val(result.ProductClassDescription);
-                  $(".custom-modal-productomschrijving").val(result.LongDescription);
-                  $(".custom-modal-productcode").val(result.Productcode);
-                  $(".custom-modal-gln").val(result.ManufacturerGLN);
-                  $(".custom-modal-gtin").val(result.GTIN);
-                  $(".custom-modal-serie").val(result.Model);
-                  $(".custom-modal-type").val(result.Version);
+                    $(".custom-modal-id").val(result.Id);
+                    $(".custom-modal-merk").val(result.ManufacturerName);
+                    $(".custom-modal-productnaam").val(result.ProductClassDescription);
+                    $(".custom-modal-productomschrijving").val(result.LongDescription);
+                    $(".custom-modal-productcode").val(result.Productcode);
+                    $(".custom-modal-gln").val(result.ManufacturerGLN);
+                    $(".custom-modal-gtin").val(result.GTIN);
+                    $(".custom-modal-serie").val(result.Model);
+                    $(".custom-modal-type").val(result.Version);
 
-                  // laat het merk zien als een hyperlink om naar website fabrikant te gaan
-                  $(".custom-modal-deeplink").val(result.ManufacturerName);
-                  $(".custom-modal-deeplink2").attr("href", result.Deeplink);
-                  // link afbeelding van 2ba
-                  $(".custom-modal-img").attr("src", "https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
+                    // laat het merk zien als een hyperlink om naar website fabrikant te gaan
+                    $(".custom-modal-deeplink").val(result.ManufacturerName);
+                    $(".custom-modal-deeplink2").attr("href", result.Deeplink);
+                    // link afbeelding van 2ba
+                    $(".custom-modal-img").attr("src", "https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
 
-                  // waardens niet worden laten zien op site wel in de database opgeslagen.
-                  $(".hidden-gewicht-eenheid").val(result.WeightMeasureUnitDescription);
-                  $(".hidden-gewicht").val(result.WeightQuantity);
-                  $(".hidden-productnaam-volledig").val(result.Description);
-                  $(".hidden-producttype").val(result.ProductClassDescription);
-                  
-                  //link afbeelding, link wordt niet laten zien
-                  $(".hidden-image").val("https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
+                    // waardens niet worden laten zien op site wel in de database opgeslagen.
+                    $(".hidden-gewicht-eenheid").val(result.WeightMeasureUnitDescription);
+                    $(".hidden-gewicht").val(result.WeightQuantity);
+                    $(".hidden-productnaam-volledig").val(result.Description);
+                    $(".hidden-producttype").val(result.ProductClassDescription);
+                    
+                    //link afbeelding, link wordt niet laten zien
+                    $(".hidden-image").val("https://api.2ba.nl/1/json/Thumbnail/Product?gln="+ result.ManufacturerGLN +"&productcode="+ result.Productcode +"");
+
+                    $('hidden-arraydata').val(result);
                   }
                   
               }
