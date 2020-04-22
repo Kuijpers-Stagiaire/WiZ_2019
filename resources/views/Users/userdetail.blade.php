@@ -15,7 +15,9 @@
                 <i aria-label="Gebruiker verwijderen" class="tablinks far fa-trash-alt usericons userdel" onclick="openCity(event, 'userdelete')"></i>
                 <i class="tablinks fas fa-info usericons" onclick="openCity(event, 'userinfo')" id="defaultOpen" style="display: none;"></i>
             </div>
-            <div class="col"><img aria-label="Avatar" class="profile-img-users mx-auto d-block" src="/storage/avatars/{{ $user->avatar }}"></div>
+            {{--De code hieronder is er voor om als de gebruiker geen profiel foto heeft en dan een default.jpg in te laden--}}
+            <div class="col"><img aria-label="Avatar" class="profile-img-users mx-auto d-block" src="/storage/avatars/{{ $user->avatar }}" onerror=this.src="{{ url('/img/default.jpg') }}"></div>
+            {{-- <div class="col"><img aria-label="Avatar" class="profile-img-users mx-auto d-block" src="/storage/avatars/{{ $user->avatar }}"></div> --}}
             <div class="col"></div>
         </div>
         <hr id="userdetailline">

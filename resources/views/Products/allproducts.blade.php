@@ -49,7 +49,9 @@
                             <div class="col colcat">
                                 <div class="card PCcard">
                                     <img aria-label="Product foto" class="card-img-left PCimg img-fluid" src="{{$prodscat->imagelink}}" alt="Card image cap" onerror=this.src="{{ url('/img/img-placeholder.png') }}" width="330px" height="250px">
-                                    <a href="/overzicht/productdetail/{{$prodscat->productcodefabrikant}}"><h5 class="card-title">{{$prodscat->productomschrijving}}</h5></a>
+                                    {{-- Deze code hieronder is verander zodat er bij de veriable $prodscat->productcodefabrikant naar $prodscat->id nu staat --}}
+                                    <a aria-label="{{$prodscat->id}}" href="/overzicht/productdetail/{{$prodscat->id}}"><h5 class="card-title">{{$prodscat->productnaam}}</h5></a>
+                                    {{-- <a aria-label="{{$prodscat->productomschrijving}}" href="/overzicht/productdetail/{{$prodscat->productcodefabrikant}}"><h5 class="card-title">{{$prodscat->productomschrijving}}</h5></a> --}}
                                     <div class="card-body ulinfo"> 
                                         <ul class="prodvraag">
                                             <li>Locatie:</li>
@@ -89,8 +91,12 @@
                         
                             <div class="col colcat">
                                 <div class="card PCcard ">
-                                    <img class="card-img-left PCimg img-fluid" src="{{$searchprod->imagelink}}" alt="Card image cap" width="330px" height="250px">
-                                    <a aria-label="{{$searchprod->productomschrijving}}" href="/overzicht/productdetail/{{$searchprod->productcodefabrikant}}"><h5 class="card-title">{{$searchprod->productomschrijving}}</h5></a>
+                                    {{-- De code hier onder zorgt er voor dat als er een product foto ontbreek dat er daan een placeholder.png laat zien --}}
+                                    <img class="card-img-left PCimg img-fluid" src="{{$searchprod->imagelink}}" alt="Card image cap" onerror=this.src="{{ url('/img/img-placeholder.png') }}" width="330px" height="250px">
+                                    {{-- <img class="card-img-left PCimg img-fluid" src="{{$searchprod->imagelink}}" alt="Card image cap" width="330px" height="250px"> --}}
+                                    {{-- Deze code hieronder is verander zodat er bij de veriable $searchprod->productcodefabrikant naar $searchprod->id nu staat --}}
+                                    <a aria-label="{{$searchprod->id}}" href="/overzicht/productdetail/{{$searchprod->id}}"><h5 class="card-title">{{$searchprod->productnaam}}</h5></a>
+                                    {{-- <a aria-label="{{$searchprod->productomschrijving}}" href="/overzicht/productdetail/{{$searchprod->productcodefabrikant}}"><h5 class="card-title">{{$searchprod->productomschrijving}}</h5></a> --}}
                                     <div class="card-body ulinfo"> 
                                         <ul class="prodvraag">
                                             <li>Locatie:</li>
@@ -124,7 +130,7 @@
                 </div>
                 <div class="row prodnotfound">
                     <div class="col"></div>
-                    <div class="col-6 searcherrorprod"> <h3>Product niet gevonden</h3></div>
+                    <div class="col-6 searcherrorprod"> <h3>{{$searcherror}}</h3></div>
                     <div class="col"></div>
                 </div>
                 <h3></h3>

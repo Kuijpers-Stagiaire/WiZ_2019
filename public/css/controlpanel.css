@@ -359,3 +359,38 @@ form.Sbar::after {
     border-color: #2f2e87;
     color: #ffffff;
 }
+
+.ellipsis {
+    text-overflow: ellipsis;
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+  }
+@media screen and (max-width: 570px) {
+    .hidetiny {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 393px) {
+    .searchbaricon {
+    margin-right: 125px !important;    
+    }
+}
+
+@media screen and (max-width: 547px) {
+    .searchbaricon {
+        margin-right: 125px !important;    
+    }
+}
+
+@media screen and (max-width: 571px) {
+    .searchbaricon {
+        margin-right: 125px !important;    
+    }
+}
+@media screen and (max-width: 705px) {
+    .searchbaricon {
+        margin-right: 125px !important;    
+    }
+}

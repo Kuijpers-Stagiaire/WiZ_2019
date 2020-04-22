@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'wizkuijpers@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'jputten@kuijpers.com'),
         'name' => env('MAIL_FROM_NAME', 'WiZ'),
     ],
     
@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+    'encryption' => env('MAIL_ENCRYPTION', 'tsl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,9 +85,9 @@ return [
     |
     */
 
-    'username' => 'wizkuijpers@gmail.com',
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => 'Wiz@2019',
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------

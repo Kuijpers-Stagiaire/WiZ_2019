@@ -13,20 +13,20 @@ class CreateProductimagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('productimages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('prt', 3);
-            $table->char('locatie', 100);
-            $table->integer('productcode');
-            $table->char('afkorting', 3);
-            $table->char('url_www', 3);
-            $table->char('imagelink', 92);
-            $table->longText('productomschrijving');
-            $table->char('land', 2);
-            $table->char('size_nmmr', 2);
-            $table->char('size', 66);
-            $table->timestamps();
-        });
+        // Schema::create('productimages', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->char('prt', 3);
+        //     $table->char('locatie', 100);
+        //     $table->integer('productcode');
+        //     $table->char('afkorting', 3);
+        //     $table->char('url_www', 3);
+        //     $table->char('imagelink', 92);
+        //     $table->longText('productomschrijving');
+        //     $table->char('land', 2);
+        //     $table->char('size_nmmr', 2);
+        //     $table->char('size', 66);
+        //     $table->timestamps();
+        // });
     }
 
     /**

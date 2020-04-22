@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Deze gegevens zijn niet bij ons bekent',
+    'failed' => 'Uw wachtwoord of email klopt niet.',
     'throttle' => 'Te veel login pogingen, probeer het later opnieuw.',
 
 ];

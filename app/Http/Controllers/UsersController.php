@@ -100,8 +100,9 @@ class UsersController extends Controller
 
     public function profilepic()
     {
+        $token = null;
         $user = Auth::user();
-        return view('profile',compact('user',$user));
+        return view('profile')->with(['token' => $token, 'user' => $user]);
     }
 
     public function update_avatar(Request $request){

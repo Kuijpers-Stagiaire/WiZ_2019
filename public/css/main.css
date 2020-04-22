@@ -1,5 +1,7 @@
 /* Import font Open Sans */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://db.onlinewebfonts.com/c/0801c08e5412f54e4b4e9ad146d83a12?family=Ink+Free);
+@font-face {font-family: "Ink Free"; src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot"); src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff") format("woff"), url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.svg#Ink Free") format("svg"); }
 
 body {    
     
@@ -369,5 +371,198 @@ ul {
         width: 60%;
         float: right;
     }
-
 }
+
+.mynavi{
+    background-color: #2f2e87 !important;
+}
+
+.mynavi2{
+    background-color: #f28e0b;
+}
+
+.navibutton{
+    background-color: #f28e0b;
+}
+
+ .Dropdown-Nav-Container{
+     margin-right: 70px;
+ }
+
+ .carousel-item img{
+    width: 900px !important;
+    height: 400px;
+    margin: 0 auto; 
+}
+
+.iconstyling{
+    background-color: #f28e0b;
+    height: 60px;
+    width: 60px;
+    border-radius: 60%;
+}
+
+.content-container{
+    margin-top: 40px;
+}
+
+.text-points{
+    margin-left: 10px;
+}
+
+.WIZ{
+    color: #2f2e87;
+    font-size: large;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.vraag{
+    color: #f28e0b;
+    font-size: 60px;
+    font-family: "Ink Free";
+    margin-bottom: 70px;
+}    
+
+@media only screen and (max-width: 770px) {
+    .vraag{
+        margin-bottom: 140px;
+    }
+  }
+@media only screen and (max-width: 575px) {
+    .vraag{
+        margin-bottom: 20px;
+    }
+}
+
+
+.ja-nee{
+    color:white;
+    font-size: large;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 100px;
+}
+ .ja{
+     right: -240px !important;
+ }
+
+ @media only screen and (max-width: 991px) {
+ .ja{
+     right: -180px !important;
+ }
+ .nee{
+    left: 200px !important;
+}
+}
+
+@media only screen and (max-width: 575px) {
+    .ja{
+        top: 450px !important;
+        right:300px !important;
+    }
+    .nee{
+        left: 300px !important;
+    }
+   }
+
+   @media only screen and (max-width: 518px) {
+    .ja{
+        top: 450px !important;
+        right:250px !important;
+    }
+    .nee{
+        left: 300px !important;
+    }
+   }
+
+   @media only screen and (max-width: 320px) {
+    .sticky{
+        width: 100px !important;
+        font-size: 9px;
+    }
+    .ja{
+        top: 600px !important;
+        left: 20px !important;
+    }
+    .nee{
+        left: 200px !important;
+    }
+   }
+
+   @media only screen and (max-width: 411px) {
+    .sticky{
+        width: 100px !important;
+        font-size: 9px;
+    }
+    .ja{
+        top: 600px !important;
+        left: 20px !important;
+    }
+    .nee{
+        left: 200px !important;
+    }
+   }
+
+   @media only screen and (max-width: 414px) {
+    .sticky{
+        width: 100px !important;
+        font-size: 9px;
+    }
+    .ja{
+        top: 600px !important;
+        left: 20px !important;
+    }
+    .nee{
+        left: 200px !important;
+    }
+   }
+
+   /* @media only screen and (max-width: 768px) {
+    .sticky{
+        width: 150px !important;
+        font-size: 11px;
+    }
+    .ja{
+        top: 200px !important;
+        left: 350px !important;
+    }
+    .nee{
+        top: 200px !important;
+        left: 200px !important;
+    }
+   } */
+
+.sticky {
+	position: absolute;
+	right: 0;
+	z-index: 100;
+	transform: rotate(5deg);
+	width: 270px;
+	min-height: 150px;
+	margin: -20px 10px 10px;
+	padding: 10px;
+	font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive;
+	background: #f28e0b;
+	box-shadow: -2px 2px 2px rgba(0,0,0,0.3);
+  }
+  .sticky:before, .sticky:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 0;
+	right: 0;
+  }
+  .sticky:before {
+	border-top: solid 8px #fff;
+	border-right: solid 8px #fff;
+	border-left: solid 8px transparent;
+	border-bottom: solid 8px transparent;
+  }
+  .sticky:after {
+	border-bottom: solid 8px #2f2e87;
+	border-left: solid 8px #2f2e87;
+	border-right: solid 8px transparent;
+	border-top: solid 8px transparent;
+  }
+

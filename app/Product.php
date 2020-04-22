@@ -18,7 +18,8 @@ class Product extends Model
         return $this->hasone(Pimage::class);
     }
 
-    public $timestamps = false;
+    //Aangepast dat de nieuwe overzicht table timestamps kan gebruiken.
+    public $timestamps = true;
     protected $table = 'overzicht';
 
     /**

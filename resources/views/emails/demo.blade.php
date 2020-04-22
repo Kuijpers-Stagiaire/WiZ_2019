@@ -1,7 +1,7 @@
 <div style="width:650px;  padding : 10px; border-radius: 6px;">
 	<div style="display: flex; justify-content: space-between; align-items: center;">
 		<div>
-			<p>Auth: {{ $demo->auth }}</p>
+			{{-- <p>Auth: {{ $demo->auth }}</p> --}}
 			<p>Beste {{ $demo->receiver }},</p>
 			<p>{{ $demo->message }}</p>
 		</div>
@@ -35,7 +35,7 @@
 			@php echo $count; @endphp
 		</td>
 		<td style=" width : 150px; text-align: center;">
-			<img src="{{ $demo->image_array[$count - 1] }}" width="100" height="100">
+			<img src="{{asset($demo->image_array[$count - 1])}}" width="100" height="100">
 		</td>
 		<td style=" width : 150px; text-align: center;">
 			{{ $demo->name_array[$count - 1] }}

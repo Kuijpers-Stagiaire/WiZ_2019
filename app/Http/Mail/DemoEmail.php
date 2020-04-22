@@ -35,7 +35,7 @@ class DemoEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(\Auth::user()->email)
+        return $this->from('Jputten@kuijpers.com')
                     ->view('emails.demo')
                     ->text('emails.demo_plain')
                     ->with(

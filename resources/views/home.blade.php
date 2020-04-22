@@ -1,115 +1,119 @@
 @extends('layouts.layout')
-@section('pageSpecificCSS')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/homegraphs.css') }}" />
-@endsection
 @section('titlePage')
-    <title>WiZ Kuijpers</title>
+<title>WiZ Kuijpers - Home</title>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+<link href="//db.onlinewebfonts.com/c/0801c08e5412f54e4b4e9ad146d83a12?family=Ink+Free" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
-    
-
-
-    <div class="home-container">
-        <div class="home-section-left">
-           <p class="title">WiZ</p>
-           <p class="text">WiZ, of weggooien is zonde, is ontwikkeld door stagiaires van Kuijpers. WiZ is ontwikkeld om het onnodig weggooien van courante producten te verminderen.</p>
-            <div class="title stadsnaam" hidden="hidden"></div>
-<!--             <canvas id="doughnut-chart" width="600" height="350"></canvas> -->
-            <canvas id="line-chart" width="600" height="350"></canvas>
-
-        </div>
-
-        <div class="home-section-right">
-            <img src="/img/clickable.png" alt="Kuijpers locaties"  class="locatie">
-            <div class="right">
-                <li class="grid-button" id="makkum">Makkum</li>
-                <li class="grid-button" id="groningen">Groningen</li>
-                <li class="grid-button" id="katwijk">Katwijk</li>
-                <li class="grid-button" id="amsterdam">Amsterdam</li>
-                <li class="grid-button" id="zwolle">Zwolle</li>
-                <li class="grid-button" id="den-haag">Den-Haag</li>
-                <li class="grid-button" id="utrecht">Utrecht</li>
-                <li class="grid-button" id="roosendaal">Roosendaal</li>
-                <li class="grid-button" id="oosterhout">Oosterhout</li>
-                <li class="grid-button" id="tilburg">Tilburg</li>
-                <li class="grid-button" id="den-bosch">Den-Bosch</li>
-                <li class="grid-button" id="arnhem">Arnhem</li>
-                <li class="grid-button" id="helmond">Helmond</li>
-                <li class="grid-button" id="zelhem">Zelhem</li>
-                <li class="grid-button" id="echt">Echt</li>
-                
-                <!-- <div class="grid">
-                    <div class="grids grid-1"></div>
-                    <div class="grids grid-2"></div>
-                    <div class="grids grid-3">
-                        <div class="grid-button" id="makkum"></div>
-                    </div>
-                    <div class="grids grid-4">
-                        <div class="grid-button" id="groningen"></div>
-                    </div>
-                    <div class="grids grid-5"></div>
-                    <div class="grids grid-6">
-                        <div class="grid-button" id="katwijk"></div>
-                        <div class="grid-button" id="amsterdam"></div>
-                    </div>
-                    <div class="grids grid-7">
-                        <div class="grid-button" id="zwolle"></div>
-                    </div>
-                    <div class="grids grid-8"></div>
-                    <div class="grids grid-9"></div>
-                    <div class="grids grid-10">
-                        <div class="grid-button" id="den-haag"></div>
-                        <div class="grid-button" id="utrecht"></div>
-                        <div class="grid-button" id="roosendaal"></div>
-                        <div class="grid-button" id="oosterhout"></div>
-                        <div class="grid-button" id="tilburg"></div>
-                    </div>
-                    <div class="grids grid-11">
-                        <div class="grid-button" id="den-bosch"></div>
-                        <div class="grid-button" id="arnhem"></div>
-                        <div class="grid-button" id="helmond"></div>
-                    </div>
-                    <div class="grids grid-12">
-                        <div class="grid-button" id="zelhem"></div>
-                    </div>
-                    <div class="grids grid-13"></div>
-                    <div class="grids grid-14"></div>
-                    <div class="grids grid-15">
-                        <div class="grid-button" id="echt"></div>
-                    </div>
-                    <div class="grids grid-16"></div>
-                </div> -->
-            </div>
-        </div>
-    </div>
-
-
-
-@section('PWA')
-    <div>
-        <img id="btnAdd" alt="PWA popup" src="{{ asset('img/pwa-icon.png') }}">
-        <div class="home-section-right-button groningen"></div>
-        <div class="home-section-right-button makkum"></div>
-        <div class="home-section-right-button amsterdam"></div>
-        <div class="home-section-right-button katwijk"></div>
-        <div class="home-section-right-button utrecht"></div>
-        <div class="home-section-right-button den-haag"></div>
-        <div class="home-section-right-button oosterhout"></div>
-        <div class="home-section-right-button tilburg"></div>
-        <div class="home-section-right-button roosendaal"></div>
-        <div class="home-section-right-button den-bosch"></div>
-        <div class="home-section-right-button helmond"></div>
-        <div class="home-section-right-button echt"></div>
-        <div class="home-section-right-button arnhem"></div>
-        <div class="home-section-right-button zelhem"></div>
-        <div class="home-section-right-button zwolle"></div>
-    <div>
-@endsection
-@section('charts')
-    <script src="{{ asset('js/raphael-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-3.3.1.max.js') }}"></script>
-    <script src="{{ asset('js/justgage.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    <script src="{{ asset('js/Charts.js') }}"></script>
-@endsection
+<div class="home-container">
+<!--Carousel Wrapper-->
+<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+	<!--Indicators-->
+	<ol class="carousel-indicators">
+		<li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+		<li data-target="#carousel-example-2" data-slide-to="1"></li>
+		<li data-target="#carousel-example-2" data-slide-to="2"></li>
+	</ol>
+	<!--/.Indicators-->
+	<!--Slides-->
+	<div class="carousel-inner" role="listbox">
+		<div class="carousel-item active">
+			<div class="view">
+				<img class="d-block w-100" src="{{url('/img/gebouw.jpg')}}"
+					alt="First slide">
+				<div class="mask rgba-black-light"></div>
+			</div>
+			{{-- 
+			<div class="carousel-caption">
+				<h3 class="h3-responsive">Light mask</h3>
+				<p>First text</p>
+			</div>
+			--}}
+		</div>
+		<div class="carousel-item">
+			<!--Mask color-->
+			<div class="view">
+				<img class="d-block w-100" src="{{url('/img/kuijperskantoor.jpg')}}"
+					alt="Second slide">
+				<div class="mask rgba-black-strong"></div>
+			</div>
+			{{-- 
+			<div class="carousel-caption">
+				<h3 class="h3-responsive">Strong mask</h3>
+				<p>Secondary text</p>
+			</div>
+			--}}
+		</div>
+		<div class="carousel-item">
+			<!--Mask color-->
+			<div class="view">
+				<img class="d-block w-100" src="{{url('/img/KuijpersLogoGebouw.jpg')}}"
+					alt="Third slide">
+				<div class="mask rgba-black-slight"></div>
+			</div>
+			{{-- 
+			<div class="carousel-caption">
+				<h3 class="h3-responsive helpjeookmee">Help jij ook mee?</h3>
+				<p>Third text</p>
+			</div>
+			--}}
+		</div>
+	</div>
+	<!--/.Slides-->
+	<!--Controls-->
+	<a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+	<span class="carousel-control-prev-icon iconstyling" aria-hidden="true"></span>
+	<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+	<span class="carousel-control-next-icon iconstyling" aria-hidden="true"></span>
+	<span class="sr-only">Next</span>
+	</a>
+	<!--/.Controls-->
+</div>
+<div class="container content-container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="text WIZ">
+				<h4>WIZ | Weggooien is Zonde</h4>
+				<ul>
+					<li class="text-points">Beter inzicht in niet-courante artikelen en voorraad</li>
+					<li class="text-points">Minder weggooien, meer hergebruik</li>
+					<li class="text-points">Hoger resultaat Recycling, MVO en Circulariteit</li>
+					<li class="text-points">Beter voor je leefomgeving dus beter voor jou</li>
+				</ul>
+			</div>
+			<br>
+			<div class="text ja-nee">
+				<div class="sticky ja">
+					<h4>Ja</h4>
+					<ul>
+						<li class="text-points">Meer Inzicht</li>
+						<li class="text-points">Hoger Resultaat</li>
+						<li class="text-points">Beter Leefomgeving</li>
+					</ul>
+				</div>
+			</div>
+			<br>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="text">
+				<p class="vraag">Help jij ook mee?</p>
+			</div>
+			<br>
+			<div class="text ja-nee">
+				<div class="sticky nee">
+					<h4>Nee</h4>
+					<ul>
+						<li class="text-points">Onnodig Weggooien</li>
+						<li class="text-points">Overproductie</li>
+						<li class="text-points">Overbelasting Leefomgeving</li>
+					</ul>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+<!--/.Carousel Wrapper-->
 @endsection

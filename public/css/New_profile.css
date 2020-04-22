@@ -1,0 +1,254 @@
+html, body {
+    height: 60%;
+    margin: 0;
+}
+  
+  /* Pattern styles */
+  /* .container {
+    display: table;
+    width: 100%;
+    height: 100%;
+  } */
+  
+  .left-half {
+    background-color: #ff9e2c;
+    position: absolute;
+    left: 0px;
+    width: 50%;
+    height: 100%;
+  }
+  
+  .right-half {
+    background-color: #b6701e;
+    position: absolute;
+    right: 0px;
+    width: 50%;
+    height: 100%;
+  }
+
+.Container{
+    height: 100%;
+    width: 100%;
+}
+.Container::after{
+    clear: both;
+}
+
+.leftColom{
+    display: inline-block;
+    float:left;
+    width: 25%;
+    height: 100%;
+    border-top:5px solid white; position:relative;
+    background-color: #f28e0b;
+}
+.RightColom{
+    display: inline-block;
+    float:left;
+    border-top:5px solid white; position:relative;
+    width: 75%;
+    height: 100%;
+    background: white;
+    overflow: auto;
+}
+.tekst-underimage{
+    color: white;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.footer-distributed{
+    margin-top: 0px;
+}
+.profile-img {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    position: relative;
+}
+
+.editProfileImg {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    top: 25px;
+    position: relative;
+}
+
+.overlay-profile {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.editProfileImg:hover .overlay-profile {
+    opacity: 0.5;
+}
+
+.icon-editProfile {
+    color: white;
+    /* font-size: 75px; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.fa-camera:hover {
+    color: #eee !important;
+}
+
+.fa-camera {
+    font-size: 75px;
+}
+
+.img-preview {
+    height: 200px;
+    width: 200px; 
+    border-radius: 50%;
+}
+/* Style tab links */
+.tablink {
+    background-color: #f1f1f1;
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 50%;
+}
+
+.tablink:hover {
+    background-color: rgb(178, 178, 178);
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: black;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+}
+.user-info {
+    width: 100%;
+}
+.user-info-inner{
+    width: 50%;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    font-weight: bold;
+}
+.user-info-splitter{
+    margin-bottom: 10px;
+}
+.user-info-splitter-tekst{
+    font-weight: normal;
+}
+@media screen and (max-width: 1250px) {
+    .user-info-inner{
+        width: 50%;
+        display: inline-block;
+        float: left;
+        text-align: center;
+        color: black;
+        font-size: 30px;
+        font-weight: bold;
+    }
+}
+@media screen and (max-width: 1050px) {
+    .profile-img {
+        border-radius: 50%;
+        height: 170px;
+        width: 170px;
+        position: relative;
+    }
+    
+    .editProfileImg {
+        border-radius: 50%;
+        height: 170px;
+        width: 170px;
+        top: 25px;
+        position: relative;
+    }
+    .user-info-inner{
+        width: 50%;
+        display: inline-block;
+        float: left;
+        text-align: center;
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+@media screen and (max-width: 700px) {
+    html, body {
+        height: 130%;
+        margin: 0;
+    }
+    .leftColom{
+        height: 40%;
+        width: 100%;
+        display: block;
+        background-color: #f28e0b;
+        border: 10px;
+        border-color: black;
+        border-top:5px solid white; position:relative;
+    }
+    .RightColom{
+        display: block;       
+        width: 100%;
+        height: 60%;
+        background: white;
+        border-top:0px solid white;
+    }
+    .profile-img {
+        border-radius: 50%;
+        height: 250px;
+        width: 250px;
+        position: relative;
+    }
+    
+    .editProfileImg {
+        border-radius: 50%;
+        height: 250px;
+        width: 250px;
+        top: 25px;
+        position: relative;
+    }
+    .user-info-inner{
+        width: 100%;
+        display: inline-block;
+        float: left;
+        text-align: center;
+        color: black;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .tablink {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-height: 570px) {
+    html, body {
+        height: 70%;
+        margin: 0;
+    }
+}
