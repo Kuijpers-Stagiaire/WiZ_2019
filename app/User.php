@@ -16,6 +16,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+     //Hieronder staan de velden die verplicht gevuld moeten zijn wanneer je een nieuwe gebruiker aanmaakt.
+     //Deze worden gebruikt in "Usercontroller.php"
     protected $fillable = [
         'voornaam', 'achternaam', 'rechten', 'vestiging', 'email', 'avatar', 'password',
     ];

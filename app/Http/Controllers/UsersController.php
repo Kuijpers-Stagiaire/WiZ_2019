@@ -16,7 +16,7 @@ class UsersController extends Controller
     {
         $this->middleware('auth');
     }
-
+    // Hier worden alle gebruikers getoond in het controle paneel 
     public function control()
     {
         $users = DB::table('users')->simplePaginate(10);
@@ -24,18 +24,21 @@ class UsersController extends Controller
         return view('controlpanel', compact('users'));
     }
 
+    // Met deze functie wordt de gebruikersinformatie getoond  
     public function show(User $user)
     {
 
         return view('Users.userdetail', compact('user'));
     }
 
+    //Met deze functie kun je pagina bezoeken waar je de gegevens kunt aanpassen van de gebruiker 
     public function edit(User $user)
     {
 
         return view('Users.edituser', compact('user'));
     }
 
+    //Met deze functie kun je de gegevens van de gebruiker aanpassen 
     public function update(User $user)
     {
 
@@ -49,6 +52,7 @@ class UsersController extends Controller
 
         $user->voornaam = request('voornaam');
         $user->achternaam = request('achternaam');
+        //In de "rechten" staan de rollen beschreven(Admin, productmanager en user)
         $user->rechten = request('rechten');
         $user->vestiging = request('vestiging');
         $user->email = request('email');
@@ -59,6 +63,7 @@ class UsersController extends Controller
 
     }
 
+    //Om een gebruiker te verwijderen
     public function destroy(User $user)
     {
         $user->delete();
@@ -66,11 +71,13 @@ class UsersController extends Controller
 
     }
 
+    //Om de pagina te bezoeken waar je een gebruiker kunt toevoegen
     public function newuser()
     {
         return view('Users.usercreate');
     }
 
+    //Deze functie zorgt ervoor dat de nieuwe gebruiker opgeslagen wordt in de DB
     public function store()
     {
         $this->validate(request(), [
@@ -105,6 +112,7 @@ class UsersController extends Controller
         return view('profile')->with(['token' => $token, 'user' => $user]);
     }
 
+    //Deze functie zorgt ervoor dat je de profielfoto kunt aanpassen van een gebruiker
     public function update_avatar(Request $request){
 
         $request->validate([
