@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row " id="Searchnavbar"> 
             <div class="col order1 shop-bar">
-                <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+                <form class="Sbar" action="/producten/products/search" method="POST" role="search">
                     {{ csrf_field() }}
                     <input aria-label="Search product" type="text" placeholder="Search product" name="q">
                     <button aria-label="Search product" type="submit"><i class="fa fa-search"></i></button>
@@ -19,14 +19,14 @@
                 <select aria-label="Select categorie" class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden>Categorieën</option>
                     @foreach ($categories as $category)
-                    <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                    <option value="/producten/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
                     @endforeach
                 </select>
             </div>
             
             <div class="col order-12 shop-bar addcol">
                 <div class="addprod">
-                    <a href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
+                    <a href="/producten/nieuw" aria-label="Nieuw product toevoegen">
                         <i class="far fa-plus-square"></i>
                     </a>
                 </div>
@@ -51,7 +51,7 @@
     </div>
         {{-- END TEST  --}}
         {{-- Formulier aangepast naar nieuwe waardes --}}
-        <form action="/overzicht/{{$productedit[0]->Product_id}}/update" method="POST" enctype="multipart/form-data">
+        <form action="/producten/{{$productedit[0]->Product_id}}/update" method="POST" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <div class="row from-group">
@@ -87,11 +87,11 @@
                     <h5>Locatie:</h5>
                     <input aria-label="Locatie" class="form-control" type="text" name="Locatie" value="{{$productedit[0]->Locatie}}" required/>
                     <h5>gewicht:</h5>
-                    <input aria-label="WeightQuantity" class="form-control" type="text" name="WeightQuantity" value="{{$productedit[0]->WeightQuantity}}" />
+                    <input aria-label="WeightQuantity" class="form-control" type="text" name="WeightQuantity" value="{{$productedit[0]->WeightQuantity}}" required/>
                     <h5>Eenheid gewicht:</h5>
-                    <input aria-label="WeightMeasureUnitDescription" class="form-control" type="text" name="WeightMeasureUnitDescription" value="{{$productedit[0]->WeightMeasureUnitDescription}}" />
+                    <input aria-label="WeightMeasureUnitDescription" class="form-control" type="text" name="WeightMeasureUnitDescription" value="{{$productedit[0]->WeightMeasureUnitDescription}}" required/>
                     <h5>Aantal:</h5>
-                    <input aria-label="Aantal" class="form-control" type="text" name="Aantal" value="{{$productedit[0]->Aantal}}" />
+                    <input aria-label="Aantal" class="form-control" type="text" name="Aantal" value="{{$productedit[0]->Aantal}}" required/>
                 </div>
             </div>
             <div class="row">

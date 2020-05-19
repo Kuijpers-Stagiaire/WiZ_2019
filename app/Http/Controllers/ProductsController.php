@@ -169,10 +169,10 @@ class ProductsController extends Controller
 
     public function destroy(String $product)
     {
-        //Overzicht id is aangepast naar Product_id
+        //producten id is aangepast naar Product_id
         $deleteproduct = Product::where('Product_id', '=', $product)->delete();
 
-        return redirect('/overzicht')
+        return redirect('/producten')
         ->with('info','Product succesvol verwijderd!');
     }
 
@@ -212,11 +212,11 @@ class ProductsController extends Controller
             'LongDescription' => ['nullable', 'string', 'max:255'],
             'Model' => ['required', 'string', 'max:255'],
             'Version' => ['required', 'string', 'max:255'],
-            'WeightQuantity' => ['nullable', 'string', 'max:255'],
-            'WeightMeasureUnitDescription' => ['nullable', 'string', 'max:255'],
+            'WeightQuantity' => ['required', 'string', 'max:255'],
+            'WeightMeasureUnitDescription' => ['required', 'string', 'max:255'],
             // 'Aantal' => ['nullable', 'string', 'max:255'],
             // Er kunnen alleen (+)getallen toegevoegd worden
-            'Aantal' => ['nullable', 'integer','regex:/^[0-9]\d*$/'],
+            'Aantal' => ['required', 'integer','regex:/^[0-9]\d*$/'],
         ]);
         // $product_id = $request->input("id");
         // $product_code = $request->input("Productcodefabrikant");
@@ -285,14 +285,14 @@ class ProductsController extends Controller
             'WeightQuantity' => $request->input("WeightQuantity"),
             'ProductImage' => $imagelinkName,
         ]);
-        return redirect('/overzicht/productdetail/'.$product_id.'');
+        return redirect('/producten/productdetail/'.$product_id.'');
     }
 
     
 
     public function editproduct(String $product)
     {
-        //Overzicht id is aangepast naar Product_id
+        //producten id is aangepast naar Product_id
         $checkDB = DB::table('overzicht')->where('Product_id',$product)->first();
 
         $categories = DB::table('productseries')->distinct()->select('productserie_naam', 'productserie_img')->get();
@@ -338,11 +338,11 @@ class ProductsController extends Controller
             'LongDescription' => ['nullable', 'string', 'max:255'],
             'Model' => ['required', 'string', 'max:255'],
             'Version' => ['required', 'string', 'max:255'],
-            'WeightQuantity' => ['nullable', 'string', 'max:255'],
-            'WeightMeasureUnitDescription' => ['nullable', 'string', 'max:255'],
+            'WeightQuantity' => ['required', 'string', 'max:255'],
+            'WeightMeasureUnitDescription' => ['required', 'string', 'max:255'],
             // 'Aantal' => ['nullable', 'string', 'max:255'],
             // Er kunnen alleen (+)getallen toegevoegd worden
-            'Aantal' => ['nullable', 'integer', 'max:999999','regex:/^[0-9]\d*$/'],
+            'Aantal' => ['required', 'integer', 'max:999999','regex:/^[0-9]\d*$/'],
         ]);
         $Productserie_id = DB::table('productseries')->distinct()->where('productserie_naam', $request->Model)->get();
         
@@ -415,11 +415,11 @@ class ProductsController extends Controller
 
         // if (Product::where('productcode_fabrikant', $request->input("Productcodefabrikant"))->exists()) {
         if (Product::where('Productcode', $request->input("Productcode"))->exists()) {
-            return redirect('/overzicht/nieuw')
+            return redirect('/producten/nieuw')
             ->with('error','Error, dit product bestaat al!');
         }else{
             $product->save();
-            return redirect('/overzicht')
+            return redirect('/producten')
             ->with('success','Product succesvol toegevoegd!');
         }    
     }
@@ -473,7 +473,7 @@ class ProductsController extends Controller
         // }
         // // Als de deeplink leeggelaten is, verander de waarde van met niet bekend
         // if(empty($request->input("deeplink"))){
-        //     $product->deeplink = "http://127.0.0.1:8000/overzicht";
+        //     $product->deeplink = "http://127.0.0.1:8000/producten";
         // }else{
         //     $product->deeplink = $request->input("deeplink");
         // }
@@ -514,7 +514,7 @@ class ProductsController extends Controller
         $product->save();
 
         // Navigeer terug naar de overzichtpagina met een "success" melding.
-        return redirect('/overzicht')
+        return redirect('/producten')
         ->with('success','Product succesvol toegevoegd!');
 
     }

@@ -9,7 +9,7 @@
     {{-- <div class="container-fluid">
         <div class="row " id="Searchnavbar"> 
             <div class="col order1 shop-bar">
-                <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+                <form class="Sbar" action="/producten/products/search" method="POST" role="search">
                     {{ csrf_field() }}
                     <input aria-label="Search product" type="text" placeholder="Search product" name="q">
                     <button aria-label="Search product" type="submit"><i class="fa fa-search"></i></button>
@@ -18,14 +18,14 @@
                 <select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden>Categorieën</option>
                     @foreach ($categories as $category)
-                    <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                    <option value="/producten/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
                     @endforeach
                 </select>
             </div>
             
             <div class="col order-12 shop-bar addcol">
                 <div class="addprod">
-                    <a aria-label="Product toevoegen" href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
+                    <a aria-label="Product toevoegen" href="/producten/nieuw" aria-label="Nieuw product toevoegen">
                         <i class="far fa-plus-square"></i>
                     </a>
                 </div>
@@ -34,7 +34,7 @@
     </div> --}}
 @endsection
 @section('content')
-<div class="container-bestelijst">
+<div class="container-bestelijst" style="height:auto !important">
     <div class="container table-wrapper-scroll-y my-custom-scrollbar table-responsive">
         <table class="table">
             <thead>
@@ -65,9 +65,9 @@
                             <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}"><input class="{{$getBasketItem->bestelling_id}}" value="{{$getBasketItem->product_aantal}}" type="number"></input></td>
                             <td  style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">{{$getBasketItem->created_at}}</td>
                             <td style="display : none;" class="edit-{{$getBasketItem->bestelling_id}}">
-                                <a type="button" class="btn btn-success btn-save" id="{{$getBasketItem->bestelling_id}}" href="/overzicht/bestellijst/">Opslaan</a> 
+                                <a type="button" class="btn btn-success btn-save" id="{{$getBasketItem->bestelling_id}}" href="/producten/bestellijst/">Opslaan</a> 
                                 <a type="button" class="btn btn-info btn-edit" id="{{$getBasketItem->bestelling_id}}">Annuleer</a>
-                                <a type="button" class="btn btn-danger" href="/overzicht/bestellijst/destroy/{{$getBasketItem->bestelling_id}}/{{$getBasketItem->product_id}}/{{$getBasketItem->product_aantal}}">X</a>
+                                <a type="button" class="btn btn-danger" href="/producten/bestellijst/destroy/{{$getBasketItem->bestelling_id}}/{{$getBasketItem->product_id}}/{{$getBasketItem->product_aantal}}">X</a>
                             </td>
                         </tr>
                     @endforeach             

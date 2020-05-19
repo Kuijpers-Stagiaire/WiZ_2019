@@ -183,7 +183,7 @@
                     <td>{{ $product->Product_id }}</td>
                     <td>{{ $product->Voornaam }} {{$product->Achternaam}}</td>
                     <td><img src="{{ $product->ProductImage }}" alt="Profiel_foto" style="Height: 100px; width: 100px;" onerror=this.src="{{ url('/img/default.jpg') }}"></td>
-                    <td><a href="/overzicht/productdetail/{{$product->Product_id}}">{{$product->Description}}</a></td>
+                    <td><a href="/producten/productdetail/{{$product->Product_id}}">{{$product->Description}}</a></td>
                     <td>{{$product->Aantal}}</td>
                     <td>{{$product->Locatie}}</td>
                   </tr>
@@ -220,4 +220,11 @@
     <script src="{{ asset('js/tab.js') }}"></script>
 {{-- link toegevoegd voor tabel. --}}
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script>
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 @endsection

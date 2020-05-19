@@ -19,7 +19,8 @@ class MailController extends Controller
         ->where('product_toevoeger_id', '=', Auth::user()->id)
         ->get();
 
-         //dd($getBasket);
+        Bestellijst::where('product_toevoeger_id', Auth::user()->id)->delete();
+        //dd($getBasket);
 
         $objDemo = new \stdClass();
         $objDemo->demo_one = Auth::user()->voornaam;
@@ -35,6 +36,7 @@ class MailController extends Controller
             "productimage" => "",
             "productamount" => ""
         );
+
 
 
         foreach ($getBasket as $getItem) {
@@ -70,9 +72,9 @@ class MailController extends Controller
         $objDemo->auth = "Admin";
         $objDemo->message = "Er zijn producten besteld door: " . Auth::user()->email . ".";
 
-        Mail::to("jputten@kuijpers.com")->send(new DemoEmail($objDemo));
+        Mail::to("Svc_SMTP_app@kuijpers.com")->send(new DemoEmail($objDemo));
 
-        return redirect('/overzicht/bestellijst')
+        return redirect('/producten/bestellijst')
         ->with('success','Uw bestelling is succesvol geplaatst!');
     }
 }

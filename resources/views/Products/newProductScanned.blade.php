@@ -71,11 +71,11 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
         <div class="dropdown">
           <button class="dropbtn" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">Nieuw product</button>
           <div class="dropdown-content">
-            <a href="/overzicht/product_Scannen">Scannen</a>
-            <a href="/overzicht/nieuw">Handmatig</a>
+            <a href="/producten/product_Scannen">Scannen</a>
+            <a href="/producten/nieuw">Handmatig</a>
           </div>
         </div>
-        <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+        <a href="/producten/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
             <i class="fas fa-shopping-cart"></i> Winkelwagen
         </a>
     </div>
@@ -85,7 +85,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
     <!-- <div class="modal-dialog modal-lg" role="document" style="height : 490px;margin-top:150px;"> -->
     <div class="modal-header custom-modal-header">
       <!-- <div class="modal-title-tab-1">Barcode</div> -->
-      <!-- <a class="modal-title-tab-2" href="http://127.0.0.1:8000/overzicht/nieuw">Handmatig</a> -->
+      <!-- <a class="modal-title-tab-2" href="http://127.0.0.1:8000/producten/nieuw">Handmatig</a> -->
       <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button> -->
@@ -96,7 +96,7 @@ echo '<div class="hidden-token" hidden>' . Session::get('token') . '</div>';
       <div class="alert alert-danger alert-scan" role="alert" style="font-size:16px !important; display: none !important; display: flex; align-items: center;justify-content: flex-start !important;">Fout! Uw barcode is incorrect.
       </div>
       <div class="custom-modal-body">
-        <form method="post" action="/overzicht/nieuw_scanned" enctype="multipart/form-data" class="custom-modal-body" id="form-barcode"> 
+        <form method="post" action="/producten/nieuw_scanned" enctype="multipart/form-data" class="custom-modal-body" id="form-barcode"> 
           @method('POST')
           @csrf
           <div class="custom-modal-body-child-1">

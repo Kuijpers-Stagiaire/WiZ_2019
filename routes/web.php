@@ -22,8 +22,11 @@ use Illuminate\Support\Facades\Input;
 Auth::routes();
 
 Route::get('/', 'PagesController@index');
+Route::get('/login', 'PagesController@index')->name('login');
 
-Route::get('/register', ['middleware' => 'auth', 'uses' => 'PagesController@register']);
+Route::get('/register', function () {
+    return redirect('/home');
+});
 
 Route::get('/onze-resultaten', ['middleware' => 'auth', 'uses' => 'Chartcontroller@homepagecharts']);
 
@@ -94,7 +97,7 @@ Route::any ( '/controlpanel', function () {
 })->middleware("auth");
 //->orWhere ( 'productcode_fabrikant', 'LIKE', '%' . $q . '%' )->paginate(16);
 
-Route::any ( '/overzicht/products/search', function(){
+Route::any ( '/producten/products/search', function(){
     
     $q = Input::get ( 'q' );
     // $searchproducts = Product::where ( 'Productomschrijving', 'LIKE', '%' . $q . '%' )->paginate(16);
@@ -153,30 +156,30 @@ Route::get('/profile', 'UsersController@profilepic');
 Route::post('/profile', 'UsersController@update_avatar');
 
 
-Route::get('/overzicht', ['middleware' => 'auth', 'uses' => 'ProductsController@shopindex']);
+Route::get('/producten', ['middleware' => 'auth', 'uses' => 'ProductsController@shopindex']);
 //shop producttoevoegen
-Route::get('/overzicht/nieuw', ['middleware' => 'auth', 'uses' => 'ProductsController@producttoevoegen']);
-Route::post('/overzicht/nieuw/store', ['middleware' => 'auth', 'uses' => 'ProductsController@store']);
+Route::get('/producten/nieuw', ['middleware' => 'auth', 'uses' => 'ProductsController@producttoevoegen']);
+Route::post('/producten/nieuw/store', ['middleware' => 'auth', 'uses' => 'ProductsController@store']);
 
-Route::get('/overzicht/product_Scannen', ['middleware' => 'auth', 'uses' => 'ProductsController@nieuw_Barcode']);
+Route::get('/producten/product_Scannen', ['middleware' => 'auth', 'uses' => 'ProductsController@nieuw_Barcode']);
 
 // Product toevoegen d.m.v. barcodescaner
-Route::post('/overzicht/nieuw_scanned', ['middleware' => 'auth', 'uses' => 'ProductsController@barcode']);
+Route::post('/producten/nieuw_scanned', ['middleware' => 'auth', 'uses' => 'ProductsController@barcode']);
 
 
 
 
 
 //shop categorie
-Route::get('/overzicht/products/{cat}',  ['middleware' => 'auth', 'uses' =>'ProductsController@shopCat']);
+Route::get('/producten/products/{cat}',  ['middleware' => 'auth', 'uses' =>'ProductsController@shopCat']);
 //shop product detail
-Route::get('/overzicht/productdetail/{product}', ['middleware' => 'auth', 'uses' => 'ProductsController@productdetail']);
+Route::get('/producten/productdetail/{product}', ['middleware' => 'auth', 'uses' => 'ProductsController@productdetail']);
 //shop product edit view
-Route::get('/overzicht/{product}/edit', ['middleware' => 'auth', 'uses' => 'ProductsController@editproduct']);
+Route::get('/producten/{product}/edit', ['middleware' => 'auth', 'uses' => 'ProductsController@editproduct']);
 
-Route::get('/overzicht/nieuw/{GTIN}', ['middleware' => 'auth', 'uses' => 'ProductsController@GTIN']);
+Route::get('/producten/nieuw/{GTIN}', ['middleware' => 'auth', 'uses' => 'ProductsController@GTIN']);
 
-Route::patch('/overzicht/{product}/update', ['middleware' => 'auth', 'uses' => 'ProductsController@update']);
+Route::patch('/producten/{product}/update', ['middleware' => 'auth', 'uses' => 'ProductsController@update']);
 
 
 
@@ -185,21 +188,21 @@ Route::patch('/overzicht/{product}/update', ['middleware' => 'auth', 'uses' => '
 
 // Add item
 // Aanpassing gemaakt zodat de route nu de $request ondersteund.
-// Route::get('/overzicht/addItem/{product}/{aantal}', 'CartController@store');
-Route::get('/overzicht/addItem/{product}/', 'CartController@store');
+// Route::get('/producten/addItem/{product}/{aantal}', 'CartController@store');
+Route::get('/producten/addItem/{product}/', 'CartController@store');
 
 // Show cart
-Route::get('/overzicht/bestellijst', ['middleware' => 'auth', 'uses' => 'CartController@show']);
+Route::get('/producten/bestellijst', ['middleware' => 'auth', 'uses' => 'CartController@show']);
 
 
 // Delete item
-Route::get('/overzicht/bestellijst/destroy/{bestelling}/{product}/{aantal}', 'CartController@destroy');
+Route::get('/producten/bestellijst/destroy/{bestelling}/{product}/{aantal}', 'CartController@destroy');
 
 // Edit item
-Route::get('/overzicht/bestellijst/{bestelling}/{aantal}', ['middleware' => 'auth', 'uses' => 'CartController@updateCustom']);
+Route::get('/producten/bestellijst/{bestelling}/{aantal}', ['middleware' => 'auth', 'uses' => 'CartController@updateCustom']);
 
 //shop product delete
-Route::delete('/overzicht/productdetail/destroy/{product}', ['middleware' => 'auth', 'uses' => 'ProductsController@destroy']);
+Route::delete('/producten/productdetail/destroy/{product}', ['middleware' => 'auth', 'uses' => 'ProductsController@destroy']);
 
 //route om naar changepassword te gaan
 Route::post('/changePassword','UpdateGegevensController@changePassword')->name('changePassword');

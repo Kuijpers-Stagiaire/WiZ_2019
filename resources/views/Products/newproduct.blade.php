@@ -91,14 +91,14 @@
                     <div class="dropdown">
                       <button class="dropbtn" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">Nieuw product</button>
                       <div class="dropdown-content">
-                        <a href="/overzicht/product_Scannen">Scannen</a>
-                        <a href="/overzicht/nieuw">Handmatig</a>
+                        <a href="/producten/product_Scannen">Scannen</a>
+                        <a href="/producten/nieuw">Handmatig</a>
                       </div>
                     </div>
-                    <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+                    <a href="/producten/bestellijst" class="btn searchbar-button-right" style="background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
                         <i class="fas fa-shopping-cart"></i> Winkelwagen
                     </a>
-                <!-- <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+                <!-- <form class="Sbar" action="/producten/products/search" method="POST" role="search">
                     {{ csrf_field() }}
                     <input aria-label="Search product" type="text" placeholder="Search product" name="q">
                     <button aria-label="Search product" type="submit"><i class="fa fa-search"></i></button>
@@ -107,14 +107,14 @@
                 <!-- <select aria-label="Select categorie" class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden>Categorieën</option>
                     @foreach ($categories as $category)
-                    <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                    <option value="/producten/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
                     @endforeach
                 </select> -->
             </div>
             
             <div class="col order-12 shop-bar addcol">
                 <div class="addprod">
-                    <!-- <a aria-label="Product toevoegen" href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
+                    <!-- <a aria-label="Product toevoegen" href="/producten/nieuw" aria-label="Nieuw product toevoegen">
                         <i class="far fa-plus-square"></i>
                     </a> -->
                 </div>
@@ -170,7 +170,7 @@
         </div><!-- /.modal -->
         {{-- 13-3-2020 aanpassing van namen en de knop voor foto opload aangepast--}}
         {{-- Formulier is aangepast. zodat de nieuwe database gebruikt kan worden. --}}
-        <form action="/overzicht/nieuw/store" method="POST" enctype="multipart/form-data">
+        <form action="/producten/nieuw/store" method="POST" enctype="multipart/form-data">
             @method('POST')
             @csrf
             <div class="row from-group">
@@ -476,7 +476,7 @@
                         setTimeout(function(){ $('#livestream_scanner').modal('hide'); }, 500);
 
                         //De code hieronder Zorgde er voor dat bij scannen barcore auto maties doorgestuurd wordt.
-                        // window.location = "/overzicht/nieuw/" + code,
+                        // window.location = "/producten/nieuw/" + code,
 
                         Quagga.stop();
                     }

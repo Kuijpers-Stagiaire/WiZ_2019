@@ -122,7 +122,7 @@
         <!-- </div> -->
         <!-- /.modal -->
 
-        <!--<form action="/overzicht/nieuw/store" method="POST" enctype="multipart/form-data">
+        <!--<form action="/producten/nieuw/store" method="POST" enctype="multipart/form-data">
             @method('POST')
             @csrf
             <div class="row from-group">
@@ -413,7 +413,7 @@
                         document.getElementById('GTIN').value = code;
                         setTimeout(function(){ $('#livestream_scanner').modal('hide'); }, 500);
 
-                        window.location = "/overzicht/nieuw/" + code,
+                        window.location = "/producten/nieuw/" + code,
 
                         Quagga.stop();
                     }

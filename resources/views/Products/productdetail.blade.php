@@ -10,7 +10,7 @@
 {{-- <div class="container-fluid searchcontainer">
 	<div class="row">
 		<div class="col">
-			<form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+			<form class="Sbar" action="/producten/products/search" method="POST" role="search">
 				{{ csrf_field() }}
 				<input aria-label="Search product" type="text" placeholder="Search product" name="q">
 				<button aria-label="Search product" type="submit"><i class="fa fa-search"></i></button>
@@ -20,20 +20,20 @@
 			<select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
 				<option value="" disabled selected hidden>Categorieën</option>
 				@foreach ($categories as $category)
-				<option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+				<option value="/producten/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
 				@endforeach
 			</select>
 		</div>
 		<div class="col">
 			<div class="addprod">
-				<a aria-label="Product toevoegen" href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
+				<a aria-label="Product toevoegen" href="/producten/nieuw" aria-label="Nieuw product toevoegen">
 				<i class="far fa-plus-square"></i>
 				</a>
 			</div>
         </div>
         <div class="col">
 			<div class="addprod">
-				<a aria-label="Product toevoegen" href="/overzicht/nieuw" aria-label="Nieuw product toevoegen">
+				<a aria-label="Product toevoegen" href="/producten/nieuw" aria-label="Nieuw product toevoegen">
 				<i class="far fa-plus-square"></i>
 				</a>
 			</div>
@@ -96,16 +96,16 @@
                 <i class="fas fa-plus-square" style="color : white !important;"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="overzicht/product_Scannen">Scannen</a>
-                    <a href="overzicht/nieuw">Handmatig</a>
+                    <a href="producten/product_Scannen">Scannen</a>
+                    <a href="producten/nieuw">Handmatig</a>
                 </div>
             </div>
-            <a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="float: right; background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+            <a href="/producten/bestellijst" class="btn searchbar-button-right" style="float: right; background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
             <i class="fas fa-shopping-cart"></i> Winkelwagen
             </a>
         </div>
         <div class="searchprod">
-            <form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+            <form class="Sbar" action="/producten/products/search" method="POST" role="search">
                 {{ csrf_field() }}
                 <input aria-label="Search product" type="text" placeholder="Zoek product" name="q" class="searchbar-button">
                 <button aria-label="Submit search" type="submit"><i class="fa fa-search" class="searchbar-button"></i></button>
@@ -113,7 +113,7 @@
             <select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
                 <option value="" disabled selected hidden>Categorieën</option>
                 @foreach ($categories as $category)
-                <option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+                <option value="/producten/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
                 @endforeach
             </select>
         </div>
@@ -126,7 +126,7 @@
 <div class="container">
 	<br>
 	<div class="row">
-		<div class="col-10">
+		<div class="col-8">
 			{{-- variable aangepast. --}}
 			{{-- 
 			<h2 class="Producttitle">{{ $productdetail[0]->productnaam }}</h2>
@@ -135,12 +135,50 @@
 			<h2 class="Producttitle">{{ $productdetail[0]->Description }}</h2>
 			<h6 class="Productundertitle"><i>{{ $productdetail[0]->LongDescription }}</i></h6>
 		</div>
+		<div class="col">
+			@if($productdetail[0]->Aantal <= 0)
+				<button class='btn-open btn btn-product' id='{{$productdetail[0]->Product_id}}' disabled='disabled'>Toevoegen</button>
+			@else
+				<button class='btn-open btn btn-product' id='{{$productdetail[0]->Product_id}}'>Toevoegen</button>
+			@endif
+		</div>
+		<div class="modal {{$productdetail[0]->Product_id}}" id="myModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						{{-- Product omschrijving is veranderd naar productnaam --}}
+						<h5 class="modal-title">{{$productdetail[0]->Description}}</h5>
+						<button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					{{-- Aanpassing van code zodat de id per element verschillend is en dat de form nu klopt en de aantal meestuurd naar de winkelwagen pagina. --}}
+					<form method="Get" action="/producten/addItem/{{$productdetail[0]->Product_id}}">
+						@csrf
+						<div class="modal-body">
+							<img alt="{{$productdetail[0]->Description}}" src="{{$productdetail[0]->ProductImage}}" onerror=this.src="{{url('/img/img-placeholder.png')}}" class="producttypeimg" width="150"/>
+							<div class="form-group">
+								<label for="InputAantal-{{$productdetail[0]->Product_id}}-onlangstoegevoegd">Aantal</label>
+								<input name="Aantal" type="text" class="form-control form-amount-{{$productdetail[0]->Product_id}}" id="InputAantal-{{$productdetail[0]->Product_id}}-onlangstoegevoegd" aria-describedby="emailHelp" max="{{$productdetail[0]->Aantal}}">
+								<small id="emailHelp" class="form-text text-muted">Vul hier het gewenste aantal producten in.</small>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+								{{-- <a href="/producten/addItem/{{$productsOT->id}}/" id="{{$productsOT->id}}" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</a> --}}
+								<button type="submit" id="{{$productdetail[0]->Product_id}}-Toevoegen" class="btn-primary btn-add btn-add-{{$productdetail[0]->Product_id}}">Toevoegen</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 		<div class="col prodedit">
-			<a aria-label="Pagina terug" href="/overzicht"><i class="fas fa-arrow-circle-left editdeleteicons "></i></a>
+
+			<a aria-label="Pagina terug" href="/producten"><i class="fas fa-arrow-circle-left editdeleteicons "></i></a>
 			{{-- Hier wordt de rol van de gebruiker gecontroleerd --}}
 			{{-- Alleen de managers en de admin mogen de "edit" en/of "verwijder" knopjes zien --}}
 			@if ($currentuser !== "User")
-			<a aria-label="Product wijzigen" href="/overzicht/{{ $productdetail[0]->Product_id }}/edit"><i class="fas fa-wrench editdeleteicons "></i></a>
+			<a aria-label="Product wijzigen" href="/producten/{{ $productdetail[0]->Product_id }}/edit"><i class="fas fa-wrench editdeleteicons "></i></a>
 			<i aria-label="Product verwijderen" class="tablinks far fa-trash-alt editdeleteicons proddel" onclick="openCity(event, 'proddel')"></i>
 			@endif
 			<i class="tablinks fas fa-info editdeleteicons" onclick="openCity(event, 'prodinfo')" id="defaultOpen" style="display: none;"></i>
@@ -196,7 +234,7 @@
 							<td>{{ (empty($productdetail[0]->GTIN)) ? 'Gegevens Ontbreken' : $productdetail[0]->GTIN }}</td>
 						</tr>
 						<tr>
-							<th>Fabikaat:</th>
+							<th>Fabrikaat:</th>
 							<td>{{(empty($productdetail[0]->ManufacturerName))? "Gegevens Ontbreken" : $productdetail[0]->ManufacturerName }}</td>
 						</tr>
 						<tr>
@@ -218,7 +256,15 @@
 						</tr>
 						<tr>
 							<th>Aantal:</th>
-							<td>{{(empty($productdetail[0]->Aantal))? "Gegevens Ontbreken" : $productdetail[0]->Aantal }}</td>
+							<td>
+							@if($productdetail[0]->Aantal == 0)
+								{{$productdetail[0]->Aantal}}
+							 @elseif(empty($productdetail[0]->Aantal))
+							 	{{"Gegevens Ontbreken"}}
+							 @else
+							 {{$productdetail[0]->Aantal}}
+							 @endif
+							 </td>
 						</tr>
 						<tr>
 							<th>Voornaam:</th>
@@ -234,6 +280,7 @@
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
 			{{-- Oude Code --}}
 			{{-- 
@@ -306,14 +353,14 @@
 		<div class="row ">
 			<div class="col"></div>
 			<div class="col" id="delaccept">
-				<form action="/overzicht/productdetail/destroy/{{ $productdetail[0]->Product_id}}" method="POST" class="delform" id="DelForm">
+				<form action="/producten/productdetail/destroy/{{ $productdetail[0]->Product_id}}" method="POST" class="delform" id="DelForm">
 					@method('DELETE')
 					@csrf
 					<button aria-label="Product verwijderen" type="submit" class="btn btn-success">Verwijder</button>
 				</form>
 			</div>
 			<div class="col" id="delannuleer">
-				<a href="/overzicht/productdetail/{{$productdetail[0]->Product_id}}"><button aria-label="Annuleer" type="submit" class="btn btn-danger">Annuleer</button></a>
+				<a href="/producten/productdetail/{{$productdetail[0]->Product_id}}"><button aria-label="Annuleer" type="submit" class="btn btn-danger">Annuleer</button></a>
 			</div>
 			<div class="col"></div>
 		</div>
@@ -328,8 +375,8 @@
 			<h2 class="Producttitle">{{ $productdetail->LongDescription }}</h2>
 		</div>
 		<div class="col prodedit">
-			<a href="/overzicht"><i class="fas fa-arrow-circle-left editdeleteicons "></i></a>
-			<a href="/overzicht/{{ $productdetail->Product_id }}/edit"><i class="fas fa-wrench editdeleteicons "></i></a>
+			<a href="/producten"><i class="fas fa-arrow-circle-left editdeleteicons "></i></a>
+			<a href="/producten/{{ $productdetail->Product_id }}/edit"><i class="fas fa-wrench editdeleteicons "></i></a>
 			<i class="tablinks far fa-trash-alt editdeleteicons proddel" onclick="openCity(event, 'proddel')"></i>
 			<i class="tablinks fas fa-info editdeleteicons" onclick="openCity(event, 'prodinfo')" id="defaultOpen" style="display: none;"></i>
 		</div>
@@ -392,14 +439,14 @@
 		<div class="row deleteconfirm">
 			<div class="col"></div>
 			<div class="col" id="delaccept">
-				<form action="/overzicht/productdetail/destroy/{{ $productdetail[0]->Product_id}}" method="POST" class="delform" id="DelForm">
+				<form action="/producten/productdetail/destroy/{{ $productdetail[0]->Product_id}}" method="POST" class="delform" id="DelForm">
 					@method('DELETE')
 					@csrf
 					<button type="submit" class="btn btn-success">Verwijder</button>
 				</form>
 			</div>
 			<div class="col" id="delannuleer">
-				<a href="/overzicht"><button type="submit" class="btn btn-danger">Annuleer</button></a>
+				<a href="/producten"><button type="submit" class="btn btn-danger">Annuleer</button></a>
 			</div>
 			<div class="col"></div>
 		</div>
@@ -407,6 +454,41 @@
 </div>
 </div>
 @endif
+<script
+src="http://code.jquery.com/jquery-3.3.1.js"
+integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+crossorigin="anonymous"></script>
+<script>
+		   setTimeout(function() {
+			  $("#app").fadeOut("slow");
+			}, 3000);
+ 
+		$(".btn-open").on("click", function(){
+
+			var item = $(this).attr("id");
+			
+			$("." + item).toggle();
+
+		});
+
+		$(".btn-add").on("click", function(){
+
+			var item = $(this).attr("id");
+
+			var amount = $(".form-amount-" + item).val();
+
+			var href = $(".btn-add-" + item).attr("href");
+
+			$(".btn-add").attr("href", href + amount);
+
+			var href_new = $(".btn-add").attr("href");
+
+		});
+
+		$(".btn-close").on("click", function(){
+			$(".modal").hide();
+		})
+</script>
 @endsection
 @section('tabJS')
 <script src="{{ asset('js/tab.js') }}"></script> 

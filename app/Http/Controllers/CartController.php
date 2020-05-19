@@ -47,7 +47,7 @@ class CartController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect('/overzicht')
+            return redirect('/producten')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -60,7 +60,7 @@ class CartController extends Controller
             Product::where('Product_id', $product)
             ->update(['Aantal' => $newAantal]);
         }else{
-            return redirect('/overzicht')
+            return redirect('/producten')
             ->with('warning','Er zijn maar ' . $oldAantal . ' van dit soort producten beschikbaar, kies een ander aantal a.u.b.');;
         }
             $getProducten = DB::table('overzicht')
@@ -87,7 +87,7 @@ class CartController extends Controller
                 $item->save();     
 
         }
-        return redirect('/overzicht/bestellijst')
+        return redirect('/producten/bestellijst')
         ->with('success','Product succesvol toegevoegd!');;
 
     }
@@ -130,7 +130,7 @@ class CartController extends Controller
      */
     public function updateCustom(String $bestelling, String $aantal)
     {
-        //Overzicht id is aangepast naar Product_id
+        //producten id is aangepast naar Product_id
         $product = Bestellijst::where('bestelling_id', $bestelling)->first()->product_id;
 
         $oldAantal = Product::where('Product_id', $product)->first()->Aantal;
@@ -149,7 +149,7 @@ class CartController extends Controller
                 ->update(['Aantal' => $newAantal]);
             }
             else{
-                return redirect('/overzicht/bestellijst')
+                return redirect('/producten/bestellijst')
                 ->with('warning','Aantal moet een positive getal zijn!');
             }
             // $newAantal = $oldAantal + $difference;
@@ -165,7 +165,7 @@ class CartController extends Controller
                 ->update(['Aantal' => $newAantal]);
             }
             else{
-                return redirect('/overzicht/bestellijst')
+                return redirect('/producten/bestellijst')
                 ->with('warning','Niks verandert!');
             }
         }
@@ -174,7 +174,7 @@ class CartController extends Controller
             // Product::where('ID', $product)
             // ->update(['Aantal' => $newAantal]);
         // }else{
-        //     return redirect('/overzicht/bestellijst')
+        //     return redirect('/producten/bestellijst')
         //     ->with('warning','Niks verandert!');
         // }
 
@@ -182,7 +182,7 @@ class CartController extends Controller
 
         Bestellijst::where('bestelling_id',$bestelling)->update(['product_aantal'=>$aantal]);
 
-        return redirect('/overzicht/bestellijst')
+        return redirect('/producten/bestellijst')
         ->with('info','Productinformatie succesvol aangepast!');
     }
 
@@ -194,7 +194,7 @@ class CartController extends Controller
      */
     public function destroy(String $bestelling, String $product, String $aantal)
     {      
-        //Overzicht id is aangepast naar Product_id
+        //producten id is aangepast naar Product_id
         if (Product::where('Product_id', $product)->count() > 0) {
            $oldAantal = Product::where('Product_id', $product)->first()->Aantal;
 
@@ -208,7 +208,7 @@ class CartController extends Controller
             ->where('bestelling_id',$bestelling)
             ->delete();
 
-            return redirect('/overzicht/bestellijst')
+            return redirect('/producten/bestellijst')
             ->with('info','Product succesvol verwijderd!');
             
         }else{
@@ -216,7 +216,7 @@ class CartController extends Controller
                 ->where('bestelling_id',$bestelling)
                 ->delete();
 
-            return redirect('/overzicht/bestellijst')
+            return redirect('/producten/bestellijst')
             ->with('info','Product succesvol verwijderd!');
         }
     }

@@ -20,7 +20,7 @@ class CheckRechten
     public function handle($request, Closure $next)
     {
         //toevoeging Van middleware die controleert of die persoon toegang heeft tot die pagina's
-        $users = ["controlpanel", "edit", "destroy", "overzicht/product_Scannen", "overzicht/nieuw"];
+        $users = ["controlpanel", "edit", "destroy", "producten/product_Scannen", "producten/nieuw"];
         $managers = ["controlpanel/users"];
         if(isset($request->user()->rechten))
         {
@@ -30,7 +30,7 @@ class CheckRechten
                 {
                     if(strpos($request->path(), $user) !== false)
                     {
-                        return redirect("401");
+                        return redirect("404");
                     }
                 }
             }
@@ -40,7 +40,7 @@ class CheckRechten
                 {
                     if(strpos($request->path(), $manager) !== false)
                     {
-                        return redirect("401");
+                        return redirect("404");
                     }
                 }
             }

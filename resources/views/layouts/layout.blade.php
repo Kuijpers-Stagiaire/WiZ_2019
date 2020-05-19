@@ -88,7 +88,7 @@
 					<p><a class="nav-link" href="/home"><i class="fa fa-home"></i></a></p>
 				</div>
 				<div class="text-white p-2 col-3 text-center d-none d-sm-block mynavi2">
-					<p><a aria-label="Overzicht" class="nav-link" href="/overzicht">Producten</a></p>
+					<p><a aria-label="producten" class="nav-link" href="/producten">Producten</a></p>
 				</div>
 				<div class="text-white p-2 col-3 text-center d-block d-sm-none small mynavi2">
 					<p><a class="nav-link" href="/producten">Producten</a></p>
@@ -124,7 +124,7 @@
 					·
 					<a href="/overons" aria-label="Over ons" class="footernavhover">Over Ons</a>       
 					·
-					<a href="/overzicht" aria-label="Overzicht " class="footernavhover">Overzicht</a>
+					<a href="/producten" aria-label="producten " class="footernavhover">producten</a>
 					·
 					<a href="/profiel" aria-label="Profiel" class="footernavhover">Profiel</a>
 					·

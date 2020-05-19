@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/shop.css') }}" />
 @endsection
 @section('titlePage')
-<title>WiZ Kuijpers - Overzicht</title>
+<title>WiZ Kuijpers - producten</title>
 @endsection
 @section('shopmenu')
 <?php 
@@ -68,16 +68,16 @@
 					<i class="fas fa-plus-square" style="color : white !important;"></i>
 					</button>
 					<div class="dropdown-content">
-						<a href="overzicht/product_Scannen">Scannen</a>
-						<a href="overzicht/nieuw">Handmatig</a>
+						<a href="producten/product_Scannen">Scannen</a>
+						<a href="producten/nieuw">Handmatig</a>
 					</div>
 				</div>
-				<a href="/overzicht/bestellijst" class="btn searchbar-button-right" style="float: right; background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
+				<a href="/producten/bestellijst" class="btn searchbar-button-right" style="float: right; background : #2f2e87; color : white !important; height : 40px !important; display: flex; justify-content: space-around;align-items: center; width: 200px; font-size: 17px;">
 				<i class="fas fa-shopping-cart"></i> Winkelwagen
 				</a>
 			</div>
 			<div class="searchprod">
-				<form class="Sbar" action="/overzicht/products/search" method="POST" role="search">
+				<form class="Sbar" action="/producten/products/search" method="POST" role="search">
 					{{ csrf_field() }}
 					<input aria-label="Search product" type="text" placeholder="Zoek product" name="q" class="searchbar-button">
 					<button aria-label="Submit search" type="submit"><i class="fa fa-search" class="searchbar-button"></i></button>
@@ -85,7 +85,7 @@
 				<select class="form-control category" aria-label="Select category" onchange="window.location=this.options[this.selectedIndex].value">
 					<option value="" disabled selected hidden>Categorieën</option>
 					@foreach ($categories as $category)
-					<option value="/overzicht/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
+					<option value="/producten/products/{{ $category->productserie_naam }}">{{ $category->productserie_naam }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -102,7 +102,7 @@
 				<div class="modal-content" style="height : 630px;">
 					<div class="modal-header custom-modal-header">
 						<div class="modal-title-tab-1">Barcode</div>
-						<a class="modal-title-tab-2" href="http://127.0.0.1:8000/overzicht/nieuw">Handmatig</a>
+						<a class="modal-title-tab-2" href="http://127.0.0.1:8000/producten/nieuw">Handmatig</a>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
@@ -112,7 +112,7 @@
 						<div class="alert alert-danger alert-scan" role="alert" style="font-size:16px !important; display: none !important; display: flex; align-items: center;justify-content: flex-start !important;">Fout! Uw barcode is incorrect.
 						</div>
 						<div class="custom-modal-body">
-							<form method="post" action="/overzicht/nieuw_scanned" enctype="multipart/form-data" class="custom-modal-body" id="form-barcode">
+							<form method="post" action="/producten/nieuw_scanned" enctype="multipart/form-data" class="custom-modal-body" id="form-barcode">
 								@method('POST')
 								@csrf
 								<div class="custom-modal-body-child-1">
@@ -222,15 +222,15 @@
 			<div class="row row-categories">
 				@foreach ($categories as $category)
 				<div class="card card-categories col-3" >
-					<a href="/overzicht/products/{{ $category->productserie_naam }}">
+					<a href="/producten/products/{{ $category->productserie_naam }}">
 						<p class="card-text card-text-categories h6 text-center">{{$category->productserie_naam}}</p>
-						{{-- Deze code hieronder zorgt er voor dat er op de overzicht pagina als er een foto ontbreekt van de catogorien er een default image inlaad --}}
+						{{-- Deze code hieronder zorgt er voor dat er op de producten pagina als er een foto ontbreekt van de catogorien er een default image inlaad --}}
 						<img class="card-img-top card-img-categories" src="{{$category->productserie_img}}"  alt="Card image cap"  onerror=this.src="{{ url('/img/img-placeholder.png') }}">
 						{{-- <img class="card-img-top card-img-categories" src="{{$category->productserie_img}}"  alt="Card image cap"> --}}
 					</a>
 					<!-- UNCOMMENT THIS TO ACTIVATE STYLE WITH BUTTON -->
 					<!--                           <div class="card-body card-body-categories">
-						<a href="/overzicht/products/{{ $category->productserie_naam }}" class="btn btn-product" style="width : 180px !important;"><i class="fas fa-arrow-circle-right"></i> Bekijk</a>
+						<a href="/producten/products/{{ $category->productserie_naam }}" class="btn btn-product" style="width : 180px !important;"><i class="fas fa-arrow-circle-right"></i> Bekijk</a>
 						</div> -->
 				</div>
 				@endforeach
@@ -245,7 +245,7 @@
 				<!-- END OF OLD DESIGN -->
 				<div class="card card-vl flex-row flex-wrap card-ot">
 					<div class="card-header card-header-img border-0">
-						{{-- Deze code hieronder zorgt er voor dat er op de overzicht pagina als er een foto ontbreekt van de catogorien er een default image inlaad --}}
+						{{-- Deze code hieronder zorgt er voor dat er op de producten pagina als er een foto ontbreekt van de catogorien er een default image inlaad --}}
 						{{-- <img alt="{{$productsOT->productomschrijving}}" src="{{$productsOT->imagelink}}" class="producttypeimg" width="150"/> --}}
 						<img alt="{{$productsOT->productnaam}}" src="{{$productsOT->imagelink}}" onerror=this.src="{{url('/img/img-placeholder.png')}}" class="producttypeimg" width="150"/>
 					</div>
@@ -274,7 +274,7 @@
 								<li class="product-aantal">{{$productsOT->aantal}}</li>
 							</ul>
 						</span>
-						<a href="/overzicht/productdetail/{{$productsOT->id}}" class="btn btn-product" id="testing">Bekijk</a>
+						<a href="/producten/productdetail/{{$productsOT->id}}" class="btn btn-product" id="testing">Bekijk</a>
 						<?php if ($productsOT->aantal <= 0) {
 							echo "<button class='btn-open btn btn-product' id='$productsOT->id' disabled='disabled'>Toevoegen</button>";
 							}else{
@@ -297,7 +297,7 @@
 								</button>
 							</div>
 							{{-- Aanpassing van code zodat de id per element verschillend is en dat de form nu klopt en de aantal meestuurd naar de winkelwagen pagina. --}}
-							<form method="Get" action="/overzicht/addItem/{{$productsOT->id}}">
+							<form method="Get" action="/producten/addItem/{{$productsOT->id}}">
 								@csrf
 								<div class="modal-body">
 									<img alt="{{$productsOT->productnaam}}" src="{{$productsOT->imagelink}}" onerror=this.src="{{url('/img/img-placeholder.png')}}" class="producttypeimg" width="150"/>
@@ -308,7 +308,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-										{{-- <a href="/overzicht/addItem/{{$productsOT->id}}/" id="{{$productsOT->id}}" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</a> --}}
+										{{-- <a href="/producten/addItem/{{$productsOT->id}}/" id="{{$productsOT->id}}" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</a> --}}
 										<button type="submit" id="{{$productsOT->id}}-Toevoegen" class="btn-primary btn-add btn-add-{{$productsOT->id}}">Toevoegen</button>
 									</div>
 								</div>
@@ -333,11 +333,11 @@
 				<div class="card bekijkcards flexbekijkook">
 					<img alt="{{$bekijk->productomschrijving}}" class="card-img-top bekijkookimg" src="{{$bekijk->imagelink}}" onerror=this.src="{{ url('/img/img-placeholder.png') }}" width="300" height="300">
 					{{-- Deze code hieronder is verander zodat er bij de veriable $bekijk->productcodefabrikant naar $bekijk->id nu staat --}}
-					<a href="/overzicht/productdetail/{{$bekijk->id}}" class="card-link">
+					<a href="/producten/productdetail/{{$bekijk->id}}" class="card-link">
 						<h5 class="card-title title-product">{{$bekijk->productnaam}} <span class="badge badge-product badge-pill badge-dark">{{$bekijk->aantal}}</span></h5>
 					</a>
 					{{-- 
-					<a href="/overzicht/productdetail/{{$bekijk->productcodefabrikant}}" class="card-link">
+					<a href="/producten/productdetail/{{$bekijk->productcodefabrikant}}" class="card-link">
 						<h5 class="card-title title-product">{{$bekijk->productomschrijving}} <span class="badge badge-product badge-pill badge-dark">{{$bekijk->aantal}}</span></h5>
 					</a>
 					--}}
@@ -357,7 +357,7 @@
 						</ul>
 					</div>
 					<div class="button-grp">
-						<a href="/overzicht/productdetail/{{$bekijk->id}}" class="btn btn-product">Bekijk</a>
+						<a href="/producten/productdetail/{{$bekijk->id}}" class="btn btn-product">Bekijk</a>
 						<button class="btn-open btn btn-product" id="{{$bekijk->id}}">Toevoegen</button>
 					</div>
 				</div>
@@ -377,7 +377,7 @@
 								{{-- 
 								<form> --}}
 									{{-- Aanpassing form method en action toegevoegd--}}
-								<form method="POST " action="/overzicht/addItem/{{$bekijk->id}}/">
+								<form method="POST " action="/producten/addItem/{{$bekijk->id}}/">
 									<div class="form-group">
 										<label for="InputAantal-{{$bekijk->id}}-Bekijkmeer">Aantal</label>
 										<input type="text" name="Aantal" required="required" class="form-control form-amount-{{$bekijk->id}}" id="InputAantal-{{$bekijk->id}}-Bekijkmeer" aria-describedby="emailHelp" max="{{$bekijk->aantal}}">
@@ -385,7 +385,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-										{{-- <a href="/overzicht/addItem/{{$bekijk->id}}/" type="submit" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a> --}}
+										{{-- <a href="/producten/addItem/{{$bekijk->id}}/" type="submit" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a> --}}
 										{{-- Aanpassing gemaakt van 
 										<a>
 											tag naar <button> tag inverban met form--}}
@@ -395,7 +395,7 @@
 							</div>
 							{{-- <div class="modal-footer">
 							<button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-							<a href="/overzicht/addItem/{{$bekijk->id}}/" type="button" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a>
+							<a href="/producten/addItem/{{$bekijk->id}}/" type="button" id="{{$bekijk->id}}" class="btn btn-primary btn-add btn-add-{{$bekijk->id}}">Toevoegen</a>
 							</div> --}}
 						</div>
 					</div>
