@@ -24,6 +24,7 @@ class CheckRechten
         $managers = ["controlpanel/users"];
         if(isset($request->user()->rechten))
         {
+            //Wanneer de "User" probeert de pagina's te bezoeken die niet voor hem zijn: 401-pagina
             if($request->user()->rechten == "User")
             {
                 foreach($users as $user)
@@ -36,6 +37,7 @@ class CheckRechten
             }
             else if($request->user()->rechten == "Product-Manager")
             {
+                //Wanneer de "Product-manager" probeert de pagina's te bezoeken van de admin: 401-pagina
                 foreach($managers as $manager)
                 {
                     if(strpos($request->path(), $manager) !== false)

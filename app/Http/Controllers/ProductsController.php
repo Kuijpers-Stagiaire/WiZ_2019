@@ -42,7 +42,7 @@ class ProductsController extends Controller
             'o.Aantal as aantal', 
             'o.ProductImage as imagelink',  
             'o.Locatie as locatie', 
-            'o.Version as producttype', 
+            'o.Version as producttype' 
         )->orderBy('created_at', 'desc')
         ->limit(3)
         ->get();
@@ -167,12 +167,14 @@ class ProductsController extends Controller
         return view('Products.newproduct', compact('combocats', 'categories'))->with('message', 'IT WORKS!');
     }
 
+    //Deze functie zorgt ervoor dat de product verwijderd wordt uit de DB 
     public function destroy(String $product)
     {
         //producten id is aangepast naar Product_id
         $deleteproduct = Product::where('Product_id', '=', $product)->delete();
 
-        return redirect('/producten')
+        return redirect('/overzicht')
+        //Wanneer het product verwijderd is krijg je deze melding te zien 
         ->with('info','Product succesvol verwijderd!');
     }
 
@@ -218,18 +220,6 @@ class ProductsController extends Controller
             // Er kunnen alleen (+)getallen toegevoegd worden
             'Aantal' => ['required', 'integer','regex:/^[0-9]\d*$/'],
         ]);
-        // $product_id = $request->input("id");
-        // $product_code = $request->input("Productcodefabrikant");
-        // $product_gtin = $request->input("GTIN");
-        // $product_naam = $request->input("Productomschrijving");
-        // $product_locatie = $request->input("Locatie");
-        // $product_fabrikaat = $request->input("Fabrikaat");
-        // $product_specificaties = $request->input("Specificaties");
-        // $product_serie = $request->input("Productserie");
-        // $product_type = $request->input("Producttype");
-        // $product_eenheid = $request->input("Eenheidgewicht");
-        // $product_aantal = $request->input("Aantal");
-        // $product_ingangsdatum = date('Y-m-d H:i:s');
         
         //aanpassing gemaakt op 17-03-2020
         //Aanpassing gemaakt zodat er nu maar 1 keer opgeslagen gaat worden inplaats van 2
@@ -239,35 +229,6 @@ class ProductsController extends Controller
             $imagelinkName = '/storage/productimages/'.request()->ProductImage->getClientOriginalName();
             $destinationPath = public_path('/storage/productimages');
             $request->ProductImage->move($destinationPath, $imagelinkName);
-            // $request->imagelink->move($destinationPath, $imagelinkName);
-        //     $results = DB::select( DB::raw("UPDATE `overzicht`
-        //         SET `Productomschrijving` = '$product_naam',
-        //             `gtin_fabrikant` = '$product_gtin',
-        //             `Locatie` = '$product_locatie',
-        //             `Fabrikaat` = '$product_fabrikaat',
-        //             `specificaties` = '$product_specificaties',
-        //             `Productserie` = '$product_serie',
-        //             `Producttype` = '$product_type',
-        //             `Eenheid gewicht` = '$product_eenheid',
-        //             `Aantal` = '$product_aantal',
-        //             `Ingangsdatum` = '$product_ingangsdatum',
-        //             `imagelink` = '$imagelinkName'
-        //         WHERE `ID` = '$product_id'") );
-
-        // }else{
-        // $results = DB::select( DB::raw("UPDATE `overzicht`
-        //     SET `Productomschrijving` = '$product_naam',
-        //         `gtin_fabrikant` = '$product_gtin',
-        //         `Locatie` = '$product_locatie',
-        //         `Fabrikaat` = '$product_fabrikaat',
-        //         `specificaties` = '$product_specificaties',
-        //         `Productserie` = '$product_serie',
-        //         `Producttype` = '$product_type',
-        //         `Eenheid gewicht` = '$product_eenheid',
-        //         `Aantal` = '$product_aantal',
-        //         `Ingangsdatum` = '$product_ingangsdatum'
-        //     WHERE `ID` = '$product_id'") );
-        // }
         }
         //Pak de laaste foto die in de database staat om er voor te zorgen dat de image niet leeg wordt
         if($imagelinkName == ""){
@@ -318,22 +279,9 @@ class ProductsController extends Controller
         }
     }
 
+    // Deze functie zorgt ervoor dat de PRODUCTEN opgeslagen in de DB
     public function store(Request $request)
     {
-        // $this->validate(request(), [
-        //     'Productcodefabrikant' => ['required', 'string', 'max:255'],
-        //     'GTIN' => ['nullable', 'string', 'max:255'],
-        //     'Productomschrijving' => ['required', 'string', 'max:255'],
-        //     'Locatie' => ['required', 'string', 'max:255'],
-        //     'Fabrikaat' => ['required', 'string', 'max:255'],
-        //     'Specificaties' => ['nullable', 'string', 'max:255'],
-        //     'Productserie' => ['required', 'string', 'max:255'],
-        //     'Producttype' => ['required', 'string', 'max:255'],
-        //     'Eenheidgewicht' => ['nullable', 'string', 'max:255'],
-        //     // 'Aantal' => ['nullable', 'string', 'max:255'],
-        //     // Er kunnen alleen (+)getallen toegevoegd worden
-        //     'Aantal' => ['nullable', 'integer', 'max:255','regex:/^[0-9]\d*$/'],
-        // ]);
         $this->validate(request(), [
             'Productcode' => ['required', 'string', 'max:255'],
             'GTIN' => ['nullable', 'string', 'max:255'],
@@ -368,55 +316,6 @@ class ProductsController extends Controller
             $request->imagelink->move($destinationPath, $imagelinkName);
             $product->ProductImage = $imagelinkName;
         }
-        // $product = new Product();
-        // $product->product_toevoeger_id = \Auth::user()->id;
-        // $product->product_toevoeger_voornaam = \Auth::user()->voornaam;
-        // $product->product_toevoeger_achternaam = \Auth::user()->achternaam;
-        // $product->product_toevoeger_email = \Auth::user()->email;
-        // $product->product_toevoeger_rechten = \Auth::user()->rechten;
-        // $product->product_toevoeger_vestiging = \Auth::user()->vestiging;
-        // $product->product_toevoeger_avatar = \Auth::user()->avatar;
-        // $product["productcode_fabrikant"] = $request->input("Productcodefabrikant");
-        // $product->Productomschrijving = $request->input("Productomschrijving");
-        // $product->Locatie = $request->input("Locatie");
-        // $product->Fabrikaat = $request->input("Fabrikaat");
-        // $product->specificaties = $request->input("Specificaties");
-        // $product->Productserie = $request->input("Productserie");
-        // $product->Producttype = $request->input("Producttype");
-        // $product->Ingangsdatum = date("Y-m-d H:i:s");
-
-        // if(empty($request->input("Eenheidgewicht"))){
-        //     $product["Eenheid gewicht"] = "Onbekend";
-        // }
-        // else{
-        //     $product["Eenheid gewicht"] = $request->input("Eenheidgewicht");
-        // }
-        // if(empty($request->input("Aantal"))){
-        //     $product->Aantal = "Onbekend";
-        // }
-        // else{
-        //     $product->Aantal = $request->input("Aantal");
-        // }
-        
-        // if (empty($request->imagelink)) {
-        //     $product->imagelink = "/img/img-placeholder.png";
-        // } else {
-        //     // $request->validate(['imagelink' => 'image|mimes:jpeg,png,jpg,gif,svg|max:7500',]);
-        //     // $imagelinkName = '/storage/productimages/'.request()->imagelink->getClientOriginalName();
-            
-        //     // $destinationPath = public_path('/storage/productimages');
-        //     // $request->imagelink->move($destinationPath, $imagelinkName);
-        //     // $product->imagelink = $imagelinkName;
-
-
-        //     $request->validate(['imagelink' => 'image|mimes:jpeg,png,jpg,gif,svg|max:7500',]);
-        //     $imagelinkName = '/storage/productimages/'.request()->imagelink->getClientOriginalName();
-            
-        //     $destinationPath = public_path('/storage/productimages');
-        //     $request->imagelink->move($destinationPath, $imagelinkName);
-        //     $product->imagelink = $imagelinkName;
-
-        // }
 
         // if (Product::where('productcode_fabrikant', $request->input("Productcodefabrikant"))->exists()) {
         if (Product::where('Productcode', $request->input("Productcode"))->exists()) {
