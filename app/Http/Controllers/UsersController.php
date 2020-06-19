@@ -115,7 +115,9 @@ class UsersController extends Controller
 
         $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
-        $request->avatar->storeAs('avatars',$avatarName);
+        // $request->avatar->storeAs('avatars',$avatarName);
+        $destinationPath = public_path('/storage/avatars');
+        $request->avatar->move($destinationPath, $avatarName);
 
         $user->avatar = $avatarName;
         $user->save();

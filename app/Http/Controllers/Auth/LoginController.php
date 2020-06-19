@@ -38,7 +38,7 @@ class LoginController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "grant_type=password&username=gvijfeijke@kuijpers.com&password=BiM2018&client_id=PG_Kuijpers_en_Zonen&client_secret=0QaK80MRGmZVJ415pVRp",
+            CURLOPT_POSTFIELDS => "grant_type=password&username=knan@kuijpers.com&password=BiM2018&client_id=PG_Kuijpers_en_Zonen&client_secret=0QaK80MRGmZVJ415pVRp",
             CURLOPT_HTTPHEADER => array(
                 "cachce-control: no-cache",
                 "Accept: application/json",
@@ -60,7 +60,7 @@ class LoginController extends Controller
         
         // Snijd de opgehaalde string af zodat alleen de access-token opgehaald word
         $rest = substr($response, 17, -126);
-
+        // dd($rest);
         // Stop de opgehaalde token in een sessie.
         Session::put('token', $rest);
     }

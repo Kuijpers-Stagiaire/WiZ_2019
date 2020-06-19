@@ -246,9 +246,13 @@
                         {{-- <input id="Productserie" class="form-control{{ $errors->has('Productserie') ? ' is-invalid' : '' }}" type="text" name="Productserie" required/> --}}
                         <select aria-label="Model" id="Model" class="form-control{{ $errors->has('Model') ? ' is-invalid' : '' }}" name="Model" value="{{ old('Model') }}">
                             <option disabled selected hidden>Product serie:</option>
-                            <option value="IT" {{ old('Model') == 'IT' ? 'selected' : '' }}>IT</option>
+                            {{-- Aanpassing gemaakt dat de catgorieën ingeladen worden--}}
+                            {{-- <option value="IT" {{ old('Model') == 'IT' ? 'selected' : '' }}>IT</option>
                             <option value="Magazijn" {{ old('Model') == 'Magazijn' ? 'selected' : '' }}>Magazijn</option>
-                            <option value="Diversen" {{ old('Model') == 'Diversen' ? 'selected' : '' }}>Diversen</option>
+                            <option value="Diversen" {{ old('Model') == 'Diversen' ? 'selected' : '' }}>Diversen</option> --}}
+                            @foreach($categories as $categorie)
+                                <option value="{{$categorie->productserie_naam}}" {{old('Model') == $categorie->productserie_naam ? 'selected' : ''}}>{{$categorie->productserie_naam}}</option>
+                            @endforeach
                             @if(isset($gtininfo)) 
                                 <option selected>{{$gtininfo[0]->Model}}</option>
                             @endif
@@ -344,7 +348,7 @@
                     </div>
                     
                     <div>
-                        <h5>Aantal:</h5>
+                        <h5><span style="color:red;">*</span>Aantal:</h5>
                         <input aria-label="Aantal" id="Aantal" class="form-control{{ $errors->has('Aantal') ? ' is-invalid' : '' }}" type="text" name="Aantal" value="{{ old('Aantal') }}"/>
                         <br>
                         @if ($errors->has('Aantal'))

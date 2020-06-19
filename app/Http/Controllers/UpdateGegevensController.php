@@ -61,12 +61,14 @@ class UpdateGegevensController extends Controller
             'Nieuw_Email' => 'required|email|max:100',
         ]);
 
-        $user = Auth::user();
-        $user->Voornaam = $request->Nieuw_Voornaam;
-        $user->Achternaam = $request->Nieuw_Achternaam;
-        $user->Email = $request->Nieuw_Email;
-        $user->save();
-        
+        // $user = Auth::user();
+        // $user->Voornaam = $request->Nieuw_Voornaam;
+        // $user->Achternaam = $request->Nieuw_Achternaam;
+        // $user->Email = $request->Nieuw_Email;
+        // $user->vestiging = $request->Nieuw_Vestiging;
+        // $user->save();
+        //query aangepast zodat de vestiging mee gestuurd wordt.
+        $user = User::where('id',auth::user()->id)->Update(['voornaam'=>$request->Nieuw_Voornaam, 'achternaam'=> $request->Nieuw_Achternaam, 'email'=>$request->Nieuw_Email, 'vestiging'=>$request->vestiging]);
         return redirect()->back()->with(["success_gegevens" => "Gegevens zijn succesvol aangepast!", 'CorrectTab' => 'UpdateGegevens']);
     }
 }

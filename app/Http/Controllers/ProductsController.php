@@ -212,8 +212,8 @@ class ProductsController extends Controller
             'LongDescription' => ['nullable', 'string', 'max:255'],
             'Model' => ['required', 'string', 'max:255'],
             'Version' => ['required', 'string', 'max:255'],
-            'WeightQuantity' => ['required', 'string', 'max:255'],
-            'WeightMeasureUnitDescription' => ['required', 'string', 'max:255'],
+            // 'WeightQuantity' => ['string', 'max:255'],
+            // 'WeightMeasureUnitDescription' => ['string', 'max:255'],
             // 'Aantal' => ['nullable', 'string', 'max:255'],
             // Er kunnen alleen (+)getallen toegevoegd worden
             'Aantal' => ['required', 'integer','regex:/^[0-9]\d*$/'],
@@ -268,6 +268,11 @@ class ProductsController extends Controller
         //         `Ingangsdatum` = '$product_ingangsdatum'
         //     WHERE `ID` = '$product_id'") );
         // }
+        }
+        //Pak de laaste foto die in de database staat om er voor te zorgen dat de image niet leeg wordt
+        if($imagelinkName == ""){
+            $Product = Product::where('Product_id',$product_id)->get();
+            $imagelinkName = $Product[0]['ProductImage'];
         }
         //Toevoeging van een nieuwere opslag methode die het product oplslaat.
         Product::where('Product_id', $product_id)
@@ -338,8 +343,8 @@ class ProductsController extends Controller
             'LongDescription' => ['nullable', 'string', 'max:255'],
             'Model' => ['required', 'string', 'max:255'],
             'Version' => ['required', 'string', 'max:255'],
-            'WeightQuantity' => ['required', 'string', 'max:255'],
-            'WeightMeasureUnitDescription' => ['required', 'string', 'max:255'],
+            // 'WeightQuantity' => ['string', 'max:255'],
+            // 'WeightMeasureUnitDescription' => ['string', 'max:255'],
             // 'Aantal' => ['nullable', 'string', 'max:255'],
             // Er kunnen alleen (+)getallen toegevoegd worden
             'Aantal' => ['required', 'integer', 'max:999999','regex:/^[0-9]\d*$/'],

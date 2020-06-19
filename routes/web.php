@@ -2,7 +2,7 @@
 
 use App\User;
 use App\Product;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,10 +70,11 @@ Route::get('503', ['as' => '503', 'uses' => 'ErrorController@maintenance']);
 Route::get('/controlpanel/newuser', ['middleware' => 'auth', 'uses' => 'UsersController@newuser']);
 Route::post('/controlpanel/newuser/store', ['middleware' => 'auth', 'uses' => 'UsersController@store']);
 
-
-Route::any ( '/controlpanel', function () {
+//aanpassing gemaakt van input::get naar $request omdat de input function niet meer werkt in laravel 7.
+Route::any ( '/controlpanel', function (Request $request) {
     $currentuser = Auth::user()->rechten;
-    $q = Input::get ( 'q' );
+    // $q = Input::get ( 'q' );
+    $q = $request->q;
     $users = User::where ( 'voornaam', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->paginate(10);
     //hier wordt de data van productbeheer table opgehaald(kijk controlpanel.blade.php voor de rest van de code rgl. 100)
     $overzicht = Product::join('users', 'overzicht.user_id', '=', 'users.id')->select('overzicht.ProductImage','overzicht.Product_id', 'users.Voornaam', 'users.Achternaam','overzicht.Description', 'overzicht.Aantal', 'overzicht.Locatie')->get();
@@ -97,9 +98,10 @@ Route::any ( '/controlpanel', function () {
 })->middleware("auth");
 //->orWhere ( 'productcode_fabrikant', 'LIKE', '%' . $q . '%' )->paginate(16);
 
-Route::any ( '/producten/products/search', function(){
-    
-    $q = Input::get ( 'q' );
+//aanpassing gemaakt van input::get naar $request omdat de input function niet meer werkt in laravel 7.
+Route::any ( '/producten/products/search', function(request $request){
+    // $q = Input::get ( 'q' );
+    $q = $request->q;
     // $searchproducts = Product::where ( 'Productomschrijving', 'LIKE', '%' . $q . '%' )->paginate(16);
     //Aanpassing op 17-03-2020
     //Toevoeging van extra data. Omdat de database is aangepast moet de nieuwe kolom namen aan roepen.

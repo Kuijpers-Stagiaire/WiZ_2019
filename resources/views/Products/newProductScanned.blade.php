@@ -253,6 +253,7 @@ $(document).ready(function () {
     function retrieveData(barcode){
       // Token die verstopt zit in een ontzichtbare div.
       $token = $(".hidden-token").text();
+      console.log($token);
 
       // Ajax call naar een lokaal php-script genaamd: retrieveProductInfo.php(script wat productinfo ophaalt).
       var getUrl = window.location;
